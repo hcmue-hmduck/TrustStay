@@ -1,0 +1,147 @@
+<div class="space-y-8 text-left">
+    <!-- Header Banner -->
+    <div class="relative overflow-hidden rounded-3xl glass-card p-6 md:p-8 border border-white/5 shadow-2xl">
+        <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-accent/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10">
+            <h1 class="text-3xl font-black text-white tracking-tight">Chào mừng trở lại, Administrator!</h1>
+            <p class="text-sm text-brand-muted mt-2 font-medium">Hệ thống đang hoạt động ổn định. Dưới đây là tổng quan tình trạng dữ liệu tours hiện tại.</p>
+        </div>
+    </div>
+
+    <!-- Quick Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Stat Card 1 -->
+        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-accent/30 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Tổng số Tours</p>
+                    <h3 class="text-3xl font-black text-white mt-1.5"><%= data.length %></h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent group-hover:scale-110 transition-transform">
+                    <i data-lucide="map" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
+                <span class="text-brand-emerald">●</span> Đang lưu trữ trong MongoDB
+            </div>
+        </div>
+
+        <!-- Stat Card 2 -->
+        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-emerald/30 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Đang Hoạt Động</p>
+                    <h3 class="text-3xl font-black text-brand-emerald mt-1.5">
+                        <%= data.filter(t => t.trang_thai === 'active').length %>
+                    </h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-brand-emerald/10 border border-brand-emerald/20 flex items-center justify-center text-brand-emerald group-hover:scale-110 transition-transform">
+                    <i data-lucide="eye" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
+                <span>Hiển thị công khai ngoài Client</span>
+            </div>
+        </div>
+
+        <!-- Stat Card 3 -->
+        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-yellow-500/30 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Tours Nổi Bật</p>
+                    <h3 class="text-3xl font-black text-yellow-500 mt-1.5">
+                        <%= data.filter(t => t.la_noi_bat).length %>
+                    </h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-500 group-hover:scale-110 transition-transform">
+                    <i data-lucide="star" class="w-6 h-6 fill-yellow-500/10"></i>
+                </div>
+            </div>
+            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
+                <span>Ưu tiên xuất hiện đầu trang chủ</span>
+            </div>
+        </div>
+
+        <!-- Stat Card 4 (Mock for integration view) -->
+        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-primary/30 transition-all duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Lượt Đặt Vé</p>
+                    <h3 class="text-3xl font-black text-white mt-1.5">148</h3>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-accent group-hover:scale-110 transition-transform">
+                    <i data-lucide="ticket-percent" class="w-6 h-6"></i>
+                </div>
+            </div>
+            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
+                <span class="text-brand-accent">+24 đơn</span> mới tuần này
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Action Card 1 -->
+        <a href="/admin/tours" class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-accent/20 transition-all block group">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-brand-accent/10 text-brand-accent rounded-xl">
+                    <i data-lucide="settings" class="w-6 h-6"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-extrabold text-white text-base group-hover:text-brand-accent transition-colors">Quản lý Danh sách Tours</h4>
+                    <p class="text-xs text-brand-muted leading-relaxed">Xem danh sách đầy đủ, tìm kiếm nhanh và thực hiện xóa các tour không còn hoạt động.</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- Action Card 2 -->
+        <a href="/" target="_blank" class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-emerald/20 transition-all block group">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-brand-emerald/10 text-brand-emerald rounded-xl">
+                    <i data-lucide="external-link" class="w-6 h-6"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-extrabold text-white text-base group-hover:text-brand-emerald transition-colors">Xem Trang chủ Khách hàng</h4>
+                    <p class="text-xs text-brand-muted leading-relaxed">Mở trang du lịch phía người dùng ngoài client để kiểm tra hiển thị thực tế các Tours.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Featured Tours Preview Section -->
+    <div class="glass-card rounded-2xl overflow-hidden border border-white/5">
+        <div class="p-5 border-b border-white/5 bg-[#0b1329]/40 flex items-center justify-between">
+            <h4 class="font-extrabold text-sm text-white uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="star" class="w-4.5 h-4.5 text-yellow-500 fill-yellow-500/20"></i>
+                <span>Tours Nổi Bật Đang Hoạt Động</span>
+            </h4>
+            <a href="/admin/tours" class="text-xs text-brand-accent hover:underline font-bold">Xem tất cả →</a>
+        </div>
+        <div class="divide-y divide-white/5">
+            <% const featured = data.filter(t => t.la_noi_bat && t.trang_thai === 'active').slice(0, 3) %>
+            <% if (featured.length > 0) { %>
+                <% featured.forEach(tour => { %>
+                    <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-3">
+                            <img src="<%= tour.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80' %>" alt="<%= tour.ten_tour %>" class="w-12 h-12 rounded-lg object-cover border border-white/5 shrink-0" />
+                            <div class="min-w-0">
+                                <p class="font-bold text-white truncate max-w-[320px] text-sm"><%= tour.ten_tour %></p>
+                                <p class="text-xs text-brand-muted mt-0.5"><%= tour.diem_khoi_hanh %> • <%= tour.thoi_gian %></p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-black text-brand-accent">
+                                <%= (tour.gia_khuyen_mai > 0 ? tour.gia_khuyen_mai : tour.gia_nguoi_lon).toLocaleString('vi-VN') %> đ
+                            </p>
+                            <p class="text-[10px] text-brand-muted mt-0.5">Giá áp dụng hiện tại</p>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="p-8 text-center text-brand-muted text-xs">
+                    Không có tour nổi bật nào đang hoạt động.
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1977 @@
+<!-- Dynamic Toast Message -->
+<div id="toast-notification"
+    class="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-brand-accent/95 text-brand-dark font-extrabold shadow-xl flex items-center gap-2 border border-white/20 backdrop-blur-md hidden transition-all duration-300 transform -translate-y-4 opacity-0">
+    <i data-lucide="sparkles" class="w-5 h-5 animate-pulse text-brand-dark"></i>
+    <span id="toast-text"></span>
+</div>
+
+<!-- Hero Container Section -->
+<section class="relative min-h-screen flex flex-col justify-center pt-24 px-4 md:px-8">
+    <!-- Cinematic Backdrop Image -->
+    <div class="absolute inset-0 z-0">
+        <img alt="Hero da nang golden bridge" class="w-full h-full object-cover brightness-[0.35]"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKFu6RpvjNNyJ0gKDj2oyYCYnQLy8Zl65nngEBjviN35mFSMx129dSHDIRuk1V-dds1bFg72ejzS0YlOVTdaybTMXPBVimICm3xtTsFP5XRWCU2S_BhChy2fO9fJtNlqdKyz5g-UBrtvZc6cVTZ64Ybu_oSpLeZb6ZSqlJJuP31iy2xGHpr2JFcwOmCOHVetwE-GcpXY4COLChfdIaMn0pIeLf8neoLLBFwS_n_n0nfeYThkKTvAZqSW3MSoDonVHGwWxtZ0Eh9B8"
+            referrerpolicy="no-referrer" />
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-transparent to-brand-dark"></div>
+    </div>
+
+    <!-- Content Panel -->
+    <div class="relative z-10 w-full max-w-5xl mx-auto text-center mt-12">
+        <!-- Satisfied Clients Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 glass-panel rounded-full animate-fade-in"
+            id="highlight-badge-customer">
+            <span class="w-2.5 h-2.5 bg-brand-accent rounded-full shadow-[0_0_8px_#a4e6ff] animate-pulse"></span>
+            <span class="text-xs font-bold text-brand-accent uppercase tracking-widest">Hơn 50,000 khách hàng hài
+                lòng</span>
+        </div>
+
+        <!-- Slogan -->
+        <h1 class="text-4xl md:text-7xl font-black text-white leading-tight tracking-tight mb-4 animate-fade-in-up">
+            Trải Nghiệm <br class="md:hidden" />
+            <span class="hero-gradient-text">Lời Nói Đi Đôi Hành Động</span>
+        </h1>
+
+        <p
+            class="text-base md:text-xl text-brand-muted font-medium mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in-up-delay">
+            Mỗi chuyến đi là một câu chuyện độc sắc đầy cảm hứng và kỉ niệm khó phai.
+        </p>
+
+        <!-- Interactive Search Bar Form -->
+        <div class="max-w-4xl mx-auto mb-16 animate-fade-in-up-more">
+            <form id="search-form"
+                class="glass-panel p-4 rounded-3xl md:rounded-full flex flex-col md:flex-row items-center gap-2 shadow-2xl border border-white/10">
+                <!-- Destination Input -->
+                <div
+                    class="flex-1 w-full flex items-center gap-3 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10 group">
+                    <i data-lucide="map-pin"
+                        class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left w-full">
+                        <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Địa
+                            điểm</span>
+                        <input type="text" id="search-destination-input" placeholder="Bạn muốn đi đâu?"
+                            class="bg-transparent border-none p-0 text-white placeholder:text-brand-muted/50 focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5" />
+                    </div>
+                    <button type="button" id="clear-dest-btn"
+                        class="p-1 hover:text-brand-accent text-brand-muted hidden">
+                        <i data-lucide="x" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- Date Input -->
+                <div
+                    class="flex-1 w-full flex items-center gap-3 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10 group">
+                    <i data-lucide="calendar"
+                        class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left w-full">
+                        <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Ngày khởi
+                            hành</span>
+                        <input type="date" id="search-date-input"
+                            class="bg-transparent border-none p-0 text-white focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5 [color-scheme:dark]" />
+                    </div>
+                </div>
+
+                <!-- Guests Input -->
+                <div class="flex-1 w-full flex items-center gap-3 px-5 py-3">
+                    <i data-lucide="users"
+                        class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
+                    <div class="text-left w-full">
+                        <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Số
+                            khách</span>
+                        <input type="number" id="search-guests-input" min="1" max="50" placeholder="Thêm số lượng khách"
+                            class="bg-transparent border-none p-0 text-white placeholder:text-brand-muted/50 focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5" />
+                    </div>
+                </div>
+
+                <div class="w-full md:w-auto flex items-center gap-2">
+                    <button type="button" id="reset-filter-btn"
+                        class="px-4 py-3.5 rounded-full border border-white/10 hover:bg-white/5 text-xs font-bold text-white transition-all whitespace-nowrap hidden">
+                        Xoá lọc
+                    </button>
+                    <button type="submit"
+                        class="w-full md:w-auto px-8 py-3.5 bg-brand-accent text-brand-dark rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-primary active:scale-95 transition-all shadow-lg shadow-brand-accent/20 cursor-pointer"
+                        id="search-submit-btn">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                        <span>Tìm kiếm</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Social Proof Stats Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto pt-8 border-t border-white/10"
+            id="stats-container">
+            <!-- Rendered by JS -->
+        </div>
+    </div>
+
+    <!-- Scroll helper indicator -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 cursor-pointer hover:opacity-100 transition-opacity"
+        onclick="document.getElementById('bento-destinations').scrollIntoView({ behavior: 'smooth' })">
+        <div class="w-px h-10 bg-gradient-to-b from-brand-accent to-transparent"></div>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-white">Thao tác để khám phá</span>
+    </div>
+</section>
+
+<!-- Bento Grid Destinations Section -->
+<section class="py-28 bg-brand-dark/60" id="bento-destinations">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div>
+                <p class="text-brand-accent font-extrabold text-xs tracking-widest mb-2 uppercase">// ĐIỂM ĐẾN PHỔ BIẾN
+                </p>
+                <h2 class="text-3xl md:text-5xl font-black text-white">Khám Phá <span class="text-brand-accent">Việt Nam
+                        hùng vĩ</span></h2>
+            </div>
+            <button
+                onclick="document.getElementById('tour-results').scrollIntoView({ behavior: 'smooth' }); showToast('Hiển thị đầy đủ hành trình');"
+                class="text-xs font-bold text-brand-muted hover:text-brand-accent transition-colors flex items-center gap-1.5 uppercase tracking-wider">
+                <span>Xem tất cả điểm đến</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-4 h-auto lg:h-[600px] w-full" id="bento-destinations-wrapper">
+
+            <!-- Card Vịnh Hạ Long -->
+            <div id="bento-card-halong" onclick="toggleBentoView('halong')"
+                class="relative lg:flex-[4.5] h-[350px] lg:h-full rounded-3xl overflow-hidden group cursor-pointer border border-white/5 transition-all duration-500 ease-in-out shadow-2xl">
+                <img alt="Vịnh Hạ Long"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] brightness-[0.6] group-hover:brightness-[0.7]"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7idfLXKZxLSQ3pnrvhcnaP0yq_4UZwCYKDH4dwJkzJCiZbMV_f39S6EDZmYY4L926a2BGDN6_0i3xqdjNHcbvskR_da4aiMjgmBIrKGLXBJ91zfg2kte2AEWTEefAFYtuU0xrOGptff2Je01aX-kPbpPnDJrARIGdGilMpi5Ns9WrvK96mB8Ww05f0BXcqpqRCr0mDyG5nE_w-MJZ6hNwSrCJC7ZKbzGSinAV25CECxgfL9GdBlEozuWvI2OuolcELymaeEX1Amw"
+                    referrerPolicy="no-referrer" />
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent">
+                </div>
+
+                <!-- Inactive rotated label -->
+                <div id="bento-label-halong"
+                    class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0">
+                    <div
+                        class="transform lg:-rotate-90 font-bold text-center tracking-widest text-xs md:text-sm uppercase text-white transition-all group-hover:text-brand-accent whitespace-nowrap">
+                        Vịnh Hạ Long
+                    </div>
+                </div>
+
+                <!-- Active state panel -->
+                <div id="bento-info-halong"
+                    class="absolute inset-0 p-6 md:p-8 lg:p-12 flex flex-col justify-between text-left opacity-100 pointer-events-auto transition-opacity duration-500">
+                    <!-- Top content -->
+                    <div class="flex justify-between items-start">
+                        <div class="glass-panel px-4 py-2 rounded-full flex items-center gap-2">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">Trending</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-accent text-brand-accent"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom content -->
+                    <div class="space-y-3 lg:space-y-4 max-w-xl">
+                        <p class="text-brand-accent text-xs font-black uppercase tracking-wider">KỲ QUAN THIÊN NHIÊN THẾ
+                            GIỚI</p>
+                        <h3 class="text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight">Vịnh Hạ Long
+                        </h3>
+                        <p class="text-brand-muted text-xs md:text-sm lg:text-base leading-relaxed opacity-95">
+                            Kỳ quan thiên nhiên thế giới với hàng ngàn đảo đảo đá vôi kì vĩ vươn lên từ mặt biển xanh
+                            mướt, kết hợp du thuyền 5 sao mang lại trải nghiệm đỉnh cao của nghỉ dưỡng.
+                        </p>
+
+                        <div class="pt-2 flex items-center gap-4">
+                            <button onclick="event.stopPropagation(); openBookingModal('pkg-halong')"
+                                class="px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-brand-accent/10 pointer-events-auto">
+                                <span>Đặt hành trình ngay</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Phú Quốc -->
+            <div id="bento-card-phuquoc" onclick="toggleBentoView('phuquoc')"
+                class="relative h-[120px] lg:h-full rounded-3xl overflow-hidden group cursor-pointer border border-white/5 transition-all duration-500 ease-in-out shadow-xl flex-1">
+                <img alt="Phú Quốc"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] brightness-[0.6] group-hover:brightness-[0.7]"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIE_MXVHB7lb5wXsXbkImV5saRX55ZHYTpy04dggDB95zTH_G1s8XnsTjsz33pBinFFVjW6-uQPhAH5G825HBfz4cf22HL-UkQUwMNNsa1gi7vBbwnAiYG79puITptEb7s0X9pStPZjWc6uk_GxrmkYuxAH1jeFLS37UBDhgaH09xH0zKdqOYOsStNU4lQEhQYjs6tDqVLetOVmr1bXL6NoVPK8Zkd3pL5wWAqITvjskGzUF7ZOQz5GtuQ6n5nxhN18YAGbMXPkok"
+                    referrerPolicy="no-referrer" />
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent">
+                </div>
+
+                <!-- Inactive rotated label -->
+                <div id="bento-label-phuquoc"
+                    class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                    <div
+                        class="transform lg:-rotate-90 font-bold text-center tracking-widest text-xs md:text-sm uppercase text-white transition-all group-hover:text-brand-accent whitespace-nowrap">
+                        Phú Quốc
+                    </div>
+                </div>
+
+                <!-- Active state panel -->
+                <div id="bento-info-phuquoc"
+                    class="absolute inset-0 p-6 md:p-8 lg:p-12 flex flex-col justify-between text-left hidden opacity-0 pointer-events-none transition-opacity duration-500">
+                    <!-- Top content -->
+                    <div class="flex justify-between items-start">
+                        <div class="glass-panel px-4 py-2 rounded-full flex items-center gap-2">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">Điểm Đến Nổi
+                                Bật</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-accent text-brand-accent"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom content -->
+                    <div class="space-y-3 lg:space-y-4 max-w-xl">
+                        <p class="text-brand-accent text-xs font-black uppercase tracking-wider">ĐẢO NGỌC VIỆT NAM</p>
+                        <h3 class="text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight">Phú Quốc</h3>
+                        <p class="text-brand-muted text-xs md:text-sm lg:text-base leading-relaxed opacity-95">
+                            Nép mình trong Vịnh Thái Lan xinh đẹp, bãi biển cát trắng tinh mượt và những rặng san hô đa
+                            dạng sắc màu kì ảo.
+                        </p>
+
+                        <div class="pt-2 flex items-center gap-4">
+                            <button onclick="event.stopPropagation(); openBookingModal('pkg-phuquoc')"
+                                class="px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-brand-accent/10 pointer-events-auto">
+                                <span>Đặt hành trình ngay</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Hội An -->
+            <div id="bento-card-hoian" onclick="toggleBentoView('hoian')"
+                class="relative h-[120px] lg:h-full rounded-3xl overflow-hidden group cursor-pointer border border-white/5 transition-all duration-500 ease-in-out shadow-xl flex-1">
+                <img alt="Hội An"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] brightness-[0.6] group-hover:brightness-[0.7]"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnwQaLXsFul8IdoHuWcCrx6IEihC7o8GeimnyO5BUOkiZ9XX_RCmBr6PLhRToENX4ek11ZFPg5PU0CkWzSsr_taAYXSrCg34yXsCSPrYs15FoUgt_R27q2C_XkztIdx_XyHtjGFN0weeYdPRXNUC6_9WtfEsVEBimb3FFgovu27gIuCZqRSArDFckaFxtqdMXt08ZchPDmQIDnwdbcTwgxv-3pG8wlAitmV8pAPOi0Xov33OGl3075K_kc99k4tz9zXZSukbEZ874"
+                    referrerPolicy="no-referrer" />
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent">
+                </div>
+
+                <!-- Inactive rotated label -->
+                <div id="bento-label-hoian"
+                    class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                    <div
+                        class="transform lg:-rotate-90 font-bold text-center tracking-widest text-xs md:text-sm uppercase text-white transition-all group-hover:text-brand-accent whitespace-nowrap">
+                        Hội An
+                    </div>
+                </div>
+
+                <!-- Active state panel -->
+                <div id="bento-info-hoian"
+                    class="absolute inset-0 p-6 md:p-8 lg:p-12 flex flex-col justify-between text-left hidden opacity-0 pointer-events-none transition-opacity duration-500">
+                    <!-- Top content -->
+                    <div class="flex justify-between items-start">
+                        <div class="glass-panel px-4 py-2 rounded-full flex items-center gap-2">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">Di Sản Văn
+                                Hóa</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-accent text-brand-accent"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom content -->
+                    <div class="space-y-3 lg:space-y-4 max-w-xl">
+                        <p class="text-brand-accent text-xs font-black uppercase tracking-wider">PHỐ CỔ THƠ MỘNG</p>
+                        <h3 class="text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight">Hội An</h3>
+                        <p class="text-brand-muted text-xs md:text-sm lg:text-base leading-relaxed opacity-95">
+                            Dòng sông Hoài thơ mộng, thả đèn hoa đăng lãng mạn và thưởng ngoạn đèn lồng rực sáng phố đêm
+                            hữu tình.
+                        </p>
+
+                        <div class="pt-2 flex items-center gap-4">
+                            <button onclick="event.stopPropagation(); openBookingModal('pkg-hoian')"
+                                class="px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-brand-accent/10 pointer-events-auto">
+                                <span>Đặt hành trình ngay</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Sapa -->
+            <div id="bento-card-sapa" onclick="toggleBentoView('sapa')"
+                class="relative h-[120px] lg:h-full rounded-3xl overflow-hidden group cursor-pointer border border-white/5 transition-all duration-500 ease-in-out shadow-xl flex-1">
+                <img alt="Sapa"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] brightness-[0.6] group-hover:brightness-[0.7]"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuByAlxkGbCR_m_8Gb1KQ0e70qiuUivvJDai2YDY6dnc4XbPKyEn69wIq3c3L07k9n6e9LGA4FYzjFU0tjlInVkD1pmlJP4OmCNTVTaeijNulQlCwUmHEmcawn1JzSPxuy6V5DDpZJBHUEPqSPylENeSZGrqbM0FUm1MHammbOZrgXsmu4iLzf413qKQ5BrpFfYhc-QBv9_CyMhCG3hmWozKVbrN4lCaDlqOHedoDTGYC32pumnABvANbi5vLsZlYAqdxlxZ-HN_XFE"
+                    referrerPolicy="no-referrer" />
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent">
+                </div>
+
+                <!-- Inactive rotated label -->
+                <div id="bento-label-sapa"
+                    class="absolute inset-0 flex items-center justify-center transition-opacity duration-300">
+                    <div
+                        class="transform lg:-rotate-90 font-bold text-center tracking-widest text-xs md:text-sm uppercase text-white transition-all group-hover:text-brand-accent whitespace-nowrap">
+                        Sapa
+                    </div>
+                </div>
+
+                <!-- Active state panel -->
+                <div id="bento-info-sapa"
+                    class="absolute inset-0 p-6 md:p-8 lg:p-12 flex flex-col justify-between text-left hidden opacity-0 pointer-events-none transition-opacity duration-500">
+                    <!-- Top content -->
+                    <div class="flex justify-between items-start">
+                        <div class="glass-panel px-4 py-2 rounded-full flex items-center gap-2">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">Chinh Phục Đỉnh
+                                Cao</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
+                            <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-accent text-brand-accent"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom content -->
+                    <div class="space-y-3 lg:space-y-4 max-w-xl">
+                        <p class="text-brand-accent text-xs font-black uppercase tracking-wider">TÂY BẮC HÙNG VĨ</p>
+                        <h3 class="text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight">Sapa</h3>
+                        <p class="text-brand-muted text-xs md:text-sm lg:text-base leading-relaxed opacity-95">
+                            Tận hưởng làn khí mát lành, ngắm ruộng bậc thang uốn mình quyến rũ vàng óng và vẻ đẹp tinh
+                            sơ núi rừng.
+                        </p>
+
+                        <div class="pt-2 flex items-center gap-4">
+                            <button onclick="event.stopPropagation(); openBookingModal('pkg-fansipan')"
+                                class="px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-brand-accent/10 pointer-events-auto">
+                                <span>Đặt hành trình ngay</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Featured Packs Grid Section -->
+<section class="py-28 bg-brand-dark/40 border-t border-white/5" id="tour-results">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
+
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div>
+                <p class="text-brand-accent font-extrabold text-xs tracking-widest mb-2 uppercase">// LỰA CHỌN PHÙ HỢP
+                    NHẤT</p>
+                <h2 class="text-3xl md:text-5xl font-black text-white">Được <span class="text-brand-accent">Yêu Thích
+                        Nhất</span></h2>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <span id="search-status-badge"
+                    class="text-xs text-brand-muted bg-white/5 px-3 py-1 rounded-full border border-white/5 hidden">
+                    <!-- Text by JS -->
+                </span>
+                <button onclick="resetFilters()"
+                    class="text-xs font-bold text-brand-muted hover:text-brand-accent transition-all uppercase tracking-wider">
+                    Đặt lại bộ lọc
+                </button>
+            </div>
+        </div>
+
+        <div id="tours-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Rendered dynamically by JS -->
+        </div>
+
+    </div>
+</section>
+
+<!-- Hành Trình Của Bạn Section -->
+<section class="py-28 bg-brand-dark" id="categories-section">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
+
+        <div class="text-center mb-20">
+            <div
+                class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-3">
+                <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent animate-pulse"></i>
+                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent">Hành Trình Đa
+                    Dạng</span>
+            </div>
+            <h2 class="text-3xl md:text-6xl font-black text-white leading-tight">
+                Hành Trình <span class="hero-gradient-text">Của Bạn</span>
+            </h2>
+            <p class="text-brand-muted max-w-2xl mx-auto mt-4 text-sm md:text-base">
+                Khám phá các phong cách du lịch đặc sắc, được thiết kế tinh xảo để mang lại trọn vẹn niềm vui và dấu ấn
+                đáng quý cho chuyến đi của bạn.
+            </p>
+        </div>
+
+        <div class="space-y-28" id="categories-list-container">
+            <!-- Rendered dynamically by JS -->
+        </div>
+
+    </div>
+</section>
+
+<!-- Nhận Xét Khách Hàng Section -->
+<section class="py-24 bg-brand-dark/40 border-t border-white/5" id="testimonials-section">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
+
+        <div class="text-center mb-16">
+            <div
+                class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-3">
+                <i data-lucide="heart-handshake" class="w-4 h-4 text-brand-accent"></i>
+                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent">Nhận xét từ khách
+                    hàng</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black text-white">Khách Hàng <span class="text-brand-accent">Nói Gì Về
+                    Chúng Tôi</span></h2>
+            <p class="text-brand-muted max-w-2xl mx-auto mt-4 text-xs md:text-sm">
+                Sự hài lòng và những kỷ niệm vàng của quý khách trên mỗi hành trình là động lực phát triển lớn nhất của
+                đội ngũ TravelGo.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div
+                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-brand-accent">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                    </div>
+                    <p
+                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
+                        "Chuyến du ngoạn Vịnh Hạ Long 5 sao thực sự vượt quá mong đợi của gia dịch tôi. Du thuyền vô
+                        cùng sang trọng, phòng ốc sạch sẽ và ẩm thực hải sản phong phú. Đội ngũ hướng dẫn viên vô cùng
+                        chu đáo."
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
+                    <div
+                        class="w-10 h-10 rounded-full bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent font-black text-sm">
+                        MA
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Nguyễn Minh Anh</h4>
+                        <p class="text-[10px] text-brand-muted mt-0.5">Khách du lịch • Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div
+                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-brand-accent">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                    </div>
+                    <p
+                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
+                        "Dịch vụ vô cùng chuyên nghiệp và chu đáo. Tôi đã book tour Phú Quốc trọn gói cho công ty với
+                        hơn 20 người, mọi người đều rất hài lòng từ khâu chuẩn bị, đưa đón sân bay đến các bữa ăn đặc
+                        sản."
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
+                    <div
+                        class="w-10 h-10 rounded-full bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary font-black text-sm">
+                        TH
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Trần Thanh Hải</h4>
+                        <p class="text-[10px] text-brand-muted mt-0.5">Quản lý doanh nghiệp • TP. HCM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div
+                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-brand-accent">
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                    </div>
+                    <p
+                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
+                        "Sapa mùa lúa chín vàng óng ả đẹp tựa như tranh vẽ. Khách sạn view núi Fansipan cực chill, ban
+                        sáng thức dậy ngắm mây trôi bồng bềnh rất thích. Tư vấn viên hỗ trợ nhiệt tình 24/7."
+                    </p>
+                </div>
+                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
+                    <div
+                        class="w-10 h-10 rounded-full bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 font-black text-sm">
+                        TT
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Lê Thu Thảo</h4>
+                        <p class="text-[10px] text-brand-muted mt-0.5">Freelancer • Đà Nẵng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Tours Nổi Bật 3D Section -->
+<section class="py-24 bg-brand-dark border-t border-white/5" id="tours-3d-section">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 overflow-hidden">
+
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-black text-white uppercase tracking-wide">Tours Nổi Bật 3D</h2>
+        </div>
+
+        <style>
+            .scene-3d {
+                perspective: 1200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .stage-3d {
+                transform-style: preserve-3d;
+                will-change: transform;
+                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+
+            .carousel-3d-card {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -140px;
+                /* -half of width */
+                margin-top: -190px;
+                /* -half of height */
+                width: 280px;
+                height: 380px;
+                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
+                transform-style: preserve-3d;
+            }
+
+            .tilt-card-inner {
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                transition: transform 0.2s ease-out;
+            }
+        </style>
+
+        <!-- 3D Carousel container with left/right arrows -->
+        <div class="relative w-full max-w-4xl mx-auto h-[480px] flex items-center justify-center overflow-visible mb-6">
+            <!-- Left Arrow Button -->
+            <button onclick="prev3D()"
+                class="absolute left-0 md:left-4 z-30 w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg backdrop-blur-md">
+                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+
+            <!-- 3D Scene -->
+            <div class="w-full h-full scene-3d overflow-visible">
+                <!-- 3D Stage (rotates dynamically) -->
+                <div id="stage-3d" class="w-[300px] h-[380px] stage-3d relative">
+                    <!-- 4 Cards populated dynamically by JS -->
+                </div>
+            </div>
+
+            <!-- Right Arrow Button -->
+            <button onclick="next3D()"
+                class="absolute right-0 md:right-4 z-30 w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg backdrop-blur-md">
+                <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Pagination indicators -->
+        <div class="flex items-center justify-center gap-3 mt-10 mb-8">
+            <div class="flex items-center gap-2" id="dots-3d-container">
+                <!-- Dots populated by JS -->
+            </div>
+        </div>
+
+        <!-- Bottom Showcase Box -->
+        <div id="showcase-3d-panel"
+            class="bg-white text-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl transition-all duration-500 border border-slate-100">
+            <!-- Show selection details dynamically -->
+        </div>
+
+    </div>
+</section>
+
+<!-- Booking Form overlay -->
+<div id="booking-modal-overlay" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <!-- Ambient Dark backdrop -->
+    <div onclick="closeBookingModal()" class="fixed inset-0 bg-black/75 backdrop-blur-sm"></div>
+
+    <!-- Modal Dialog container -->
+    <div class="flex min-h-screen items-center justify-center p-4">
+        <div
+            class="relative w-full max-w-4xl glass-panel text-left rounded-3xl p-6 md:p-8 z-10 overflow-hidden border border-white/10 shadow-2xl">
+            <!-- Close Button top corner -->
+            <button onclick="closeBookingModal()"
+                class="absolute top-5 right-5 p-2 bg-white/5 hover:bg-white/10 rounded-full text-brand-muted hover:text-white transition-colors border border-white/10 z-20">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Standard Booking Screen -->
+            <div id="booking-form-screen" class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
+                <!-- Left Column: Rich Tour details -->
+                <div class="space-y-6 max-h-[80vh] overflow-y-auto pr-2 pb-4">
+                    <div class="relative rounded-2xl overflow-hidden h-52">
+                        <img id="modal-tour-img" src="" alt="" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent">
+                        </div>
+                        <div class="absolute bottom-4 left-4">
+                            <span id="modal-tour-duration"
+                                class="px-3 py-1 bg-brand-secondary/15 border border-brand-secondary/30 text-brand-secondary uppercase font-bold text-[10px] rounded-full">
+
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 id="modal-tour-title" class="text-2xl font-extrabold text-white"></h3>
+                        <p class="text-xs text-brand-accent flex items-center gap-1 font-bold mt-1.5 uppercase">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                            <span id="modal-tour-location"></span>
+                        </p>
+                        <p id="modal-tour-description" class="text-xs text-brand-muted mt-3 leading-relaxed opacity-90">
+                        </p>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 text-xs">
+                        <h4 class="font-bold text-white mb-2.5 flex items-center gap-1 text-xs">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent animate-pulse"></i>
+                            <span>Điểm Nhấn Nổi Bật Của Hành Trình</span>
+                        </h4>
+                        <ul id="modal-tour-highlights" class="space-y-2">
+                            <!-- Filled by JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Detail Itinerary -->
+                    <div>
+                        <h4 class="font-bold text-white mb-2.5 text-xs uppercase tracking-wider">Lịch Trình Chi Tiết
+                        </h4>
+                        <div id="modal-tour-itinerary"
+                            class="space-y-3 font-mono text-[11px] text-brand-muted text-xs leading-relaxed">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Form interactive checkout card -->
+                <div
+                    class="glass-panel p-6 rounded-2xl border border-brand-accent/20 bg-brand-dark/40 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-black text-lg text-white mb-1.5 flex items-center gap-1.5">
+                            <i data-lucide="ticket" class="w-5 h-5 text-brand-accent"></i>
+                            <span>Mẫu Đặt Vé Tour</span>
+                        </h4>
+                        <p class="text-xs text-brand-muted/80 mb-6">Bạn đang đặt chỗ cho chuyến du ngoạn lý thú. Vui
+                            lòng nhập đúng thông tin liên lạc.</p>
+
+                        <form id="booking-form" class="space-y-4 text-xs text-left">
+                            <!-- Name Field -->
+                            <div>
+                                <label class="block text-brand-muted font-bold uppercase mb-1">Họ & Tên Trưởng
+                                    Đoàn</label>
+                                <input type="text" required id="booking-fullname-field"
+                                    placeholder="Ví dụ: Huynh My Huong"
+                                    class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white placeholder:text-brand-muted/40 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none" />
+                            </div>
+
+                            <!-- Contact Phone & Email -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-brand-muted font-bold uppercase mb-1">Số Điện Thoại</label>
+                                    <input type="tel" required id="booking-phone-field" placeholder="Nhập SĐT liên hệ"
+                                        class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white placeholder:text-brand-muted/40 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none" />
+                                </div>
+                                <div>
+                                    <label class="block text-brand-muted font-bold uppercase mb-1">Địa Chỉ Email</label>
+                                    <input type="email" required id="booking-email-field" placeholder="huong@gmail.com"
+                                        class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white placeholder:text-brand-muted/40 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none" />
+                                </div>
+                            </div>
+
+                            <!-- Date and guests count -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-brand-muted font-bold uppercase mb-1">Ngày Đi Mong
+                                        Muốn</label>
+                                    <input type="date" required id="booking-startdate-field"
+                                        class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none [color-scheme:dark]" />
+                                </div>
+                                <div>
+                                    <label class="block text-brand-muted font-bold uppercase mb-1">Số Lượng Vé</label>
+                                    <div class="flex items-center">
+                                        <button type="button" onclick="adjustGuests(-1)"
+                                            class="px-3 py-2.5 bg-white/5 border border-white/10 hover:bg-white/15 text-white font-extrabold rounded-l-xl transition-all">
+                                            -
+                                        </button>
+                                        <span id="booking-guests-display"
+                                            class="flex-1 text-center bg-black/40 border-t border-b border-white/10 py-2 text-white font-extrabold text-sm">
+                                            1
+                                        </span>
+                                        <button type="button" onclick="adjustGuests(1)"
+                                            class="px-3 py-2.5 bg-white/5 border border-white/10 hover:bg-white/15 text-white font-extrabold rounded-r-xl transition-all">
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cost breakdowns -->
+                            <div class="p-4 bg-black/40 rounded-xl border border-white/5 space-y-1.5 mt-4">
+                                <div class="flex justify-between">
+                                    <span class="text-brand-muted">Đơn giá vé cơ bản:</span>
+                                    <span id="booking-price-display" class="font-bold text-white">0 đ</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-brand-muted">Khách tham gia:</span>
+                                    <span id="booking-count-display" class="font-bold text-white">x 1</span>
+                                </div>
+                                <div
+                                    class="flex justify-between pt-2 border-t border-white/10 text-brand-accent font-black text-sm">
+                                    <span>Tổng chi phí dự tính:</span>
+                                    <span id="booking-total-display">0 đ</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="submit-checkout-btn"
+                                class="w-full py-4 bg-brand-accent disabled:opacity-50 text-brand-dark rounded-xl font-bold uppercase tracking-wider text-xs hover:bg-brand-primary active:scale-[0.98] transition-all cursor-pointer shadow-lg shadow-brand-accent/10 mt-6 animate-pulse">
+                                Thanh toán &amp; Giữ vé ngay
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="text-[10px] text-brand-muted text-center mt-3 pt-3 border-t border-white/5">
+                        Bảo đảm chính sách hoàn trả 100% trước 48 giờ khởi hành. Giao dịch mã hóa SSL an toàn tuyệt đối.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success screen -->
+            <div id="booking-success-screen" class="text-center py-10 hidden">
+                <div
+                    class="w-20 h-20 bg-brand-accent/10 text-brand-accent rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-accent/30 animate-bounce">
+                    <i data-lucide="check" class="w-10 h-10"></i>
+                </div>
+                <span
+                    class="text-[10px] text-brand-accent uppercase font-black tracking-widest bg-brand-accent/10 px-3 py-1 rounded">Xác
+                    nhận thành công</span>
+                <h3 class="text-3xl font-black text-white mt-4">Cảm ơn <span id="success-username">Huong</span>!</h3>
+                <p class="text-sm text-brand-muted mt-2 max-w-md mx-auto">Yêu cầu đặt vé của bạn cho chuyến đi <strong
+                        id="success-tour-title" class="text-white"></strong> đã được tạo thành công.</p>
+
+                <!-- Ticket overview -->
+                <div id="success-ticket-card"
+                    class="glass-panel p-5 rounded-2xl max-w-md mx-auto my-6 border border-brand-accent/20 text-left font-mono text-xs text-brand-muted space-y-2">
+                    <!-- Rebuilt dynamically -->
+                </div>
+
+                <p class="text-xs text-brand-muted/70">Số điện thoại hỗ trợ tư vấn 24/7 của đại lý: <strong>1900
+                        6789</strong></p>
+
+                <button onclick="closeBookingModal()"
+                    class="mt-8 px-8 py-3 bg-brand-accent text-brand-dark rounded-full font-bold hover:bg-brand-primary cursor-pointer text-xs uppercase tracking-wider">
+                    Quay lại trang chính
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trust & Review Section banner -->
+<section class="py-24 bg-brand-dark border-t border-white/5">
+    <div class="max-w-5xl mx-auto px-4 md:px-8 text-center">
+        <i data-lucide="globe" class="w-10 h-10 text-brand-accent mx-auto mb-4 animate-spin-slow"></i>
+        <h3 class="text-2xl font-extrabold text-white">Đối Tác Đồng Hành Đáng Tin Cậy</h3>
+        <p class="text-brand-muted text-sm mt-2 max-w-lg mx-auto">TravelGo hợp tác chặt chẽ cùng các hãng hàng không
+            hàng đầu và tổ hợp nghỉ dưỡng 5 sao nhằm đem đến chuyến đi ưu đãi trọn vẹn và chu đáo nhất.</p>
+        <div
+            class="flex flex-wrap items-center justify-center gap-12 mt-8 opacity-40 hover:opacity-75 transition-opacity duration-300">
+            <span class="font-black tracking-widest text-lg">VIETNAM AIRLINES</span>
+            <span class="font-bold tracking-wider text-lg">VINPEARL RESORTS</span>
+            <span class="font-extrabold tracking-widest text-lg">SUN GROUP</span>
+            <span class="font-mono font-black text-lg">BAMBOO AIRWAYS</span>
+        </div>
+    </div>
+</section>
+
+<!-- Data Store & Application Script -->
+<script>
+    // Data definition
+    const tourCategories = [
+        {
+            id: '01',
+            title: 'Biển & Đảo',
+            subtitle: 'Nắng ấm & Cát trắng',
+            description: 'Đắm mình trong làn nước xanh ngọc bích, tận hưởng ánh nắng vàng trên những bãi cát trắng mịn. Từ Phú Quốc đến Côn Đảo, mỗi hòn đảo là một thiên đường riêng đang chờ bạn khám phá.',
+            locations: ['Phú Quốc', 'Côn Đảo', 'Cát Bà'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDu--UM00uk_30vLdGHO6CXGZ79rHs7gVo7AbY1ivA1MrBVZINmINI_YP01QpRq-6hnaS3uBW-uhIS16HF6Z654EAkEmKSche9O5epdqj1nMiRNg0FP-0ADcgjj_hYKgVSH40MMqUt7v-7kT3FpZmZZ9AzqlgD6_pg5svzpbHzUGhWjUtC1YiJD_1S3m9aT3o25yQICbzLprnZi0N0hsCHrsKznkyaI7VrMiLXulGQ1LfVmC7xER871tcDb3CoKsowVuXfZKZijlXM',
+            countLabel: '01 / 06'
+        },
+        {
+            id: '02',
+            title: 'Núi & Trekking',
+            subtitle: 'Chinh phục đỉnh cao',
+            description: 'Chinh phục những đỉnh núi hùng vĩ, băng qua những cánh rừng nguyên sinh và ruộng bậc thang vàng óng. Mỗi bước chân là một khám phá mới về vẻ đẹp hoang sơ của núi rừng Tây Bắc.',
+            locations: ['Fansipan', 'Sapa', 'Hà Giang'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAaNXYGgX-NZ9O4hlU1w20ySf_32DHtmSe7mlTk6y3bVkaYHvtYrkybtttxfzLd0d4bUtgLvXvjjnhejBTDfROqB3GIJSWG_A9GMgSAtaD5XaT6x7LSKJOiiwiBloujrVnKwGMsGDaIfzml0h0ypqwu-Sa9vZnB7R0DS4NOixc2GsyaJwjrbdHGp9lRE7KZQvzoaPmLw4pC9lDdlGXvNKxTHzY5SygEepoAzQvhiZLsz9IJK-kiivixb7c6Nlz5HyzcCmea-v3LuwQ',
+            countLabel: '02 / 06'
+        },
+        {
+            id: '03',
+            title: 'Văn Hóa & Lịch Sử',
+            subtitle: 'Hồn thiêng đất Việt',
+            description: 'Lạc bước vào những con phố cổ nghìn năm tuổi, khám phá di sản văn hóa thế giới và trải nghiệm nét đẹp truyền thống của người Việt qua từng lễ hội, làng nghề và ẩm thực địa phương.',
+            locations: ['Hội An', 'Huế', 'Hà Nội'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD8w2xBsca4MIygV2gq50BGq8btMVOISZrWr5MdpCeI558wWAzQIXk2LUU0nLy1ugCt5bd7xtoCEgMrp-b340yub5hc8BUROGQTtxwnRmK-3j4oOrcM_a0Hl0cnNTOw3vWfnQkHdH8GeQxfNPYoOaB5Qn5k7x2nLuF2gfK_HEyFkyP2VSBPGxufSSQwthlQ2vc8JUWt996gw6Bs78OREMuyF2X_O1iNLaM48_ieUXiY-sXz4gDBt45bkzl6CUZWO8eNL5klry7gQZA',
+            countLabel: '03 / 06'
+        },
+        {
+            id: '04',
+            title: 'Du Thuyền',
+            subtitle: 'Kỳ quan sóng nước',
+            description: 'Tận hưởng cuộc sống trên những du thuyền sang trọng giữa kỳ quan thiên nhiên thế giới. Ngắm hoàng hôn trên vịnh, khám phá hang động huyền bí và thưởng thức hải sản tươi ngon ngay trên boong tàu.',
+            locations: ['Hạ Long Bay', 'Lan Hạ Bay'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDV83bqXPc_09MjxYaZkZx5RkIpvaYlCtAX2MRQrjiGhG2xyoHdI6aDD-adfiQxiZoMl1Xq6pag_4lYdjc3_J8adGI3OVU7XeipayFR_RDJCxGoLt3ioqB6nwcPxe5tcJ01P6E8nnP9EWRicK2Wijl958r03KbjS39Q1mv30BUlszF9BRswz0KzTFg2CnFy2ZLalquZBWKRXoIvLu-F8RHB-WDY6L0TKTs4N6zci1zGs82luZScjRLAW08StaMN2hImiuKNY19Cn3E',
+            countLabel: '04 / 06'
+        },
+        {
+            id: '05',
+            title: 'Ẩm Thực',
+            subtitle: 'Tinh hoa vị giác',
+            description: 'Hành trình khám phá nền ẩm thực phong phú và đa dạng của Việt Nam. Từ phở Hà Nội, bún bò Huế đến bánh xèo Sài Gòn. Mỗi vùng đất mang một hương vị riêng không thể nhầm lẫn.',
+            locations: ['Hà Nội', 'Hội An', 'Huế'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBzJ3f-zL2Mfw8UShaYnQ2rLqsb3lUNZkupXL8PDjS55YeG29I6YBmWlPjLvQG9mwaaVe5fwhtZ9-Vge2MNN3pHz1PL7eLcKIpvMOSX3ds9CILckXKkWqaj_7sEc3ii9WaHIZgsPyujCYJcFD729g18TxAfVg_Poh1CB1VUp7j5nHwucs_KvwUyc5feqEe2_5Eostr9TwsanqITGzO5hyyLZnBrqeSflIIIVCZKGWJr_vwsMuSBz72xP4eEwEEv5p_1m3fjeGPA7LA',
+            countLabel: '05 / 06'
+        },
+        {
+            id: '06',
+            title: 'Mạo Hiểm',
+            subtitle: 'Thử thách giới hạn',
+            description: 'Dành cho những tâm hồn không ngại thử thách — từ nhảy dù, lặn biển sâu đến leo núi đá và khám phá hang động. Mỗi chuyến đi là một câu chuyện anh hùng bạn sẽ kể mãi.',
+            locations: ['Quảng Bình', 'Nha Trang', 'Đà Nẵng'],
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBElTij7AUvDItDkB2gFIjV4duNKJGOQj0m3AqDRKdjNPE9M-vOdXZRNGW-XwGWleCGRwMBbRlcAdiN7R9OhpCt-mU664PJA62UjIYoqIJNCynClQTVZu22vm-MlKY5R2USbll5Jm8bv3hMzEcHmXl-sZbneALqCHM_G2a2rmKJ9Yp4j677bl-5Qbd1n8m3qhQTdiKwyhAJ5mCINSfoPeNw_O6KDz-L-PgK5Ot7ExQoxFlDdSVkbWLi5B5A3su_c9DgZ64O0tqoTg4',
+            countLabel: '06 / 06'
+        }
+    ];
+
+    const tourPackages = [
+        {
+            id: 'pkg-hoian',
+            title: 'Khám Phá Hội An Cổ Kính',
+            location: 'Hội An, Việt Nam',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAnwQaLXsFul8IdoHuWcCrx6IEihC7o8GeimnyO5BUOkiZ9XX_RCmBr6PLhRToENX4ek11ZFPg5PU0CkWzSsr_taAYXSrCg34yXsCSPrYs15FoUgt_R27q2C_XkztIdx_XyHtjGFN0weeYdPRXNUC6_9WtfEsVEBimb3FFgovu27gIuCZqRSArDFckaFxtqdMXt08ZchPDmQIDnwdbcTwgxv-3pG8wlAitmV8pAPOi0Xov33OGl3075K_kc99k4tz9zXZSukbEZ874',
+            discountPercent: 22,
+            originalPrice: 3200000,
+            currentPrice: 2500000,
+            duration: '2 ngày 2 đêm',
+            maxGuests: 12,
+            rating: 4.9,
+            reviewCount: 328,
+            categoryId: '03',
+            description: 'Khám phá Phố cổ Hội An - di sản văn hóa thế giới với những ngôi nhà cổ sơn vàng đặc trưng, giăng đầy đèn lồng rực rỡ sắc màu về đêm, hòa quyện với văn hóa ẩm thực đặc sắc vùng Quảng Nam.',
+            highlights: [
+                'Ghé thăm Chùa Cầu, nhà cổ Phùng Hưng, hội quán Phúc Kiến',
+                'Thưởng thức Cao Lầu, Mì Quảng, bánh mì Phượng nổi danh',
+                'Thả đèn hoa đăng lãng mạn trên dòng sông Hoài thơ mộng',
+                'Tham gia lớp học làm đèn lồng thủ công truyền thống'
+            ],
+            itinerary: [
+                'Ngày 1: Đón khách từ Đà Nẵng - di chuyển đến Hội An - thưởng ngoạn Phố Cổ - thả đèn sông Hoài',
+                'Ngày 2: Ghé thăm Rừng dừa Bảy Mẫu - trải nghiệm đi thuyền thúng - trải nghiệm ẩm thực địa phương - mua sắm đồ thủ công lưu niệm - tiễn khách.'
+            ]
+        },
+        {
+            id: 'pkg-halong',
+            title: 'Vịnh Hạ Long 2 Ngày 1 Đêm',
+            location: 'Hạ Long, Việt Nam',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD7idfLXKZxLSQ3pnrvhcnaP0yq_4UZwCYKDH4dwJkzJCiZbMV_f39S6EDZmYY4L926a2BGDN6_0i3xqdjNHcbvskR_da4aiMjgmBIrKGLXBJ91zfg2kte2AEWTEefAFYtuU0xrOGptff2Je01aX-kPbpPnDJrARIGdGilMpi5Ns9WrvK96mB8Ww05f0BXcqpqRCr0mDyG5nE_w-MJZ6hNwSrCJC7ZKbzGSinAV25CECxgfL9GdBlEozuWvI2OuolcELymaeEX1Amw',
+            discountPercent: 16,
+            originalPrice: 4500000,
+            currentPrice: 3800000,
+            duration: '2 ngày 1 đêm',
+            maxGuests: 28,
+            rating: 4.8,
+            reviewCount: 254,
+            categoryId: '04',
+            description: 'Hành trình trọn vẹn khám phá Vịnh Hạ Long xinh đẹp trên du thuyền 5 sao đẳng cấp. Thưởng ngoạn hàng ngàn hòn đảo đá vôi kì vĩ vươn lên từ mặt biển xanh ngọc lục bảo.',
+            highlights: [
+                'Nghỉ dưỡng phòng Suite sang trọng có ban công ngắm vịnh',
+                'Khám phá Hang Sửng Sốt - hang động lớn và đẹp nhất vịnh',
+                'Chèo thuyền kayak tại Hang Luồn hoặc tắm biển đảo Ti Tốp',
+                'Tiệc hoàng hôn Sunset Party và lớp học nấu ăn truyền thống'
+            ],
+            itinerary: [
+                'Ngày 1: Đón khách từ Hà Nội - check-in du thuyền - thưởng thức bữa trưa - khám phá Hang Sửng Sốt - tắm biển Ti Tốp - Sunset Party - bữa tối sang trọng.',
+                'Ngày 2: Tập Thái Cực Quyền đón bình minh - chèo thuyền Kayak Hang Luồn - bữa trưa buffet nhẹ trên tàu - du thuyền về bến - trả khách về Hà Nội.'
+            ]
+        },
+        {
+            id: 'pkg-fansipan',
+            title: 'Chinh Phục Fansipan',
+            location: 'Sapa, Việt Nam',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuByAlxkGbCR_m_8Gb1KQ0e70qiuUivvJDai2YDY6dnc4XbPKyEn69wIq3c3L07k9n6e9LGA4FYzjFU0tjlInVkD1pmlJP4OmCNTVTaeijNulQlCwUmHEmcawn1JzSPxuy6V5DDpZJBHUEPqSPylENeSZGrqbM0FUm1MHammbOZrgXsmu4iLzf413qKQ5BrpFfYhc-QBv9_CyMhCG3hmWozKVbrN4lCaDlqOHedoDTGYC32pumnABvANbi5vLsZlYAqdxlxZ-HN_XFE',
+            discountPercent: 11,
+            originalPrice: 4800000,
+            currentPrice: 4200000,
+            duration: '4 ngày 3 đêm',
+            maxGuests: 8,
+            rating: 4.7,
+            reviewCount: 112,
+            categoryId: '02',
+            description: 'Khám phá thị trấn Sapa mờ sương và chinh phục "Nóc nhà Đông Dương" đỉnh Fansipan cao 3.143m đầy kiêu hãnh. Trải nghiệm cáp treo vượt mây và ngắm toàn cảnh thung lũng Mường Hoa kỳ vĩ.',
+            highlights: [
+                'Chinh phục đỉnh Fansipan bằng cáp treo 3 dây hiện đại',
+                'Check-in biểu tượng cột mốc Nóc nhà Đông Dương giữa biển mây',
+                'Tìm hiểu văn hóa bản địa độc đáo tại bản Cát Cát và Tả Van',
+                'Thưởng thức đặc sản lẩu cá hồi, thịt trâu gác bếp, hạt dẻ nướng'
+            ],
+            itinerary: [
+                'Ngày 1: Hà Nội di chuyển đi Sapa - check-in khách sạn - tham quan Nhà thờ Đá Sapa - dạo quanh thị trấn mờ sương.',
+                'Ngày 2: Chinh phục đỉnh Fansipan - check-in cột mốc linh thiêng - thưởng ngoạn quần thể tâm linh trên đỉnh Fansipan.',
+                'Ngày 3: Trekking bản Cát Cát - khám phá văn hóa đồng bào H\'Mông - ngắm thác Tiên Sa - giao lưu lửa trại tối.',
+                'Ngày 4: Khám phá Núi Hàm Rồng - ngắm trọn vẹn thung lũng Mường Hoa - mua sắm đặc sản măng ớt, rau cải mèo - di chuyển về Hà Nội.'
+            ]
+        },
+        {
+            id: 'pkg-phuquoc',
+            title: 'Thiên Đường Biển Đảo Phú Quốc',
+            location: 'Phú Quốc, Việt Nam',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIE_MXVHB7lb5wXsXbkImV5saRX55ZHYTpy04dggDB95zTH_G1s8XnsTjsz33pBinFFVjW6-uQPhAH5G825HBfz4cf22HL-UkQUwMNNsa1gi7vBbwnAiYG79puITptEb7s0X9pStPZjWc6uk_GxrmkYuxAH1jeFLS37UBDhgaH09xH0zKdqOYOsStNU4lQEhQYjs6tDqVLetOVmr1bXL6NoVPK8Zkd3pL5wWAqITvjskGzUF7ZOQz5GtuQ6n5nxhN18YAGbMXPkok',
+            discountPercent: 33,
+            originalPrice: 5200000,
+            currentPrice: 3500000,
+            duration: '4 ngày 3 đêm',
+            maxGuests: 15,
+            rating: 4.9,
+            reviewCount: 189,
+            categoryId: '01',
+            description: 'Trải nghiệm thiên đường đảo ngọc Phú Quốc với làn nước trong vắt, bãi cát dài phẳng mịn và hải sản tươi rói phong phú. Nghỉ dưỡng sang chảnh tại resort sát biển cao cấp.',
+            highlights: [
+                'Tour cano khám phá 4 đảo đẹp nhất: hòn Mây Rút, hòn Gầm Ghì, hòn Móng Tay',
+                'Lặn ngắm rặng san hô tự nhiên đa sắc màu cực kỳ sinh động',
+                'Vui chơi cực đã tại tổ hợp giải trí Grand World & VinWonders',
+                'Ngắm hoàng hôn rực rỡ nhất Việt Nam tại Sunset Sanato'
+            ],
+            itinerary: [
+                'Ngày 1: Đón sân bay Phú Quốc - nhận phòng resort - dạo chợ đêm Dương Đông - thưởng thức bún quậy nổi tiếng.',
+                'Ngày 2: Cano 4 đảo kì diệu - lặn biển ngắm san hô - ăn trưa trên đảo - chiều ngắm hoàng hôn cực phẩm.',
+                'Ngày 3: Check-in Grand World "Thành phố không ngủ" - đi thuyền kênh Venice thu nhỏ - xem show diễn "Tinh hoa Việt Nam".',
+                'Ngày 4: Tham quan cơ sở ngọc trai, nhà thùng nước mắm truyền thống - mua sắm tiêu xanh đặc sản - đưa khách ra sân bay.'
+            ]
+        }
+    ];
+
+    const heroStats = [
+        { value: '500+', label: 'Tours' },
+        { value: '50K+', label: 'Khách hàng' },
+        { value: '4.9/5', label: 'Đánh giá' },
+        { value: '10+', label: 'Năm kinh nghiệm' }
+    ];
+
+    // State Variables
+    let favorites = ['pkg-hoian'];
+    let myBookings = [
+        {
+            id: 'B-1004',
+            tourId: 'pkg-halong',
+            tourTitle: 'Vịnh Hạ Long 2 Ngày 1 Đêm',
+            fullName: 'Huong',
+            phone: '0912345678',
+            email: 'huynhmyduc2005@gmail.com',
+            startDate: '2026-06-15',
+            guestsCount: 2,
+            totalPrice: 7600000,
+            status: 'confirmed',
+            bookingDate: '2026-06-01'
+        }
+    ];
+
+    let searchDest = '';
+    let searchDate = '';
+    let searchGuests = '';
+    let filteredTours = [...tourPackages];
+    let selectedTour = null;
+    let currentGuestsCount = 1;
+
+    // Toast function
+    function showToast(message) {
+        const toast = document.getElementById('toast-notification');
+        const text = document.getElementById('toast-text');
+        text.innerText = message;
+        toast.classList.remove('hidden');
+        setTimeout(() => {
+            toast.classList.remove('opacity-0', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+        }, 50);
+
+        setTimeout(() => {
+            toast.classList.remove('opacity-100', 'translate-y-0');
+            toast.classList.add('opacity-0', '-translate-y-4');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 300);
+        }, 3000);
+    }
+
+    // Toggle Bento Item View
+    function toggleBentoView(id) {
+        const activeCard = document.getElementById(`bento-card-${id}`);
+        const activePanel = document.getElementById(`bento-info-${id}`);
+        const activeLabel = document.getElementById(`bento-label-${id}`);
+
+        if (!activeCard) return;
+
+        const isCurrentlyActive = activeCard.classList.contains('lg:flex-[4.5]');
+
+        // If clicking a card that is already active:
+        if (isCurrentlyActive) {
+            // If it's already halong, do nothing (keep it open)
+            if (id === 'halong') return;
+
+            // If it's another card, close it and open halong back
+            toggleBentoView('halong');
+            return;
+        }
+
+        // Reset all cards to flex-1 (including halong)
+        ['halong', 'phuquoc', 'hoian', 'sapa'].forEach(key => {
+            const card = document.getElementById(`bento-card-${key}`);
+            const panel = document.getElementById(`bento-info-${key}`);
+            const label = document.getElementById(`bento-label-${key}`);
+
+            if (card) {
+                card.classList.remove('lg:flex-[4.5]');
+                card.classList.add('flex-1');
+
+                // Height on mobile
+                card.classList.remove('h-[350px]');
+                card.classList.add('h-[120px]');
+            }
+            if (panel) {
+                panel.classList.add('opacity-0', 'pointer-events-none');
+                panel.classList.remove('opacity-100');
+                // Hide panel after fade transition to prevent text wrapping in small columns
+                setTimeout(() => {
+                    if (panel.classList.contains('opacity-0')) {
+                        panel.classList.add('hidden');
+                    }
+                }, 500);
+            }
+            if (label) {
+                label.classList.remove('opacity-0');
+                label.classList.add('opacity-100');
+            }
+        });
+
+        // Activate clicked card
+        activeCard.classList.remove('flex-1');
+        activeCard.classList.add('lg:flex-[4.5]');
+
+        // Height on mobile
+        activeCard.classList.remove('h-[120px]');
+        activeCard.classList.add('h-[350px]');
+
+        if (activePanel) {
+            activePanel.classList.remove('hidden');
+            // Small delay to allow display: flex state to register in DOM, then fade in
+            setTimeout(() => {
+                activePanel.classList.remove('opacity-0', 'pointer-events-none');
+                activePanel.classList.add('opacity-100');
+            }, 50);
+        }
+        if (activeLabel) {
+            activeLabel.classList.remove('opacity-100');
+            activeLabel.classList.add('opacity-0');
+        }
+    }
+
+    // Close Dropdowns on Document Click
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#bento-destinations')) {
+            const halongCard = document.getElementById('bento-card-halong');
+            if (halongCard && !halongCard.classList.contains('lg:flex-[4.5]')) {
+                toggleBentoView('halong');
+            }
+        }
+    });
+
+    // Render Stats
+    function renderStats() {
+        const container = document.getElementById('stats-container');
+        container.innerHTML = heroStats.map(stat => `
+            <div class="flex flex-col items-center">
+                <span class="text-2xl md:text-4xl font-extrabold text-brand-accent">${stat.value}</span>
+                <span class="text-xs text-brand-muted/80 uppercase tracking-wider mt-1">${stat.label}</span>
+            </div>
+        `).join('');
+    }
+
+    // Render Categories
+    function renderCategories() {
+        const container = document.getElementById('categories-list-container');
+        container.innerHTML = tourCategories.map((cat, idx) => {
+            const isEven = idx % 2 === 0;
+            const locationsHtml = cat.locations.map(loc => `
+                <span 
+                    class="flex items-center gap-1.5 text-xs font-bold text-white bg-white/5 border border-white/10 hover:border-brand-accent/30 hover:bg-white/10 px-4 py-2 rounded-full cursor-pointer transition-colors"
+                    onclick="applyLocationFilter('${loc}')"
+                >
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-accent"></i>
+                    <span>${loc}</span>
+                </span>
+            `).join('');
+
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <!-- Image showcase wrapper -->
+                    <div class="lg:col-span-6 w-full h-[250px] sm:h-[350px] lg:h-[400px] relative rounded-3xl overflow-hidden shadow-2xl border border-white/5 group ${isEven ? 'order-1' : 'order-1 lg:order-2'}">
+                        <img 
+                            alt="${cat.title}" 
+                            class="w-full h-full object-cover transition-transform duration-[1000ms] group-hover:scale-105" 
+                            src="${cat.image}"
+                            referrerPolicy="no-referrer"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent"></div>
+                        
+                        <!-- Badge -->
+                        <div class="absolute top-6 left-6 px-4 py-2 glass-panel rounded-full flex items-center gap-2">
+                            <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
+                            <span class="text-[10px] font-black uppercase tracking-widest text-white">${cat.title}</span>
+                        </div>
+
+                        <!-- Watermark -->
+                        <div class="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                            <span class="text-[10px] bg-black/60 backdrop-blur-md text-brand-muted/95 border border-white/10 px-3 py-1 rounded-full font-bold">
+                                Bắt đầu hành trình kì vĩ
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Info details wrapper -->
+                    <div class="lg:col-span-6 text-left ${isEven ? 'order-2' : 'order-2 lg:order-1'}">
+                        <p class="text-brand-accent font-extrabold text-xs tracking-widest mb-3 uppercase">―― ${cat.countLabel}</p>
+                        <h3 class="text-2xl md:text-4xl font-extrabold text-white mb-4 flex items-center gap-2">
+                            <span>${cat.title}</span>
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-white/5 rounded-full border border-white/5 text-brand-secondary">
+                                ${cat.subtitle}
+                            </span>
+                        </h3>
+                        <p class="text-brand-muted text-sm md:text-base leading-relaxed mb-6 opacity-90">
+                            ${cat.description}
+                        </p>
+
+                        <!-- Tags -->
+                        <div class="flex flex-wrap gap-2.5 mb-8">
+                            ${locationsHtml}
+                        </div>
+
+                        <button 
+                            onclick="exploreCategory('${cat.id}', '${cat.title}')"
+                            class="px-8 py-3.5 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 cursor-pointer"
+                        >
+                            <span>Khám phá ngay</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        lucide.createIcons();
+    }
+
+    // Apply Location tag filter
+    function applyLocationFilter(loc) {
+        searchDest = loc;
+        document.getElementById('search-destination-input').value = loc;
+        document.getElementById('clear-dest-btn').classList.remove('hidden');
+        showToast(`Đã lọc theo: ${loc}`);
+        document.getElementById('search-destination-input').focus();
+    }
+
+    // Explore category button
+    function exploreCategory(catId, catTitle) {
+        const pkg = tourPackages.find(p => p.categoryId === catId);
+        if (pkg) {
+            openBookingModal(pkg.id);
+        } else {
+            searchDest = catTitle;
+            document.getElementById('search-destination-input').value = catTitle;
+            document.getElementById('clear-dest-btn').classList.remove('hidden');
+            filterTours();
+            showToast(`Lọc theo thể loại: ${catTitle}`);
+        }
+    }
+
+    // Toggle favorite
+    function toggleFavorite(id) {
+        const pkg = tourPackages.find(p => p.id === id);
+        if (!pkg) return;
+        if (favorites.includes(id)) {
+            favorites = favorites.filter(favId => favId !== id);
+            showToast(`Đã xoá "${pkg.title}" khỏi danh sách yêu thích`);
+        } else {
+            favorites.push(id);
+            showToast(`Đã thêm "${pkg.title}" vào danh sách yêu thích! ❤️`);
+        }
+        updateFavoritesDropdown();
+        renderToursGrid();
+    }
+
+    // Update Favorites List in Header Dropdown
+    function updateFavoritesDropdown() {
+        const dropdown = document.getElementById('favorites-dropdown');
+        const badge = document.querySelector('#favorites-toggle-btn span');
+        const icon = document.querySelector('#favorites-toggle-btn i');
+
+        if (!dropdown) return;
+        const listContainer = dropdown.querySelector('.space-y-3');
+        if (!listContainer) return;
+
+        listContainer.innerHTML = '';
+
+        if (favorites.length === 0) {
+            listContainer.innerHTML = `
+                <div class="text-center py-6 text-brand-muted text-xs">
+                    <p class="mb-2">Danh sách yêu thích trống.</p>
+                    <p class="text-[10px]">Nhấn ❤️ tại các tour du lịch để lưu trữ tiện lợi.</p>
+                </div>
+            `;
+            if (badge) badge.classList.add('hidden');
+            if (icon) icon.classList.remove('fill-brand-accent');
+        } else {
+            if (badge) {
+                badge.classList.remove('hidden');
+                badge.textContent = favorites.length;
+            }
+            if (icon) {
+                icon.classList.add('fill-brand-accent');
+            }
+
+            favorites.forEach(favId => {
+                const pkg = tourPackages.find(p => p.id === favId);
+                if (!pkg) return;
+
+                const item = document.createElement('div');
+                item.className = 'flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group';
+                item.onclick = () => {
+                    openBookingModal(pkg.id);
+                    dropdown.classList.add('hidden');
+                };
+                item.innerHTML = `
+                    <img src="${pkg.image}" alt="${pkg.title}" class="w-12 h-12 rounded-lg object-cover" />
+                    <div class="flex-1 min-w-0">
+                      <p class="text-xs font-bold text-white group-hover:text-brand-primary transition-colors truncate">${pkg.title}</p>
+                      <p class="text-[10px] text-brand-muted flex items-center gap-1 mt-0.5">
+                        <i data-lucide="map-pin" class="w-3 h-3 text-brand-accent"></i>
+                        <span class="truncate">${pkg.location}</span>
+                      </p>
+                      <p class="text-xs font-black text-brand-accent mt-0.5">${pkg.currentPrice.toLocaleString('vi-VN')} đ</p>
+                    </div>
+                    <button 
+                      onclick="event.stopPropagation(); toggleFavorite('${pkg.id}');"
+                      class="p-1 text-red-400 hover:text-red-300 hover:bg-white/5 rounded"
+                      title="Xóa khỏi yêu thích"
+                    >
+                      <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                `;
+                listContainer.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+    }
+
+    // Update Bookings List in Header Dropdown
+    function updateBookingsDropdown() {
+        const dropdown = document.getElementById('bookings-dropdown');
+        const badge = document.querySelector('#user-profile-btn .relative span');
+
+        if (!dropdown) return;
+        const listContainer = dropdown.querySelector('.space-y-3');
+        if (!listContainer) return;
+
+        listContainer.innerHTML = '';
+
+        if (myBookings.length === 0) {
+            listContainer.innerHTML = `
+                <div class="text-center py-6 text-brand-muted text-xs">
+                    <p>Bạn chưa đặt tour nào gần đây.</p>
+                    <p class="mt-1 text-[10px]">Tìm hành trình yêu thích và đặt vé trải nghiệm ngay!</p>
+                </div>
+            `;
+            if (badge) badge.classList.add('hidden');
+        } else {
+            if (badge) badge.classList.remove('hidden');
+
+            myBookings.forEach(bk => {
+                const item = document.createElement('div');
+                item.className = 'p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 relative group';
+                item.innerHTML = `
+                    <span class="absolute top-2.5 right-2.5 bg-green-500/20 text-green-300 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      ${bk.status === 'confirmed' ? 'Đã xác nhận' : 'Chờ duyệt'}
+                    </span>
+                    <p class="text-[10px] text-brand-accent font-mono">${bk.id}</p>
+                    <h5 class="text-xs font-bold text-white mt-1 pr-14 line-clamp-1">${bk.tourTitle}</h5>
+                    
+                    <div class="grid grid-cols-2 gap-y-1.5 gap-x-2 mt-2 pt-2 border-t border-white/5 text-[10px] text-brand-muted">
+                      <p class="flex items-center gap-1">
+                        <i data-lucide="calendar" class="w-3 h-3 text-brand-accent"></i>
+                        <span>${bk.startDate}</span>
+                      </p>
+                      <p class="flex items-center gap-1">
+                        <i data-lucide="users" class="w-3 h-3 text-brand-accent"></i>
+                        <span>${bk.guestsCount} Vé</span>
+                      </p>
+                    </div>
+                    <div class="flex justify-between items-center mt-2.5 pt-1.5 border-t border-white/5">
+                      <span class="text-[9px] text-brand-muted">Ngày đặt: ${bk.bookingDate}</span>
+                      <span class="text-xs font-extrabold text-brand-accent">${bk.totalPrice.toLocaleString('vi-VN')} đ</span>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+            lucide.createIcons();
+        }
+    }
+
+    // Render Tours Grid
+    function renderToursGrid() {
+        const container = document.getElementById('tours-grid-container');
+        const statusBadge = document.getElementById('search-status-badge');
+
+        if (filteredTours.length === 0) {
+            statusBadge.classList.add('hidden');
+            container.innerHTML = `
+                <div class="col-span-full glass-panel p-12 text-center rounded-3xl border border-white/5 my-8">
+                  <i data-lucide="compass" class="w-12 h-12 text-brand-accent mx-auto mb-4 animate-bounce"></i>
+                  <h3 class="text-lg font-bold text-white">Không tìm thấy tour phù hợp</h3>
+                  <p class="text-xs text-brand-muted mt-2 max-w-sm mx-auto">Vui lòng thử tìm kiếm bằng từ khoá khác hoặc chọn "Đặt lại bộ lọc" để xem danh sách toàn bộ các tours nổi bật.</p>
+                  <button 
+                    onclick="resetFilters()"
+                    class="mt-5 px-6 py-2.5 bg-brand-accent text-brand-dark text-xs font-extrabold rounded-full cursor-pointer"
+                  >
+                    Xem tất cả tours
+                  </button>
+                </div>
+            `;
+            lucide.createIcons();
+            return;
+        }
+
+        if (searchDest || searchDate || searchGuests) {
+            statusBadge.classList.remove('hidden');
+            statusBadge.innerText = `Đang lọc • Tìm thấy ${filteredTours.length} tours`;
+        } else {
+            statusBadge.classList.add('hidden');
+        }
+
+        container.innerHTML = filteredTours.map(pkg => {
+            const isFav = favorites.includes(pkg.id);
+            return `
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-brand-accent/50 hover:shadow-2xl transition-all duration-300 border border-white/10 group">
+                    <!-- Card Banner -->
+                    <div class="relative h-48 overflow-hidden">
+                      <img 
+                        alt="${pkg.title}" 
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-95" 
+                        src="${pkg.image}"
+                        referrerPolicy="no-referrer"
+                      />
+                      
+                      <!-- Discount Tag -->
+                      <div class="absolute top-4 left-4">
+                        <span class="px-2.5 py-1 bg-red-600 text-white text-[10px] font-black rounded-lg">
+                          -${pkg.discountPercent}%
+                        </span>
+                      </div>
+
+                      <!-- Favorite button toggle -->
+                      <button 
+                        onclick="toggleFavorite('${pkg.id}')"
+                        class="absolute top-4 right-4 w-9 h-9 rounded-full bg-brand-dark/50 backdrop-blur-md flex items-center justify-center text-white hover:text-brand-accent transition-all active:scale-90"
+                        title="${isFav ? "Xoá khỏi yêu thích" : "Yêu thích"}"
+                      >
+                        <i data-lucide="heart" class="w-4 h-4 ${isFav ? 'fill-red-500 text-red-500' : 'text-white'}"></i>
+                      </button>
+                    </div>
+
+                    <!-- Card Details -->
+                    <div class="p-5 flex-1 flex flex-col justify-between text-left">
+                      <div>
+                        <!-- Map Location -->
+                        <div class="flex items-center gap-1 text-brand-muted/90 text-[10px] font-black uppercase mb-1.5 tracking-wider">
+                          <i data-lucide="map-pin" class="w-3 h-3 text-brand-accent"></i>
+                          <span>${pkg.location}</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h4 class="text-white font-extrabold text-sm md:text-base group-hover:text-brand-accent transition-colors line-clamp-1">${pkg.title}</h4>
+                        
+                        <!-- Specs -->
+                        <div class="flex items-center gap-3 text-brand-muted text-[11px] font-semibold mt-3.5 mb-4">
+                          <span class="flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-accent"></i>
+                            <span>${pkg.duration}</span>
+                          </span>
+                          <span class="flex items-center gap-1">
+                            <i data-lucide="users" class="w-3.5 h-3.5 text-brand-accent"></i>
+                            <span>Tối đa ${pkg.maxGuests} khách</span>
+                          </span>
+                        </div>
+
+                        <!-- Star Rating summary -->
+                        <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/5">
+                          <div class="flex items-center gap-1 text-xs">
+                            <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i>
+                            <span class="text-white font-black">${pkg.rating}</span>
+                            <span class="text-brand-muted">(${pkg.reviewCount})</span>
+                          </div>
+                          <span class="text-[10px] bg-brand-secondary/10 px-2 py-0.5 rounded text-brand-secondary uppercase font-semibold">Bảo đảm</span>
+                        </div>
+                      </div>
+
+                      <!-- Pricing and Action -->
+                      <div>
+                        <div class="flex items-baseline gap-2 mb-4">
+                          <span class="text-brand-accent font-black text-lg">
+                            ${pkg.currentPrice.toLocaleString('vi-VN')} đ
+                          </span>
+                          <span class="text-brand-muted font-medium text-[11px] line-through decoration-red-500/50">
+                            ${pkg.originalPrice.toLocaleString('vi-VN')} đ
+                          </span>
+                        </div>
+
+                        <button 
+                          onclick="openBookingModal('${pkg.id}')"
+                          class="w-full py-2.5 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full text-xs font-black group-hover:bg-brand-accent group-hover:text-brand-dark transition-all flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
+                        >
+                          <span>Xem chi tiết</span>
+                          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        lucide.createIcons();
+    }
+
+    // Open Booking modal
+    function openBookingModal(id) {
+        selectedTour = tourPackages.find(p => p.id === id);
+        if (!selectedTour) return;
+
+        // Reset elements
+        document.getElementById('modal-tour-img').src = selectedTour.image;
+        document.getElementById('modal-tour-duration').innerText = selectedTour.duration;
+        document.getElementById('modal-tour-title').innerText = selectedTour.title;
+        document.getElementById('modal-tour-location').innerText = selectedTour.location;
+        document.getElementById('modal-tour-description').innerText = selectedTour.description;
+
+        // Highlights list
+        const highlightsContainer = document.getElementById('modal-tour-highlights');
+        highlightsContainer.innerHTML = selectedTour.highlights.map(h => `
+            <li class="flex gap-2 text-brand-muted leading-relaxed">
+              <span class="text-brand-accent font-bold">•</span>
+              <span>${h}</span>
+            </li>
+        `).join('');
+
+        // Itinerary timeline
+        const itineraryContainer = document.getElementById('modal-tour-itinerary');
+        itineraryContainer.innerHTML = selectedTour.itinerary.map((it, idx) => `
+            <div class="p-2.5 bg-black/30 rounded border border-white/5 text-left">
+              <p class="text-brand-accent font-bold uppercase mb-1">CỘT MỐC ${idx + 1}</p>
+              <span>${it}</span>
+            </div>
+        `).join('');
+
+        // Initialize form
+        currentGuestsCount = Number(document.getElementById('search-guests-input').value) || 2;
+        if (currentGuestsCount > selectedTour.maxGuests) currentGuestsCount = selectedTour.maxGuests;
+
+        document.getElementById('booking-fullname-field').value = "Huong";
+        document.getElementById('booking-phone-field').value = "0912345678";
+        document.getElementById('booking-email-field').value = "huynhmyduc2005@gmail.com";
+
+        const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+        document.getElementById('booking-startdate-field').value = document.getElementById('search-date-input').value || nextWeek;
+
+        updateCalculationUI();
+
+        // Show Modal
+        const overlay = document.getElementById('booking-modal-overlay');
+        overlay.classList.remove('hidden');
+        document.getElementById('booking-form-screen').classList.remove('hidden');
+        document.getElementById('booking-success-screen').classList.add('hidden');
+
+        lucide.createIcons();
+    }
+
+    // Close Booking modal
+    function closeBookingModal() {
+        document.getElementById('booking-modal-overlay').classList.add('hidden');
+    }
+
+    // Adjust guests count
+    function adjustGuests(amount) {
+        if (!selectedTour) return;
+        const newCount = currentGuestsCount + amount;
+        if (newCount >= 1 && newCount <= selectedTour.maxGuests) {
+            currentGuestsCount = newCount;
+            updateCalculationUI();
+        }
+    }
+
+    // Update calculation block
+    function updateCalculationUI() {
+        if (!selectedTour) return;
+        document.getElementById('booking-guests-display').innerText = currentGuestsCount;
+        document.getElementById('booking-price-display').innerText = selectedTour.currentPrice.toLocaleString('vi-VN') + ' đ';
+        document.getElementById('booking-count-display').innerText = 'x ' + currentGuestsCount;
+        document.getElementById('booking-total-display').innerText = (selectedTour.currentPrice * currentGuestsCount).toLocaleString('vi-VN') + ' đ';
+    }
+
+    // Search trigger action
+    function filterTours() {
+        filteredTours = tourPackages.filter(pkg => {
+            const matchDest = !searchDest ||
+                pkg.title.toLowerCase().includes(searchDest.toLowerCase()) ||
+                pkg.location.toLowerCase().includes(searchDest.toLowerCase());
+
+            const matchGuests = !searchGuests || pkg.maxGuests >= Number(searchGuests);
+
+            return matchDest && matchGuests;
+        });
+
+        renderToursGrid();
+
+        // Show status badge details
+        const resetBtn = document.getElementById('reset-filter-btn');
+        if (searchDest || searchDate || searchGuests) {
+            resetBtn.classList.remove('hidden');
+        } else {
+            resetBtn.classList.add('hidden');
+        }
+    }
+
+    // Reset all search filters
+    function resetFilters() {
+        searchDest = '';
+        searchDate = '';
+        searchGuests = '';
+
+        document.getElementById('search-destination-input').value = '';
+        document.getElementById('search-date-input').value = '';
+        document.getElementById('search-guests-input').value = '';
+        document.getElementById('clear-dest-btn').classList.add('hidden');
+        document.getElementById('reset-filter-btn').classList.add('hidden');
+
+        filteredTours = [...tourPackages];
+        renderToursGrid();
+        showToast("Đã khôi phục toàn bộ danh sách tours du lịch!");
+    }
+
+    // Init listeners for search inputs
+    document.getElementById('search-destination-input').addEventListener('input', (e) => {
+        searchDest = e.target.value;
+        const clearBtn = document.getElementById('clear-dest-btn');
+        if (searchDest) {
+            clearBtn.classList.remove('hidden');
+        } else {
+            clearBtn.classList.add('hidden');
+        }
+    });
+
+    document.getElementById('clear-dest-btn').addEventListener('click', () => {
+        document.getElementById('search-destination-input').value = '';
+        searchDest = '';
+        document.getElementById('clear-dest-btn').classList.add('hidden');
+    });
+
+    document.getElementById('search-date-input').addEventListener('change', (e) => {
+        searchDate = e.target.value;
+    });
+
+    document.getElementById('search-guests-input').addEventListener('input', (e) => {
+        searchGuests = e.target.value;
+    });
+
+    // Form search submit
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        filterTours();
+
+        const resultsEl = document.getElementById('tour-results');
+        if (resultsEl) {
+            resultsEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        showToast(`Tìm thấy ${filteredTours.length} tour phù hợp với yêu cầu của bạn!`);
+    });
+
+    // Checkout Form Submit
+    document.getElementById('booking-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!selectedTour) return;
+
+        const submitBtn = document.getElementById('submit-checkout-btn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+            <span class="flex items-center justify-center gap-2">
+                <span class="w-4 h-4 border-2 border-brand-dark border-t-transparent rounded-full animate-spin"></span>
+                <span>Đang kết nối hệ thống giữ vé...</span>
+            </span>
+        `;
+
+        setTimeout(() => {
+            const totalPrice = selectedTour.currentPrice * currentGuestsCount;
+            const bookingId = `B-${Math.floor(1000 + Math.random() * 9000)}`;
+            const bookingDate = new Date().toISOString().split('T')[0];
+            const fullName = document.getElementById('booking-fullname-field').value;
+            const phone = document.getElementById('booking-phone-field').value;
+            const email = document.getElementById('booking-email-field').value;
+            const startDate = document.getElementById('booking-startdate-field').value;
+
+            const newBooking = {
+                id: bookingId,
+                tourId: selectedTour.id,
+                tourTitle: selectedTour.title,
+                fullName: fullName,
+                phone: phone,
+                email: email,
+                startDate: startDate,
+                guestsCount: currentGuestsCount,
+                totalPrice: totalPrice,
+                status: 'confirmed',
+                bookingDate: bookingDate
+            };
+
+            myBookings.unshift(newBooking);
+            updateBookingsDropdown();
+            showToast('Đặt tour thành công! Hẹn gặp lại bạn trong chuyến đi.');
+
+            // Success View population
+            document.getElementById('success-username').innerText = fullName;
+            document.getElementById('success-tour-title').innerText = selectedTour.title;
+
+            document.getElementById('success-ticket-card').innerHTML = `
+                <p class="text-brand-accent font-black text-sm pb-1.5 border-b border-white/10 flex justify-between">
+                  <span>MÃ VÉ KHÁCH HÀNG</span>
+                  <span>${bookingId}</span>
+                </p>
+                <p class="flex justify-between"><span>Tour du lịch:</span> <span class="text-white font-bold">${selectedTour.title}</span></p>
+                <p class="flex justify-between"><span>Ngày khởi hành:</span> <span class="text-white font-bold">${startDate}</span></p>
+                <p class="flex justify-between"><span>Số hành khách:</span> <span class="text-white font-bold">${currentGuestsCount} Vé</span></p>
+                <p class="flex justify-between"><span>Họ và tên:</span> <span class="text-white font-bold">${fullName}</span></p>
+                <p class="flex justify-between pt-2 border-t border-white/10 text-brand-accent text-sm font-black">
+                  <span>Tổng chi phí:</span>
+                  <span>${totalPrice.toLocaleString('vi-VN')} đ</span>
+                </p>
+            `;
+
+            document.getElementById('booking-form-screen').classList.add('hidden');
+            document.getElementById('booking-success-screen').classList.remove('hidden');
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Thanh toán &amp; Giữ vé ngay";
+
+            lucide.createIcons();
+        }, 1500);
+    });
+
+    // 3D Tours Carousel Logic
+    const tours3DData = [
+        {
+            id: 'pkg-dalat',
+            location: 'Đà Lạt',
+            title: 'Đà Lạt Thành Phố Ngàn Hoa',
+            duration: '3 ngày 2 đêm',
+            price: '2.800.000 đ',
+            rating: '4.8',
+            image: 'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?auto=format&fit=crop&w=600&q=80',
+            originalId: 'pkg-fansipan'
+        },
+        {
+            id: 'pkg-ninhbinh',
+            location: 'Ninh Bình',
+            title: 'Ninh Bình Tràng An Bích Động',
+            duration: '2 ngày 1 đêm',
+            price: '1.800.000 đ',
+            rating: '4.7',
+            image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
+            originalId: 'pkg-fansipan'
+        },
+        {
+            id: 'pkg-danang',
+            location: 'Hội An',
+            title: 'Khám Phá Hội An Cổ Kính',
+            duration: '3 ngày 2 đêm',
+            price: '2.500.000 đ',
+            rating: '4.9',
+            image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=600&q=80',
+            originalId: 'pkg-hoian'
+        },
+        {
+            id: 'pkg-halong-3d',
+            location: 'Hạ Long',
+            title: 'Vịnh Hạ Long 2 Ngày 1 Đêm Trên Du Thuyền',
+            duration: '2 ngày 1 đêm',
+            price: '3.800.000 đ',
+            rating: '4.8',
+            image: 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80',
+            originalId: 'pkg-halong'
+        }
+    ];
+
+    let virtualIndex = 1; // Ninh Bình is index 1
+
+    function setup3DCarousel() {
+        const stage = document.getElementById('stage-3d');
+        const dotsContainer = document.getElementById('dots-3d-container');
+        if (!stage) return;
+
+        // Render cards once
+        stage.innerHTML = tours3DData.map((tour, idx) => {
+            return `
+                <div 
+                    id="card-3d-${idx}"
+                    onclick="select3DActive(${idx})"
+                    class="carousel-3d-card rounded-3xl cursor-pointer"
+                    style="transform: rotateY(${idx * 90}deg) translateZ(280px);"
+                >
+                    <div class="tilt-card-inner w-full h-full bg-slate-900/80 border border-white/10 rounded-3xl p-4 flex flex-col justify-between shadow-xl">
+                        <!-- Top Image with Rating overlay -->
+                        <div class="relative w-full h-[180px] rounded-2xl overflow-hidden mb-4">
+                            <img src="${tour.image}" alt="${tour.title}" class="w-full h-full object-cover" />
+                            <div class="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full flex items-center gap-1 border border-white/10 text-white text-[10px] font-bold">
+                                <i data-lucide="star" class="w-3 h-3 fill-yellow-500 text-yellow-500"></i>
+                                <span>${tour.rating}</span>
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="space-y-2 flex-1 flex flex-col justify-between">
+                            <div class="space-y-1 text-left">
+                                <div class="flex items-center gap-1 text-[10px] font-bold text-blue-400 uppercase">
+                                    <i data-lucide="map-pin" class="w-3 h-3"></i>
+                                    <span>${tour.location}</span>
+                                </div>
+                                <h4 class="text-sm font-black text-white leading-snug line-clamp-2">${tour.title}</h4>
+                            </div>
+
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-between">
+                                <div class="text-[10px] text-brand-muted flex items-center gap-1 font-bold">
+                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                    <span>${tour.duration}</span>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[8px] text-brand-muted uppercase">Từ</p>
+                                    <p class="text-xs font-black text-blue-400">${tour.price}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Render Dots once
+        if (dotsContainer) {
+            dotsContainer.innerHTML = tours3DData.map((_, idx) => {
+                return `
+                    <span 
+                        id="dot-3d-${idx}"
+                        onclick="clickDot3D(${idx})"
+                        class="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 bg-white/20 hover:bg-white/45"
+                    ></span>
+                `;
+            }).join('');
+        }
+
+        // Apply initial rotation and classes
+        updateCarouselState();
+        init3DTilt();
+    }
+
+    function updateCarouselState() {
+        const stage = document.getElementById('stage-3d');
+        if (!stage) return;
+
+        // Rotate stage without tilt
+        stage.style.transform = `rotateY(${-virtualIndex * 90}deg)`;
+
+        // Calculate current active index (modulo 4)
+        const activeIdx = (virtualIndex % 4 + 4) % 4;
+
+        // Update card styles
+        tours3DData.forEach((_, idx) => {
+            const card = document.getElementById(`card-3d-${idx}`);
+            const dot = document.getElementById(`dot-3d-${idx}`);
+            if (card) {
+                const isActive = idx === activeIdx;
+                const inner = card.querySelector('.tilt-card-inner');
+
+                // Calculate billboard rotation so card always faces front
+                const billboardRot = -idx * 90 + virtualIndex * 90;
+
+                // Update transform with scale & translateZ
+                card.style.transform = `rotateY(${idx * 90}deg) translateZ(320px) rotateY(${billboardRot}deg) scale(${isActive ? 1.05 : 0.8})`;
+
+                if (isActive) {
+                    card.classList.remove('opacity-50', 'z-10');
+                    card.classList.add('opacity-100', 'z-20');
+                    if (inner) {
+                        inner.classList.add('border-blue-500', 'shadow-[0_0_25px_rgba(30,144,255,0.25)]');
+                        inner.classList.remove('border-white/10');
+                    }
+                } else {
+                    card.classList.remove('opacity-100', 'z-20');
+                    card.classList.add('opacity-50', 'z-10');
+                    if (inner) {
+                        inner.classList.remove('border-blue-500', 'shadow-[0_0_25px_rgba(30,144,255,0.25)]');
+                        inner.classList.add('border-white/10');
+                    }
+                }
+            }
+
+            if (dot) {
+                if (idx === activeIdx) {
+                    dot.classList.add('bg-blue-500', 'px-3');
+                    dot.classList.remove('bg-white/20');
+                } else {
+                    dot.classList.remove('bg-blue-500', 'px-3');
+                    dot.classList.add('bg-white/20');
+                }
+            }
+        });
+
+        // Update Bottom Showcase Box
+        renderBottomShowcase(activeIdx);
+    }
+
+    function renderBottomShowcase(activeIdx) {
+        const panel = document.getElementById('showcase-3d-panel');
+        if (!panel) return;
+
+        const tour = tours3DData[activeIdx];
+
+        panel.innerHTML = `
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="space-y-3 flex-1 text-center md:text-left">
+                    <h3 class="text-xl md:text-2xl font-black text-slate-800 leading-tight">${tour.title}</h3>
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-500 font-bold">
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-600 fill-blue-600/10"></i>
+                            <span>${tour.location}</span>
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600"></i>
+                            <span>${tour.duration}</span>
+                        </span>
+                        <span class="flex items-center gap-1">
+                            <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
+                            <span>${tour.rating}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
+                    <div class="text-center sm:text-right">
+                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-wider">Tổng giá vé từ</p>
+                        <p class="text-2xl font-black text-blue-600">${tour.price}</p>
+                    </div>
+                    <button 
+                        onclick="openBookingModal('${tour.originalId}')"
+                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-black transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20 active:scale-95 w-full sm:w-auto justify-center"
+                    >
+                        <span>Đặt tour ngay</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+        lucide.createIcons();
+    }
+
+    function next3D() {
+        virtualIndex++;
+        updateCarouselState();
+    }
+
+    function prev3D() {
+        virtualIndex--;
+        updateCarouselState();
+    }
+
+    function select3DActive(idx) {
+        clickDot3D(idx);
+    }
+
+    function clickDot3D(targetIdx) {
+        const currentActualIdx = (virtualIndex % 4 + 4) % 4;
+        let diff = targetIdx - currentActualIdx;
+        if (diff > 2) diff -= 4;
+        if (diff < -2) diff += 4;
+        virtualIndex += diff;
+        updateCarouselState();
+    }
+
+    function init3DTilt() {
+        const cards = document.querySelectorAll('.carousel-3d-card');
+        cards.forEach(card => {
+            const inner = card.querySelector('.tilt-card-inner');
+            if (!inner) return;
+
+            card.addEventListener('mousemove', (e) => {
+                if (!card.classList.contains('opacity-100')) return;
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                const angleX = (yc - y) / 8;
+                const angleY = (x - xc) / 8;
+                inner.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.03, 1.03, 1.03)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                inner.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+    }
+
+    // App Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+        renderStats();
+        renderCategories();
+        renderToursGrid();
+        updateFavoritesDropdown();
+        updateBookingsDropdown();
+        setup3DCarousel();
+    });
+</script>

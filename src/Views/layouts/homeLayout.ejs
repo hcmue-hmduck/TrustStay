@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title || 'TPVTravel - Trải Nghiệm Lời Nói Đi Đôi Hành Động' %>
+  </title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            'brand-dark': '#020e1f',
+            'brand-text': '#f3f4f6',
+            'brand-accent': '#a4e6ff',
+            'brand-primary': '#00d2ff',
+            'brand-muted': '#9ca3af',
+            'brand-secondary': '#10b981',
+          },
+          animation: {
+            'spin-slow': 'spin 12s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Glassmorphism styles -->
+  <style>
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-gradient-text {
+      background: linear-gradient(135deg, #fff 30%, #a4e6ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+
+<body class="relative min-h-screen bg-[#020e1f] text-brand-text overflow-x-hidden font-sans">
+
+  <!-- Top Banner Navigation Bar -->
+  <header
+    class="fixed top-0 left-0 right-0 z-40 bg-brand-dark/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+    <nav class="flex justify-between items-center w-full px-4 md:px-8 py-4 max-w-screen-2xl mx-auto" id="main-nav">
+      <div class="text-2xl font-black text-brand-accent tracking-tighter cursor-pointer flex items-center gap-1.5"
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+        <i data-lucide="compass" class="w-6 h-6 animate-spin-slow text-brand-accent"></i>
+        <a href="/">
+          <span>TPVTravel</span>
+        </a>
+      </div>
+
+      <!-- Center Navigation Actions -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+        <a href="/"
+          class="pb-1 transition-all <%= page === 'home' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
+          Trang chủ
+        </a>
+        <a href="/tours"
+          class="pb-1 transition-all <%= page === 'tours' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
+          Danh sách Tours
+        </a>
+        <a href="#categories-section" class="pb-1 transition-all text-brand-text hover:text-brand-primary">
+          Cẩm nang du lịch
+        </a>
+        <a href="#feedback-footer" class="text-brand-text hover:text-brand-primary transition-colors">
+          Liên hệ
+        </a>
+      </div>
+
+      <!-- Right Header Controls -->
+      <div class="flex items-center gap-3 relative">
+        <!-- Heart / Favorites Icon -->
+        <div class="relative">
+          <button class="p-2.5 rounded-full hover:bg-white/10 transition-all text-brand-text/80 relative"
+            title="Yêu thích" id="favorites-toggle-btn">
+            <i data-lucide="heart" class="w-5 h-5 fill-brand-accent text-brand-accent"></i>
+            <span
+              class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-brand-dark animate-bounce">
+              1
+            </span>
+          </button>
+
+          <!-- Favorites Dropdown Card (hidden by default) -->
+          <div
+            class="absolute right-0 mt-3 w-80 glass-panel rounded-2xl shadow-2xl p-4 overflow-hidden z-50 text-left border border-white/15 hidden"
+            id="favorites-dropdown">
+            <div class="flex justify-between items-center pb-2 mb-3 border-b border-white/10">
+              <h4 class="font-bold text-brand-accent flex items-center gap-1.5 text-sm">
+                <i data-lucide="heart" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
+                <span>Điểm Đến Yêu Thích</span>
+              </h4>
+              <button onclick="document.getElementById('favorites-dropdown').classList.add('hidden')"
+                class="text-brand-muted hover:text-white">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <div class="space-y-3 max-h-72 overflow-y-auto pr-1">
+              <div
+                class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=150&q=80"
+                  alt="Hội An" class="w-12 h-12 rounded-lg object-cover" />
+                <div class="flex-1 min-w-0">
+                  <p class="text-xs font-bold text-white group-hover:text-brand-primary transition-colors truncate">Hội
+                    An Cổ Kính</p>
+                  <p class="text-[10px] text-brand-muted flex items-center gap-1 mt-0.5">
+                    <i data-lucide="map-pin" class="w-3 h-3 text-brand-accent"></i>
+                    <span class="truncate">Quảng Nam</span>
+                  </p>
+                  <p class="text-xs font-black text-brand-accent mt-0.5">12.000.000 đ</p>
+                </div>
+                <button class="p-1 text-red-400 hover:text-red-300 hover:bg-white/5 rounded">
+                  <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Menu Dropdown / Bookings -->
+        <div class="relative">
+          <button
+            class="flex items-center gap-2 pl-1.5 pr-3 py-1.5 glass-panel rounded-full hover:bg-white/10 hover:border-brand-accent/40 active:scale-95 transition-all group"
+            id="user-profile-btn">
+            <div class="relative">
+              <img alt="Huong avatar"
+                class="w-7 h-7 rounded-full object-cover border-2 border-brand-accent group-hover:scale-105 transition-transform"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7-BT8hEUDXMbFTeQu0Xurif9vYxMXdxVnEsc5FvAmCVega3qmJiWNyafHkSNtO5iHqYrz7Ew5aEJQOySgsa8kDWvPCNPNWmhgeDpI35N78OgqvefT5gKJzEdHa0v_aAhjs_s6biFnJkkhAkXSGyocJQSYA31WNC-zP0a1bvyWjzVZ6SUnouQ5CwKgReQIbFJUFky1P0hDEUzbgIycJpmJiHGkdkEnt8DUBrHlqX2VFTuXGbX-EZ5uYyBTomcP7HoQwaT7v6UseQ4" />
+              <span
+                class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-brand-dark animate-pulse"></span>
+            </div>
+            <span
+              class="text-xs font-bold text-white hidden sm:inline group-hover:text-brand-accent transition-colors">Huong</span>
+          </button>
+
+          <!-- Bookings / Notification Dropdown (hidden by default) -->
+          <div
+            class="absolute right-0 mt-3 w-80 glass-panel rounded-2xl shadow-2xl p-4 z-50 text-left border border-white/15 hidden"
+            id="bookings-dropdown">
+            <div class="flex justify-between items-center pb-2 mb-3 border-b border-white/10">
+              <h4 class="font-bold text-brand-accent flex items-center gap-1.5 text-sm">
+                <i data-lucide="ticket" class="w-4 h-4 text-brand-accent"></i>
+                <span>Vé Đã Đặt Của Bạn</span>
+              </h4>
+              <button onclick="document.getElementById('bookings-dropdown').classList.add('hidden')"
+                class="text-brand-muted hover:text-white">
+                <i data-lucide="x" class="w-4 h-4"></i>
+              </button>
+            </div>
+
+            <div class="space-y-3 max-h-72 overflow-y-auto pr-1">
+              <div
+                class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 relative group">
+                <span
+                  class="absolute top-2.5 right-2.5 bg-green-500/20 text-green-300 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Đã xác nhận
+                </span>
+                <p class="text-[10px] text-brand-accent font-mono">B-1004</p>
+                <h5 class="text-xs font-bold text-white mt-1 pr-14 line-clamp-1">Vịnh Hạ Long 2 Ngày 1 Đêm</h5>
+
+                <div
+                  class="grid grid-cols-2 gap-y-1.5 gap-x-2 mt-2 pt-2 border-t border-white/5 text-[10px] text-brand-muted">
+                  <p class="flex items-center gap-1">
+                    <i data-lucide="calendar" class="w-3 h-3 text-brand-accent"></i>
+                    <span>2026-06-15</span>
+                  </p>
+                  <p class="flex items-center gap-1">
+                    <i data-lucide="users" class="w-3 h-3 text-brand-accent"></i>
+                    <span>2 Vé</span>
+                  </p>
+                </div>
+                <div class="flex justify-between items-center mt-2.5 pt-1.5 border-t border-white/5">
+                  <span class="text-[9px] text-brand-muted">Ngày đặt: 2026-06-01</span>
+                  <span class="text-xs font-extrabold text-brand-accent">7.600.000 đ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="min-h-[calc(100vh-80px)]">
+    <%- body %>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-[#020e1f] text-brand-muted text-xs py-5 border-t border-white/5" id="feedback-footer">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
+      <!-- Logo brand & introduction -->
+      <div class="space-y-4">
+        <div class="text-xl font-black text-brand-accent flex items-center gap-1.5 leading-tight">
+          <i data-lucide="compass" class="w-5 h-5 text-brand-accent"></i>
+          <span>TPVTravel</span>
+        </div>
+        <p class="text-[11px] leading-relaxed opacity-80">
+          Công ty TNHH Lữ Hành TPVTravel Việt Nam. Đem lại kỷ niệm vàng cùng hành trình tuyệt diệu và dịch vụ tận tâm ưu
+          ái chu đáo.
+        </p>
+        <div class="pt-2 text-xs text-brand-accent font-bold">
+          Hotline hỗ trợ: <span class="text-white">1900 6789</span>
+        </div>
+      </div>
+
+      <!-- Quick link categories helper -->
+      <div>
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Các Loại Hình Tour</h4>
+        <ul class="space-y-2 text-[11px]">
+          <li><a href="#" class="hover:text-brand-accent">Biển & Sóng Nước Đảo Ngọc</a></li>
+          <li><a href="#" class="hover:text-brand-accent">Trekking Khám Phá Núi rừng kỳ bí</a></li>
+          <li><a href="#" class="hover:text-brand-accent">Nhịp Sống Văn Hóa & Di Sản Cổ</a></li>
+          <li><a href="#" class="hover:text-brand-accent">Khám Phá Kì Quan Sóng Nước</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter signups simulated -->
+      <div class="md:col-span-2 space-y-4">
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2">Đăng Ký Nhận Tin Khuyến Mãi</h4>
+        <p className="text-[11px]/relaxed">Nhập email để liên tục đón đầu các hành trình hot giảm giá đến 40% hàng tuần
+          từ TPVTravel.</p>
+
+        <div class="flex gap-2">
+          <input type="email" placeholder="Nhập địa chỉ email của bạn..."
+            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent"
+            id="newsletter-email-input" />
+          <button onclick="alert('Đăng ký nhận bản tin khuyến mãi thành công! Check mail ưu đãi.')"
+            class="px-6 py-3 bg-brand-accent text-brand-dark rounded-xl font-bold hover:bg-brand-primary whitespace-nowrap cursor-pointer text-xs">
+            Gửi ngay
+          </button>
+        </div>
+
+        <p class="text-[10px] text-brand-muted opacity-70">Chúng tôi cam kết không spam thư rác và bảo mật thông tin
+          liên hệ 100%.</p>
+      </div>
+    </div>
+
+    <!-- Copy right row details -->
+    <div
+      class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4">
+      <p>© 2026 TPVTravel. Đã đăng ký bản quyền thương hiệu. Thiết kế lấy cảm hứng từ thiên nhiên Việt Nam.</p>
+      <div class="flex items-center gap-6">
+        <span class="hover:text-white cursor-pointer">Điều khoản dịch vụ</span>
+        <span class="hover:text-white cursor-pointer">Bảo mật thông tin</span>
+        <span class="hover:text-white cursor-pointer">Hỗ trợ 24/7 Hotline</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dropdowns & Icon Initialization Script -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Dropdown toggling logic
+    const favBtn = document.getElementById('favorites-toggle-btn');
+    const favDropdown = document.getElementById('favorites-dropdown');
+    const profileBtn = document.getElementById('user-profile-btn');
+    const bookingsDropdown = document.getElementById('bookings-dropdown');
+
+    if (favBtn && favDropdown) {
+      favBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        favDropdown.classList.toggle('hidden');
+        if (bookingsDropdown) bookingsDropdown.classList.add('hidden');
+      });
+    }
+
+    if (profileBtn && bookingsDropdown) {
+      profileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        bookingsDropdown.classList.toggle('hidden');
+        if (favDropdown) favDropdown.classList.add('hidden');
+      });
+    }
+
+    // Close dropdowns on clicking outside
+    document.addEventListener('click', () => {
+      if (favDropdown) favDropdown.classList.add('hidden');
+      if (bookingsDropdown) bookingsDropdown.classList.add('hidden');
+    });
+
+    // Prevent closing when clicking inside the dropdowns
+    if (favDropdown) {
+      favDropdown.addEventListener('click', (e) => e.stopPropagation());
+    }
+    if (bookingsDropdown) {
+      bookingsDropdown.addEventListener('click', (e) => e.stopPropagation());
+    }
+  </script>
+</body>
+
+</html>

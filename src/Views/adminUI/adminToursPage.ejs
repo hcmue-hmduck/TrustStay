@@ -1,0 +1,187 @@
+<div class="space-y-6">
+    <!-- Header Page -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-2xl font-black text-white">Quản Lý Danh Sách Tours</h1>
+        </div>
+    </div>
+
+    <!-- Toolbar Filters -->
+    <div class="glass-card p-4 rounded-2xl">
+        <!-- Search bar input -->
+        <div class="relative w-full">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-brand-muted">
+                <i data-lucide="search" class="w-4.5 h-4.5"></i>
+            </span>
+            <input type="text" id="tour-search-input" placeholder="Tìm kiếm theo mã tour, tên tour..."
+                class="w-full pl-10 pr-4 py-2.5 bg-[#0b1329] border border-white/10 rounded-xl text-xs text-white focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 placeholder:text-brand-muted/40 font-semibold transition-all" />
+        </div>
+    </div>
+
+    <!-- Tours Table component -->
+    <div class="glass-card rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto min-w-full">
+            <table class="min-w-full text-sm text-left">
+                <thead>
+                    <tr class="border-b border-white/10 text-brand-muted font-bold bg-[#0b1329]/80">
+                        <th class="py-4 px-6">Tour</th>
+                        <th class="py-4 px-4">Giá Khuyến mãi</th>
+                        <th class="py-4 px-4">Thời Gian</th>
+                        <th class="py-4 px-4">Khởi Hành</th>
+                        <th class="py-4 px-4 text-center">Nổi Bật</th>
+                        <th class="py-4 px-4 text-center">Trạng Thái</th>
+                        <th class="py-4 px-6 text-center">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody id="tours-table-body">
+                    <% if (data && data.length> 0) { %>
+                        <% data.forEach(tour=> { %>
+                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors tour-row"
+                                data-search-text="<%= (tour.ma_tour + ' ' + tour.ten_tour).toLowerCase() %>">
+                                <!-- Image & Title details -->
+                                <td class="py-4 px-6">
+                                    <div class="flex items-center gap-3">
+                                        <img src="<%= tour.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80' %>"
+                                            alt="<%= tour.ten_tour %>"
+                                            class="w-14 h-14 rounded-lg object-cover border border-white/5 shrink-0" />
+                                        <div class="min-w-0">
+                                            <p class="font-extrabold text-white text-base max-w-[400px] truncate"
+                                                title="<%= tour.ten_tour %>">
+                                                <%= tour.ten_tour %>
+                                            </p>
+                                            <p class="text-xs text-brand-muted mt-1 flex items-center gap-1.5">
+                                                <i data-lucide="users" class="w-4 h-4 text-brand-accent"></i>
+                                                <span>Tối đa <%= tour.so_nguoi_toi_da %> khách</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="py-4 px-4 font-bold">
+                                    <% if (tour.gia_khuyen_mai> 0) { %>
+                                        <p class="text-brand-accent font-black text-base">
+                                            <%= tour.gia_khuyen_mai.toLocaleString('vi-VN') %> đ
+                                        </p>
+                                        <% } else { %>
+                                            <p class="text-white font-black text-base">
+                                                <%= tour.gia_nguoi_lon.toLocaleString('vi-VN') %> đ
+                                            </p>
+                                            <% } %>
+                                </td>
+
+                                <td class="py-4 px-4 text-slate-300 font-bold">
+                                    <%= tour.thoi_gian %>
+                                </td>
+
+                                <td class="py-4 px-4 text-slate-300 font-bold">
+                                    <%= tour.diem_khoi_hanh %>
+                                </td>
+
+                                <!-- Featured indicator -->
+                                <td class="py-4 px-4 text-center">
+                                    <% if (tour.la_noi_bat) { %>
+                                        <span
+                                            class="inline-flex items-center justify-center p-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20"
+                                            title="Đang nổi bật">
+                                            <i data-lucide="star" class="w-4 h-4 fill-yellow-500"></i>
+                                        </span>
+                                        <% } else { %>
+                                            <span class="text-slate-600">-</span>
+                                            <% } %>
+                                </td>
+
+                                <!-- Status badge -->
+                                <td class="py-4 px-4 text-center">
+                                    <% if (tour.trang_thai==='active' ) { %>
+                                        <span
+                                            class="px-2.5 py-1 bg-brand-emerald/10 border border-brand-emerald/20 text-brand-emerald text-[10px] font-bold rounded-full uppercase tracking-wider">
+                                            Hoạt động
+                                        </span>
+                                        <% } else { %>
+                                            <span
+                                                class="px-2.5 py-1 bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                                                Tạm khóa
+                                            </span>
+                                            <% } %>
+                                </td>
+
+                                <!-- Actions trigger -->
+                                <td class="py-4 px-6 text-center">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <a href="/tour-details/<%= tour.ma_tour %>" target="_blank"
+                                            title="Xem chi tiết client"
+                                            class="p-1.5 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
+                                            <i data-lucide="external-link" class="w-4.5 h-4.5"></i>
+                                        </a>
+                                        <button onclick="deleteTour('<%= tour._id %>', '<%= tour.ten_tour %>')"
+                                            title="Xóa Tour"
+                                            class="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-all border border-transparent hover:border-red-500/20 cursor-pointer">
+                                            <i data-lucide="trash-2" class="w-4.5 h-4.5"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="8" class="py-12 text-center text-brand-muted">
+                                            Không tìm thấy dữ liệu Tours nào trong Cơ sở dữ liệu.
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Frontend JavaScript controllers -->
+<script>
+    // Live Search input filter
+    const searchInput = document.getElementById('tour-search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            document.querySelectorAll('.tour-row').forEach(row => {
+                const text = row.getAttribute('data-search-text');
+                if (!query || text.includes(query)) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
+                }
+            });
+        });
+    }
+</script>
+
+<!-- Safely pass server-side data to client script -->
+<script id="tours-data" type="application/json">
+    <%- JSON.stringify(data || []) %>
+</script>
+
+<script>
+    const deleteTour = async (id, title) => {
+        if (confirm(`Bạn có chắc chắn muốn xóa tour "${title}" khỏi MongoDB?\nHành động này sẽ không thể hoàn tác.`)) {
+            try {
+                // Post fetch API delete request
+                const res = await fetch(`/admin/tours/delete/${id}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await res.json();
+
+                if (result.success) {
+                    showAdminToast("Đã xóa tour thành công!");
+                    setTimeout(() => window.location.reload(), 1000);
+                } else {
+                    alert("Lỗi: " + result.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Không thể xóa tour do lỗi kết nối.");
+            }
+        }
+    };
+</script>

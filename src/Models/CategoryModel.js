@@ -14,7 +14,6 @@ const CategoryModel = new mongoose.Schema({
     hinh_anh: String,
     trang_thai: {
         type: String,
-        enum: ['active', 'inactive'],
         default: 'active'
     }
 }, {

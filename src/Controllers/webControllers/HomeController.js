@@ -1,6 +1,6 @@
 
-const UserServices = require('../Services/UserServices');
-const TourServices = require('../Services/TourServices');
+const UserServices = require('../../Services/UserServices');
+const TourServices = require('../../Services/TourServices');
 
 class HomeController {
     async getHomePage(req, res) {
@@ -33,8 +33,8 @@ class HomeController {
 
     async getTourDetail(req, res) {
         try {
-            const tour_id = req.params.tour_id;
-            const tour_details = await TourServices.getTourDetails(tour_id);
+            const ma_tour = req.params.ma_tour;
+            const tour_details = await TourServices.getTourDetails(ma_tour);
             console.log(tour_details);
             res.render('homeUI/tourDetails', {
                 title: 'Chi tiết về Tour',

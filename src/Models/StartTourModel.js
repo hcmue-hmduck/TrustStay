@@ -35,7 +35,6 @@ const StartTourModel = new mongoose.Schema({
 
     trang_thai: {
         type: String,
-        enum: ['available', 'full', 'cancelled'],
         default: 'available'
     }
 }, {

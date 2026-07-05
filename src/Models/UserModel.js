@@ -31,7 +31,6 @@ const UserModel = new mongoose.Schema({
     anh_dai_dien: String,
     trang_thai: {
         type: String,
-        enum: ['active', 'inactive', 'blocked'],
         default: 'active'
     }
 }, {

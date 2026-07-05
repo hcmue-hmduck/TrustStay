@@ -23,7 +23,6 @@ const ContactModel = new mongoose.Schema({
 
     trang_thai: {
         type: String,
-        enum: ['new', 'read', 'replied'],
         default: 'new'
     }
 }, {

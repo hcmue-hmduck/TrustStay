@@ -4,6 +4,23 @@
         <div>
             <h1 class="text-2xl font-black text-white">Quản Lý Danh Sách Tours</h1>
         </div>
+        <div>
+            <button type="button" onclick="openCategoryModal()"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
+                <i data-lucide="folder-open" class="w-4 h-4"></i>
+                <span>Quản lý Danh mục</span>
+            </button>
+            <a href="/admin/tours/create"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                <span>Quản lý Địa điểm</span>
+            </a>
+            <a href="/admin/tours/create"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                <span>Tạo Tour Mới</span>
+            </a>
+        </div>
     </div>
 
     <!-- Toolbar Filters -->
@@ -36,7 +53,8 @@
                 <tbody id="tours-table-body">
                     <% if (data && data.length> 0) { %>
                         <% data.forEach(tour=> { %>
-                            <tr class="border-b border-white/5 hover:bg-white/5 transition-colors tour-row"
+                            <tr id="tour-row-<%= tour._id %>"
+                                class="border-b border-white/5 hover:bg-white/5 transition-colors tour-row"
                                 data-search-text="<%= (tour.ma_tour + ' ' + tour.ten_tour).toLowerCase() %>">
                                 <!-- Image & Title details -->
                                 <td class="py-4 px-6">
@@ -108,6 +126,10 @@
                                 <!-- Actions trigger -->
                                 <td class="py-4 px-6 text-center">
                                     <div class="flex items-center justify-center gap-2">
+                                        <a href="/admin/tours/<%= tour._id %>" title="Chỉnh sửa Tour"
+                                            class="p-1.5 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
+                                            <i data-lucide="edit-3" class="w-4.5 h-4.5"></i>
+                                        </a>
                                         <a href="/tour-details/<%= tour.ma_tour %>" target="_blank"
                                             title="Xem chi tiết client"
                                             class="p-1.5 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
@@ -163,18 +185,24 @@
 
 <script>
     const deleteTour = async (id, title) => {
-        if (confirm(`Bạn có chắc chắn muốn xóa tour "${title}" khỏi MongoDB?\nHành động này sẽ không thể hoàn tác.`)) {
+        if (confirm(`Bạn có chắc chắn muốn xóa tour "${title}" không ?\nHành động này sẽ không thể hoàn tác.`)) {
             try {
                 // Post fetch API delete request
-                const res = await fetch(`/admin/tours/delete/${id}`, {
-                    method: 'POST',
+                const res = await fetch(`/api/tours/delete/${id}`, {
+                    method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' }
                 });
                 const result = await res.json();
 
                 if (result.success) {
                     showAdminToast("Đã xóa tour thành công!");
-                    setTimeout(() => window.location.reload(), 1000);
+                    const row = document.getElementById(`tour-row-${id}`);
+                    if (row) {
+                        row.style.transition = 'all 0.5s ease';
+                        row.style.opacity = '0';
+                        row.style.transform = 'translateX(-20px)';
+                        setTimeout(() => row.remove(), 500);
+                    }
                 } else {
                     alert("Lỗi: " + result.message);
                 }
@@ -185,3 +213,5 @@
         }
     };
 </script>
+
+<%- include('formCategoryPage') %>

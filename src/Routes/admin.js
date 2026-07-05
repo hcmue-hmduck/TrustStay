@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const AdminController = require('../Controllers/AdminController');
+const AdminController = require('../Controllers/webControllers/AdminController');
+const TourController = require('../Controllers/webControllers/TourController');
 
 router.use((req, res, next) => {
     res.locals.layout = 'layouts/adminLayout';
@@ -9,8 +10,10 @@ router.use((req, res, next) => {
 });
 
 
-router.get('/dashboard', AdminController.getDashboard);
-router.get('/tours', AdminController.getTours)
+router.get('/dashboard', AdminController.getDashboard)
+
+router.get('/tours', TourController.getTours)
+router.get('/tours/:ma_tour', TourController.getTourDetails)
 
 
 module.exports = router;

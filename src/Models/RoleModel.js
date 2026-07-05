@@ -13,7 +13,6 @@ const RoleModel = new mongoose.Schema({
     mo_ta: String,
     trang_thai: {
         type: String,
-        enum: ['active', 'inactive'],
         default: 'active'
     }
 }, {

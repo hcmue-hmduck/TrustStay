@@ -71,7 +71,6 @@ const TourModel = new mongoose.Schema({
 
     trang_thai: {
         type: String,
-        enum: ['active', 'inactive'],
         default: 'active'
     }
 }, {

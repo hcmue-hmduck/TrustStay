@@ -4,8 +4,18 @@ const path = require('path');
 // Load environment variables from the root .env file
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
-const TourModel = require('../Models/TourModel');
-const tourPackagesSeed = require('./toursSeedData');
+// Import all sub-seeders
+const { seedRoles } = require('./roleSeedData');
+const { seedUsers } = require('./userSeedData');
+const { seedCategories } = require('./categorySeedData');
+const { seedLocations } = require('./locationSeedData');
+const { seedTours } = require('./toursSeedData');
+const { seedSchedules } = require('./tourScheduleSeedData');
+const { seedImages } = require('./tourImageSeedData');
+const { seedStartTours } = require('./startTourSeedData');
+const { seedTourRequests } = require('./tourRequestSeedData');
+const { seedBlogs } = require('./blogSeedData');
+const { seedContacts } = require('./contactSeedData');
 
 async function runSeed() {
     if (!process.env.DB_URL) {
@@ -17,22 +27,56 @@ async function runSeed() {
         console.log('Bắt đầu kết nối MongoDB...');
         await mongoose.connect(process.env.DB_URL);
         console.log('Kết nối MongoDB thành công.');
+        console.log('--------------------------------------------------');
 
-        // 1. Seed dữ liệu cho bảng Tours
-        console.log('Đang xóa toàn bộ danh sách tours cũ...');
-        await TourModel.deleteMany({});
-        console.log('Xóa thành công.');
+        // 1. Vai trò (Roles)
+        const roleIdMap = await seedRoles();
+        console.log('--------------------------------------------------');
 
-        console.log('Đang thêm dữ liệu seed tours mới...');
-        const seededTours = await TourModel.insertMany(tourPackagesSeed);
-        console.log(`Đã thêm thành công ${seededTours.length} tours vào cơ sở dữ liệu!`);
+        // 2. Người dùng (Users)
+        const userIdMap = await seedUsers(roleIdMap);
+        console.log('--------------------------------------------------');
 
-        // Sau này bạn có thể thêm các seeder khác tại đây, ví dụ:
-        // await seedUsers();
-        // await seedLocations();
+        // 3. Danh mục (Categories)
+        const categoryIdMap = await seedCategories();
+        console.log('--------------------------------------------------');
+
+        // 4. Địa điểm (Locations)
+        const locationIdMap = await seedLocations();
+        console.log('--------------------------------------------------');
+
+        // 5. Tours
+        const tourIdMap = await seedTours(categoryIdMap, locationIdMap);
+        console.log('--------------------------------------------------');
+
+        // 6. Lịch trình Tour (Schedules)
+        await seedSchedules(tourIdMap);
+        console.log('--------------------------------------------------');
+
+        // 7. Hình ảnh Tour (Images)
+        await seedImages(tourIdMap);
+        console.log('--------------------------------------------------');
+
+        // 8. Lịch khởi hành Tour (StartTours)
+        const startTourIdMap = await seedStartTours(tourIdMap);
+        console.log('--------------------------------------------------');
+
+        // 9. Yêu cầu đặt Tour (TourRequests)
+        await seedTourRequests(tourIdMap, startTourIdMap);
+        console.log('--------------------------------------------------');
+
+        // 10. Bài viết Blog (Blogs)
+        await seedBlogs(userIdMap);
+        console.log('--------------------------------------------------');
+
+        // 11. Liên hệ (Contacts)
+        await seedContacts();
+        console.log('--------------------------------------------------');
+
+        console.log('🎉🎉🎉 HOÀN TẤT QUÁ TRÌNH SEED DỮ LIỆU TOÀN BỘ HỆ THỐNG! 🎉🎉🎉');
 
     } catch (error) {
-        console.error('Đã xảy ra lỗi khi chạy seeder:', error);
+        console.error('Đã xảy ra lỗi nghiêm trọng khi chạy seeder:', error);
     } finally {
         // Đóng kết nối
         await mongoose.connection.close();
@@ -40,5 +84,5 @@ async function runSeed() {
     }
 }
 
-// Chạy seeder
+// Chạy seeder chính
 runSeed();

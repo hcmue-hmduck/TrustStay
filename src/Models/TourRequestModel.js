@@ -44,7 +44,6 @@ const TourRequestModel = new mongoose.Schema({
 
     trang_thai: {
         type: String,
-        enum: ['pending', 'contacted', 'cancelled'],
         default: 'pending'
     }
 }, {

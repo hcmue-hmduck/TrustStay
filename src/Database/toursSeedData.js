@@ -1,6 +1,7 @@
+const TourModel = require('../Models/TourModel');
+
 const tourPackagesSeed = [
     {
-        ma_tour: 'pkg-hoian',
         ma_danh_muc: '03',
         ma_dia_diem: 'hoian',
         ten_tour: 'Khám Phá Hội An Cổ Kính',
@@ -37,7 +38,6 @@ const tourPackagesSeed = [
         trang_thai: 'active'
     },
     {
-        ma_tour: 'pkg-halong',
         ma_danh_muc: '04',
         ma_dia_diem: 'halong',
         ten_tour: 'Vịnh Hạ Long 2 Ngày 1 Đêm',
@@ -74,7 +74,6 @@ const tourPackagesSeed = [
         trang_thai: 'active'
     },
     {
-        ma_tour: 'pkg-fansipan',
         ma_danh_muc: '02',
         ma_dia_diem: 'sapa',
         ten_tour: 'Chinh Phục Fansipan',
@@ -111,7 +110,6 @@ const tourPackagesSeed = [
         trang_thai: 'active'
     },
     {
-        ma_tour: 'pkg-phuquoc',
         ma_danh_muc: '01',
         ma_dia_diem: 'phuquoc',
         ten_tour: 'Thiên Đường Biển Đảo Phú Quốc',
@@ -149,4 +147,29 @@ const tourPackagesSeed = [
     }
 ];
 
-module.exports = tourPackagesSeed;
+async function seedTours(categoryIdMap, locationIdMap) {
+    console.log('Đang xóa toàn bộ danh sách tours cũ...');
+    await TourModel.deleteMany({});
+    console.log('Xóa thành công.');
+
+    console.log('Đang thêm dữ liệu seed tours mới...');
+    const tourIdMap = {};
+    const prepTours = tourPackagesSeed.map((tour, index) => {
+        const doc = new TourModel(tour);
+        doc.ma_tour = doc._id.toString();
+        // Ánh xạ mã danh mục và địa điểm sang mã mới ngẫu nhiên tương ứng
+        doc.ma_danh_muc = categoryIdMap[tour.ma_danh_muc] || tour.ma_danh_muc;
+        doc.ma_dia_diem = locationIdMap[tour.ma_dia_diem] || tour.ma_dia_diem;
+        
+        // Thiết lập map mã cũ (slug/index) sang mã mới của tour
+        const oldCode = index === 0 ? 'hoian' : (index === 1 ? 'halong' : (index === 2 ? 'sapa' : 'phuquoc'));
+        tourIdMap[oldCode] = doc.ma_tour;
+        
+        return doc;
+    });
+    await TourModel.insertMany(prepTours);
+    console.log(`Đã thêm thành công ${prepTours.length} tours vào cơ sở dữ liệu!`);
+    return tourIdMap;
+}
+
+module.exports = { seedTours };

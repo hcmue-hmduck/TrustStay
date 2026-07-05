@@ -24,7 +24,6 @@ const BlogModel = new mongoose.Schema({
 
     trang_thai: {
         type: String,
-        enum: ['draft', 'published', 'hidden'],
         default: 'draft'
     }
 }, {

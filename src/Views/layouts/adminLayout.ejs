@@ -10,7 +10,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- Tailwind Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -46,24 +48,30 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
+
     .neon-text-glow {
       text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
     }
+
     .neon-border-glow:focus {
       box-shadow: 0 0 15px rgba(2, 132, 199, 0.2);
     }
+
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
+
     ::-webkit-scrollbar-track {
       background: rgba(3, 7, 18, 0.8);
     }
+
     ::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 4px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 255, 255, 0.25);
     }
@@ -73,37 +81,49 @@
 <body class="bg-brand-dark text-slate-100 min-h-screen flex flex-col md:flex-row antialiased overflow-x-hidden">
 
   <!-- Sidebar Component -->
-  <aside class="w-full md:w-64 bg-slate-950 border-r border-slate-900 flex flex-col justify-between shrink-0 z-40 transition-all duration-300">
+  <aside
+    class="w-full md:w-64 bg-slate-950 border-r border-slate-900 flex flex-col justify-between shrink-0 z-40 transition-all duration-300">
     <div>
       <!-- Sidebar Header -->
       <div class="h-16 flex items-center justify-between px-6 border-b border-slate-900">
         <a href="/" class="flex items-center gap-2 group">
-          <i data-lucide="compass" class="w-6 h-6 text-brand-accent group-hover:rotate-45 transition-transform duration-300"></i>
-          <span class="font-mono text-lg font-black tracking-tight text-white uppercase">TPV<span class="text-brand-accent">Travel</span></span>
+          <i data-lucide="compass"
+            class="w-6 h-6 text-brand-accent group-hover:rotate-45 transition-transform duration-300"></i>
+          <span class="font-mono text-lg font-black tracking-tight text-white uppercase">TPV<span
+              class="text-brand-accent">Travel</span></span>
         </a>
-        <div class="text-[9px] bg-brand-primary/20 text-brand-accent px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+        <div
+          class="text-[9px] bg-brand-primary/20 text-brand-accent px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
           Admin
         </div>
       </div>
 
       <!-- Navigation links -->
       <nav class="mt-6 px-4 space-y-1.5">
-        <a href="/admin/dashboard" 
-           class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_dashboard' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
-          <i data-lucide="layout-dashboard" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+        <a href="/admin/dashboard"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_dashboard' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="layout-dashboard"
+            class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
           <span>Bảng Điều Khiển</span>
         </a>
 
-        <a href="/admin/tours" 
-           class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_tours' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+        <a href="/admin/tours"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_tours' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
           <i data-lucide="map" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
           <span>Quản Lý Tours</span>
         </a>
 
-        <a href="/admin/bookings" 
-           class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_bookings' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
-          <i data-lucide="ticket-percent" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+        <a href="/admin/bookings"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_bookings' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="ticket-percent"
+            class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
           <span>Quản Lý Đơn Vé</span>
+        </a>
+
+        <a href="/admin/category-location"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_category_location' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="tags" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Quản Lý Danh mục & Địa điểm</span>
         </a>
       </nav>
     </div>
@@ -111,14 +131,16 @@
     <!-- Sidebar Footer user profile card -->
     <div class="p-4 border-t border-slate-900">
       <div class="flex items-center gap-3 p-2 bg-slate-900/60 rounded-2xl border border-white/5">
-        <div class="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent font-black">
+        <div
+          class="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent font-black">
           AD
         </div>
         <div class="flex-1 min-w-0">
           <p class="text-xs font-bold text-white truncate">Administrator</p>
           <p class="text-[10px] text-brand-muted truncate">admin@tpvtravel.vn</p>
         </div>
-        <a href="/" title="Về trang chủ" class="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+        <a href="/" title="Về trang chủ"
+          class="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
           <i data-lucide="log-out" class="w-4 h-4"></i>
         </a>
       </div>
@@ -127,29 +149,16 @@
 
   <!-- Main view wrapper -->
   <main class="flex-1 flex flex-col min-h-screen min-w-0 bg-[#070b19] relative">
-    
+
     <!-- Toast notifications -->
-    <div id="admin-toast" class="fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl glass-card border-brand-accent/30 shadow-2xl transition-all duration-300 transform -translate-y-4 opacity-0 hidden">
+    <div id="admin-toast"
+      class="fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl glass-card border-brand-accent/30 shadow-2xl transition-all duration-300 transform -translate-y-4 opacity-0 hidden">
       <div class="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
         <i data-lucide="bell" class="w-4 h-4"></i>
       </div>
       <p id="admin-toast-text" class="text-xs font-bold text-slate-100"></p>
     </div>
 
-    <!-- Top Admin Header -->
-    <header class="h-16 flex items-center justify-between px-6 md:px-10 border-b border-slate-900 shrink-0">
-      <h2 class="text-sm font-extrabold text-white font-mono uppercase tracking-wider flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-brand-accent animate-ping"></span>
-        <span>Hệ thống Quản trị Tour du lịch</span>
-      </h2>
-      <div class="flex items-center gap-4">
-        <!-- Date display -->
-        <span class="text-xs font-bold text-brand-muted hidden sm:inline-flex items-center gap-1.5">
-          <i data-lucide="clock" class="w-4 h-4"></i>
-          <span id="header-datetime">03/07/2026</span>
-        </span>
-      </div>
-    </header>
 
     <!-- Content Area -->
     <div class="flex-1 p-6 md:p-10 overflow-y-auto max-w-full w-full">
@@ -161,30 +170,15 @@
     // Create icons on page render
     lucide.createIcons();
 
-    // Set dynamic date in header
-    const updateHeaderDate = () => {
-      const el = document.getElementById('header-datetime');
-      if (el) {
-        const d = new Date();
-        el.innerText = d.toLocaleDateString('vi-VN', { 
-          weekday: 'long', 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric' 
-        });
-      }
-    };
-    updateHeaderDate();
-
     // Global toast system
     window.showAdminToast = (message, isSuccess = true) => {
       const toast = document.getElementById('admin-toast');
       const text = document.getElementById('admin-toast-text');
       if (!toast || !text) return;
-      
+
       text.innerText = message;
       toast.classList.remove('hidden');
-      
+
       setTimeout(() => {
         toast.classList.remove('opacity-0', '-translate-y-4');
         toast.classList.add('opacity-100', 'translate-y-0');
@@ -195,6 +189,21 @@
         toast.classList.add('opacity-0', '-translate-y-4');
         setTimeout(() => toast.classList.add('hidden'), 300);
       }, 3500);
+    };
+
+    window.getFormData = (formElement) => {
+      const formData = new FormData(formElement);
+      const data = {};
+      for (let [key, value] of formData.entries()) {
+        if (key.endsWith('[]')) {
+          const cleanKey = key.slice(0, -2);
+          if (!data[cleanKey]) data[cleanKey] = [];
+          data[cleanKey].push(value);
+        } else {
+          data[key] = value;
+        }
+      }
+      return data;
     };
   </script>
 </body>

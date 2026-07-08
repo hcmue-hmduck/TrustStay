@@ -1,23 +1,31 @@
 <div class="space-y-6">
     <!-- Header Page -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-            <h1 class="text-2xl font-black text-white">Quản Lý Danh Sách Tours</h1>
+    <div class="glass-card p-6 rounded-2xl flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-l-4 border-l-brand-accent shadow-2xl">
+        <div class="space-y-1">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-brand-accent/10 rounded-xl shadow-inner">
+                    <i data-lucide="map" class="w-6 h-6 text-brand-accent"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black text-white leading-tight">Quản Lý Danh Sách Tours</h1>
+                    <p class="text-xs text-brand-muted font-medium mt-1">Điều hành, thêm mới và thiết lập toàn bộ hệ thống tour du lịch.</p>
+                </div>
+            </div>
         </div>
-        <div>
+        <div class="flex flex-wrap items-center gap-3">
             <button type="button" onclick="openCategoryModal()"
-                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
-                <i data-lucide="folder-open" class="w-4 h-4"></i>
-                <span>Quản lý Danh mục</span>
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-800/50 border border-white/10 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 hover:text-white hover:border-white/20 transition-all cursor-pointer">
+                <i data-lucide="folder-open" class="w-4 h-4 text-brand-accent"></i>
+                <span>Danh Mục</span>
+            </button>
+            <button type="button" onclick="openLocationModal()"
+                class="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-800/50 border border-white/10 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 hover:text-white hover:border-white/20 transition-all cursor-pointer">
+                <i data-lucide="map-pin" class="w-4 h-4 text-brand-accent"></i>
+                <span>Địa Điểm</span>
             </button>
             <a href="/admin/tours/create"
-                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
-                <i data-lucide="map-pin" class="w-4 h-4"></i>
-                <span>Quản lý Địa điểm</span>
-            </a>
-            <a href="/admin/tours/create"
-                class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-primary border border-brand-accent/30 text-white text-xs font-extrabold rounded-xl hover:bg-brand-primary/80 transition-all shadow-lg shadow-brand-primary/20 cursor-pointer">
-                <i data-lucide="plus" class="w-4 h-4"></i>
+                class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-brand-primary to-brand-accent text-brand-dark text-xs font-black rounded-xl hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20px_rgba(0,210,255,0.3)] hover:shadow-[0_0_30px_rgba(0,210,255,0.5)] cursor-pointer">
+                <i data-lucide="plus-circle" class="w-4.5 h-4.5"></i>
                 <span>Tạo Tour Mới</span>
             </a>
         </div>
@@ -42,115 +50,128 @@
                 <thead>
                     <tr class="border-b border-white/10 text-brand-muted font-bold bg-[#0b1329]/80">
                         <th class="py-4 px-6">Tour</th>
+                        <th class="py-4 px-4">Danh Mục</th>
+                        <th class="py-4 px-4">Địa Điểm</th>
                         <th class="py-4 px-4">Giá Khuyến mãi</th>
-                        <th class="py-4 px-4">Thời Gian</th>
                         <th class="py-4 px-4">Khởi Hành</th>
-                        <th class="py-4 px-4 text-center">Nổi Bật</th>
-                        <th class="py-4 px-4 text-center">Trạng Thái</th>
-                        <th class="py-4 px-6 text-center">Hành Động</th>
+                        <th class="py-4 px-2 text-center w-px whitespace-nowrap">Trạng Thái</th>
+                        <th class="py-4 px-2 text-center w-px whitespace-nowrap">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody id="tours-table-body">
                     <% if (data && data.length> 0) { %>
                         <% data.forEach(tour=> { %>
-                            <tr id="tour-row-<%= tour._id %>"
-                                class="border-b border-white/5 hover:bg-white/5 transition-colors tour-row"
-                                data-search-text="<%= (tour.ma_tour + ' ' + tour.ten_tour).toLowerCase() %>">
-                                <!-- Image & Title details -->
-                                <td class="py-4 px-6">
-                                    <div class="flex items-center gap-3">
-                                        <img src="<%= tour.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80' %>"
-                                            alt="<%= tour.ten_tour %>"
-                                            class="w-14 h-14 rounded-lg object-cover border border-white/5 shrink-0" />
-                                        <div class="min-w-0">
-                                            <p class="font-extrabold text-white text-base max-w-[400px] truncate"
-                                                title="<%= tour.ten_tour %>">
-                                                <%= tour.ten_tour %>
-                                            </p>
-                                            <p class="text-xs text-brand-muted mt-1 flex items-center gap-1.5">
-                                                <i data-lucide="users" class="w-4 h-4 text-brand-accent"></i>
-                                                <span>Tối đa <%= tour.so_nguoi_toi_da %> khách</span>
-                                            </p>
+                            <% const cat=(category || []).find(c=> c.ma_danh_muc === tour.ma_danh_muc);
+                                const catName = cat ? cat.ten_danh_muc : 'Chưa phân loại';
+                                const loc = (location || []).find(l => l.ma_dia_diem === tour.ma_dia_diem);
+                                const locName = loc ? loc.ten_dia_diem : 'Chưa xác định';
+                                %>
+                                <tr id="tour-row-<%= tour._id %>"
+                                    class="border-b border-white/5 hover:bg-white/5 transition-colors tour-row"
+                                    data-search-text="<%= (tour.ma_tour + ' ' + tour.ten_tour + ' ' + catName + ' ' + locName).toLowerCase() %>">
+                                    <!-- Image & Title details -->
+                                    <td class="py-4 px-6">
+                                        <div class="flex items-center gap-3">
+                                            <img src="<%= tour.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80' %>"
+                                                alt="<%= tour.ten_tour %>"
+                                                class="w-14 h-14 rounded-lg object-cover border border-white/5 shrink-0" />
+                                            <div class="min-w-0">
+                                                <p class="font-extrabold text-white text-base max-w-[400px] truncate flex items-center gap-1.5"
+                                                    title="<%= tour.ten_tour %>">
+                                                    <% if (tour.la_noi_bat) { %>
+                                                        <i data-lucide="star"
+                                                            class="w-4 h-4 text-yellow-500 fill-yellow-500 shrink-0"
+                                                            title="Tour nổi bật"></i>
+                                                        <% } %>
+                                                            <span>
+                                                                <%= tour.ten_tour %>
+                                                            </span>
+                                                </p>
+                                                <p
+                                                    class="text-[11px] text-brand-muted mt-1.5 flex items-center gap-x-2.5 flex-wrap font-semibold">
+                                                    <span class="flex items-center gap-1">
+                                                        <i data-lucide="users"
+                                                            class="w-3.5 h-3.5 text-brand-accent"></i>
+                                                        <span>Tối đa <%= tour.so_nguoi_toi_da %> khách</span>
+                                                    </span>
+                                                    <span class="text-white/10">•</span>
+                                                    <span class="flex items-center gap-1">
+                                                        <i data-lucide="clock"
+                                                            class="w-3.5 h-3.5 text-brand-accent"></i>
+                                                        <span>
+                                                            <%= tour.thoi_gian %>
+                                                        </span>
+                                                    </span>
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td class="py-4 px-4 font-bold">
-                                    <% if (tour.gia_khuyen_mai> 0) { %>
-                                        <p class="text-brand-accent font-black text-base">
-                                            <%= tour.gia_khuyen_mai.toLocaleString('vi-VN') %> đ
-                                        </p>
-                                        <% } else { %>
-                                            <p class="text-white font-black text-base">
-                                                <%= tour.gia_nguoi_lon.toLocaleString('vi-VN') %> đ
+                                    <td class="py-4 px-4 text-slate-300 font-bold">
+                                        <%= catName %>
+                                    </td>
+
+                                    <td class="py-4 px-4 text-slate-300 font-bold">
+                                        <%= locName %>
+                                    </td>
+
+                                    <td class="py-4 px-4 font-bold">
+                                        <% if (tour.gia_khuyen_mai> 0) { %>
+                                            <p class="text-brand-accent font-black text-base">
+                                                <%= tour.gia_khuyen_mai.toLocaleString('vi-VN') %> đ
                                             </p>
-                                            <% } %>
-                                </td>
+                                            <% } else { %>
+                                                <p class="text-white font-black text-base">
+                                                    <%= tour.gia_nguoi_lon.toLocaleString('vi-VN') %> đ
+                                                </p>
+                                                <% } %>
+                                    </td>
 
-                                <td class="py-4 px-4 text-slate-300 font-bold">
-                                    <%= tour.thoi_gian %>
-                                </td>
+                                    <td class="py-4 px-4 text-slate-300 font-bold">
+                                        <%= tour.diem_khoi_hanh %>
+                                    </td>
 
-                                <td class="py-4 px-4 text-slate-300 font-bold">
-                                    <%= tour.diem_khoi_hanh %>
-                                </td>
-
-                                <!-- Featured indicator -->
-                                <td class="py-4 px-4 text-center">
-                                    <% if (tour.la_noi_bat) { %>
-                                        <span
-                                            class="inline-flex items-center justify-center p-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20"
-                                            title="Đang nổi bật">
-                                            <i data-lucide="star" class="w-4 h-4 fill-yellow-500"></i>
-                                        </span>
-                                        <% } else { %>
-                                            <span class="text-slate-600">-</span>
-                                            <% } %>
-                                </td>
-
-                                <!-- Status badge -->
-                                <td class="py-4 px-4 text-center">
-                                    <% if (tour.trang_thai==='active' ) { %>
-                                        <span
-                                            class="px-2.5 py-1 bg-brand-emerald/10 border border-brand-emerald/20 text-brand-emerald text-[10px] font-bold rounded-full uppercase tracking-wider">
-                                            Hoạt động
-                                        </span>
-                                        <% } else { %>
-                                            <span
-                                                class="px-2.5 py-1 bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                                                Tạm khóa
+                                    <!-- Status badge -->
+                                    <td class="py-4 px-2 text-center w-px whitespace-nowrap">
+                                        <% if (tour.trang_thai==='active' ) { %>
+                                            <span class="inline-flex items-center justify-center p-1 bg-brand-emerald/10 text-brand-emerald rounded-full border border-brand-emerald/20" title="Hoạt động">
+                                                <i data-lucide="check-circle" class="w-4 h-4"></i>
                                             </span>
-                                            <% } %>
-                                </td>
+                                        <% } else { %>
+                                            <span class="inline-flex items-center justify-center p-1 bg-red-500/10 text-red-400 rounded-full border border-red-500/20" title="Tạm khóa">
+                                                <i data-lucide="lock" class="w-4 h-4"></i>
+                                            </span>
+                                        <% } %>
+                                    </td>
 
-                                <!-- Actions trigger -->
-                                <td class="py-4 px-6 text-center">
-                                    <div class="flex items-center justify-center gap-2">
-                                        <a href="/admin/tours/<%= tour._id %>" title="Chỉnh sửa Tour"
-                                            class="p-1.5 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
-                                            <i data-lucide="edit-3" class="w-4.5 h-4.5"></i>
-                                        </a>
-                                        <a href="/tour-details/<%= tour.ma_tour %>" target="_blank"
-                                            title="Xem chi tiết client"
-                                            class="p-1.5 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
-                                            <i data-lucide="external-link" class="w-4.5 h-4.5"></i>
-                                        </a>
-                                        <button onclick="deleteTour('<%= tour._id %>', '<%= tour.ten_tour %>')"
-                                            title="Xóa Tour"
-                                            class="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-all border border-transparent hover:border-red-500/20 cursor-pointer">
-                                            <i data-lucide="trash-2" class="w-4.5 h-4.5"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <% }) %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="8" class="py-12 text-center text-brand-muted">
-                                            Không tìm thấy dữ liệu Tours nào trong Cơ sở dữ liệu.
-                                        </td>
-                                    </tr>
-                                    <% } %>
+                                    <!-- Actions trigger -->
+                                    <td class="py-4 px-2 text-center w-px whitespace-nowrap">
+                                        <div class="flex items-center justify-center gap-0.5">
+                                            <a href="/admin/tours/<%= tour._id %>" title="Chỉnh sửa Tour"
+                                                class="p-1 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
+                                                <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                            </a>
+                                            <a href="/tour-details/<%= tour.ma_tour %>" target="_blank"
+                                                title="Xem chi tiết client"
+                                                class="p-1 text-slate-400 hover:text-brand-accent hover:bg-brand-primary/10 rounded transition-all border border-transparent hover:border-brand-accent/20">
+                                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                            </a>
+                                            <button onclick="deleteTour('<%= tour._id %>', '<%= tour.ten_tour %>')"
+                                                title="Xóa Tour"
+                                                class="p-1 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded transition-all border border-transparent hover:border-red-500/20 cursor-pointer">
+                                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="7" class="py-12 text-center text-brand-muted">
+                                                Không tìm thấy dữ liệu Tours nào trong Cơ sở dữ liệu.
+                                            </td>
+                                        </tr>
+                                        <% } %>
                 </tbody>
             </table>
         </div>
@@ -215,3 +236,4 @@
 </script>
 
 <%- include('formCategoryPage') %>
+    <%- include('formLocationPage') %>

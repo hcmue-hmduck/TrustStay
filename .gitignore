@@ -1,3 +1,7 @@
 Doc.md
 node_modules
 .env
+googleUploadService
+token.json
+oauth.json
+temp_uploads

@@ -74,7 +74,8 @@ const TourModel = new mongoose.Schema({
         default: 'active'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('Tour', TourModel);

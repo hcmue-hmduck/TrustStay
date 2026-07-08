@@ -79,21 +79,38 @@
 
                     <!-- Departure Select -->
                     <div class="space-y-2">
-                        <label class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted">Điểm khởi hành</label>
+                        <label class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted">Địa điểm hành trình</label>
                         <select 
                             id="filter-departure-select"
                             class="w-full bg-black/40 border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent [color-scheme:dark]"
                         >
                             <option value="">Tất cả điểm đi</option>
-                            <!-- Populated dynamically based on server-side options below -->
+                            <% location.forEach(loc => { %>
+                                <% if (loc.trang_thai === 'active') {%>
+                                    <option value="<%= loc.ma_dia_diem %>"><%= loc.ten_dia_diem %></option>
+                                <% } %>
+                            <% }) %>
                         </select>
                     </div>
 
                     <!-- Category Filter -->
                     <div class="space-y-2">
-                        <label class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted">Thể loại hành trình</label>
+                        <label class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted">Danh mục hành trình</label>
                         <div class="flex flex-col gap-2" id="filter-categories-container">
                             <!-- Populated dynamically -->
+                            <% category.forEach(cat => { %>
+                                <% if (cat.trang_thai === 'active') { %>
+                                    <label class="flex items-center gap-2.5 text-xs text-brand-muted hover:text-white cursor-pointer transition-colors">
+                                        <input 
+                                            type="checkbox" 
+                                            value="<%= cat.ma_danh_muc %>" 
+                                            onchange="toggleCategoryFilter('<%= cat.ma_danh_muc %>', this.checked)"
+                                            class="category-checkbox rounded border-white/10 bg-black/40 text-brand-accent focus:ring-brand-accent w-4.5 h-4.5"
+                                        />
+                                        <span><%= cat.ten_danh_muc %></span>
+                                    </label>
+                                <% } %>
+                            <% }) %>
                         </div>
                     </div>
 
@@ -192,6 +209,9 @@
                             const currentPrice = tour.gia_khuyen_mai > 0 ? tour.gia_khuyen_mai : tour.gia_nguoi_lon;
                             const discountPercent = tour.gia_khuyen_mai > 0 ? Math.round(((tour.gia_nguoi_lon - tour.gia_khuyen_mai) / tour.gia_nguoi_lon) * 100) : 0;
                             
+                            // Get location details
+                            const tourLoc = location.find(l => l.ma_dia_diem === tour.ma_dia_diem) || {};
+
                             // Generate robust mock stats dynamically from title length
                             const rating = (4.5 + (tour.ten_tour.length % 5) * 0.1).toFixed(1);
                             const reviewCount = 80 + (tour.ten_tour.length % 10) * 25;
@@ -209,13 +229,13 @@
                                 data-category="<%= tour.ma_danh_muc %>"
                                 data-price="<%= currentPrice %>"
                                 data-original-price="<%= tour.gia_nguoi_lon %>"
-                                data-departure="<%= tour.diem_khoi_hanh %>"
+                                data-departure="<%= tour.ma_dia_diem %>"
                                 data-duration-days="<%= daysNum %>"
                                 data-featured="<%= tour.la_noi_bat ? 'true' : 'false' %>"
                                 data-title="<%= tour.ten_tour %>"
                                 data-rating="<%= rating %>"
                                 data-reviews="<%= reviewCount %>"
-                                data-search-content="<%= (tour.ten_tour + ' ' + tour.mo_ta_ngan + ' ' + tour.diem_khoi_hanh).toLowerCase() %>"
+                                data-search-content="<%= (tour.ten_tour + ' ' + tour.mo_ta_ngan + ' ' + tour.diem_khoi_hanh + ' ' + (tourLoc.ten_dia_diem || '') + ' ' + (tourLoc.tinh_thanh || '')).toLowerCase() %>"
                             >
                                 <!-- Image Header -->
                                 <div class="relative h-48 overflow-hidden">
@@ -257,7 +277,7 @@
                                         <div class="flex items-center justify-between text-[10px] text-brand-muted/95 uppercase font-bold tracking-wider">
                                             <span class="flex items-center gap-1">
                                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-accent"></i>
-                                                <span><%= tour.diem_khoi_hanh %> đi</span>
+                                                <span><%= tour.diem_khoi_hanh %></span>
                                             </span>
                                             <span class="text-brand-accent bg-brand-accent/5 px-2 py-0.5 rounded border border-brand-accent/10 category-badge" data-cat-id="<%= tour.ma_danh_muc %>">
                                                 <%= tour.ma_danh_muc %>
@@ -366,15 +386,6 @@
         };
     });
 
-    const categoryNames = {
-        '01': 'Biển & Đảo',
-        '02': 'Núi & Trekking',
-        '03': 'Văn Hóa & Lịch Sử',
-        '04': 'Du Thuyền',
-        '05': 'Ẩm Thực',
-        '06': 'Mạo Hiểm'
-    };
-
     // 2. Đồng bộ danh sách yêu thích và vé đặt qua localStorage
     let favorites = JSON.parse(localStorage.getItem('tpv_favorites')) || ['pkg-hoian'];
     let myBookings = JSON.parse(localStorage.getItem('tpv_bookings')) || [
@@ -431,34 +442,11 @@
 
     // Render Filters Elements on Startup
     function initFiltersUI() {
-        // 1. Populate Departure Select with unique values from database tours
-        const departures = [...new Set(toursData.map(t => t.diem_khoi_hanh).filter(Boolean))];
-        const depSelect = document.getElementById('filter-departure-select');
-        departures.forEach(dep => {
-            const opt = document.createElement('option');
-            opt.value = dep;
-            opt.textContent = dep;
-            depSelect.appendChild(opt);
-        });
-
-        // 2. Populate Categories checkbox list
-        const categoriesContainer = document.getElementById('filter-categories-container');
-        categoriesContainer.innerHTML = Object.entries(categoryNames).map(([id, name]) => `
-            <label class="flex items-center gap-2.5 text-xs text-brand-muted hover:text-white cursor-pointer transition-colors">
-                <input 
-                    type="checkbox" 
-                    value="${id}" 
-                    onchange="toggleCategoryFilter('${id}', this.checked)"
-                    class="category-checkbox rounded border-white/10 bg-black/40 text-brand-accent focus:ring-brand-accent w-4.5 h-4.5"
-                />
-                <span>${name}</span>
-            </label>
-        `).join('');
 
         // 3. Translate EJS Categories to human-readable names on initial page load
         document.querySelectorAll('.category-badge').forEach(badge => {
             const catId = badge.getAttribute('data-cat-id');
-            badge.innerText = categoryNames[catId] || 'Hành trình';
+            badge.innerText = 'Hành trình';
         });
     }
 

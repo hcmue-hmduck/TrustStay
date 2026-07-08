@@ -26,7 +26,8 @@ const ContactModel = new mongoose.Schema({
         default: 'new'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('LienHe', ContactModel);

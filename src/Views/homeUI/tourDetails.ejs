@@ -1,418 +1,408 @@
-<% if (data) { 
-    const currentPrice = data.gia_khuyen_mai > 0 ? data.gia_khuyen_mai : data.gia_nguoi_lon;
-    const discountPercent = data.gia_khuyen_mai > 0 ? Math.round(((data.gia_nguoi_lon - data.gia_khuyen_mai) / data.gia_nguoi_lon) * 100) : 0;
-    const rating = (4.5 + (data.ten_tour.length % 5) * 0.1).toFixed(1);
-    const reviewCount = 80 + (data.ten_tour.length % 10) * 25;
-%>
-<!-- Hero Banner -->
-<section class="relative pt-32 pb-20 px-4 md:px-8 border-b border-white/5">
-    <!-- Cinematic Backdrop Image -->
-    <div class="absolute inset-0 z-0">
-        <img 
-            alt="<%= data.ten_tour %>" 
-            class="w-full h-full object-cover brightness-[0.35]" 
-            src="<%= data.hinh_anh_dai_dien %>"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-transparent to-brand-dark"></div>
-    </div>
+    <% if (data) { const currentPrice=data.gia_khuyen_mai> 0 ? data.gia_khuyen_mai : data.gia_nguoi_lon;
+        const discountPercent = data.gia_khuyen_mai > 0 ? Math.round(((data.gia_nguoi_lon - data.gia_khuyen_mai) /
+        data.gia_nguoi_lon) * 100) : 0;
+        const rating = (4.5 + (data.ten_tour.length % 5) * 0.1).toFixed(1);
+        const reviewCount = 80 + (data.ten_tour.length % 10) * 25;
 
-    <div class="relative z-10 w-full max-w-screen-2xl mx-auto text-left flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-        <div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-3">
-                <i data-lucide="compass" class="w-4 h-4 text-brand-accent animate-spin-slow"></i>
-                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent">Hành Trình Khám Phá</span>
+        // Find category and location names
+        const tourCategory = category.find(c => c.ma_danh_muc === data.ma_danh_muc) || {};
+        const tourLocation = location.find(l => l.ma_dia_diem === data.ma_dia_diem) || {};
+    %>
+    <!-- Hero Banner -->
+    <section
+        class="relative pt-48 pb-12 px-6 md:px-12 flex items-end min-h-[500px] aspect-[4/3] md:aspect-video xl:aspect-[21/9] w-[95%] xl:w-[90%] mx-auto mt-4 mb-8">
+        <!-- Cinematic Backdrop Image -->
+        <div class="absolute inset-0 z-0 rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+            <img alt="<%= data.ten_tour %>" class="w-full h-full object-cover brightness-[0.55]"
+                src="<%= data.hinh_anh_dai_dien %>" />
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-brand-dark/95"></div>
+        </div>
+
+        <div
+            class="relative z-10 w-full text-left flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 lg:gap-10">
+
+            <!-- Left Side: Tour Info -->
+            <div class="space-y-4 max-w-4xl flex-1">
+                <!-- Breadcrumbs -->
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 text-xs text-brand-muted font-bold bg-black/30 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg mb-3">
+                        <a href="/" class="hover:text-brand-accent transition-colors flex items-center gap-1">
+                            <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                            <span>Trang chủ</span>
+                        </a>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-white/30"></i>
+                        <a href="/tours" class="hover:text-brand-accent transition-colors">Danh sách Tours</a>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-white/30"></i>
+                        <span class="text-brand-accent truncate max-w-[120px] md:max-w-[200px]">
+                            <%= data.ten_tour %>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div>
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-brand-accent/15 border border-brand-accent/30 rounded-full">
+                        <i data-lucide="compass" class="w-3.5 h-3.5 text-brand-accent animate-spin-slow"></i>
+                        <span class="text-[10px] uppercase font-black tracking-widest text-brand-accent">
+                            <%= tourCategory.ten_danh_muc %>
+                        </span>
+                    </div>
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-black text-white leading-tight">
+                    <%= data.ten_tour %>
+                </h1>
+
+                <div class="flex flex-wrap items-center gap-6 mt-2 text-xs font-semibold text-brand-muted">
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Khởi hành: <strong class="text-white">
+                                <%= data.diem_khoi_hanh %>
+                            </strong></span>
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="navigation" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Điểm đến: <strong class="text-white">
+                                <%= tourLocation.ten_dia_diem %> (<%= tourLocation.tinh_thanh %>)
+                            </strong></span>
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="clock" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Thời gian: <strong class="text-white">
+                                <%= data.thoi_gian %>
+                            </strong></span>
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="users" class="w-4 h-4 text-brand-accent"></i>
+                        <span>Tối đa: <strong class="text-white">
+                                <%= data.so_nguoi_toi_da %> khách
+                            </strong></span>
+                    </span>
+                    <span class="flex items-center gap-1.5">
+                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                        <strong class="text-white">
+                            <%= rating %>
+                        </strong>
+                        <span>(<%= reviewCount %> đánh giá)</span>
+                    </span>
+                </div>
             </div>
-            <h1 class="text-2xl md:text-4xl font-black text-white leading-tight">
-                <%= data.ten_tour %>
-            </h1>
-            <div class="flex flex-wrap items-center gap-6 mt-4 text-xs font-semibold text-brand-muted">
-                <span class="flex items-center gap-1.5">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-accent"></i>
-                    <span>Khởi hành: <strong class="text-white"><%= data.diem_khoi_hanh %></strong></span>
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <i data-lucide="clock" class="w-4 h-4 text-brand-accent"></i>
-                    <span>Thời gian: <strong class="text-white"><%= data.thoi_gian %></strong></span>
-                </span>
-                <span class="flex items-center gap-1.5">
-                    <i data-lucide="users" class="w-4 h-4 text-brand-accent"></i>
-                    <span>Tối đa: <strong class="text-white"><%= data.so_nguoi_toi_da %> khách</strong></span>
-                </span>
-                <span class="flex items-center gap-1">
-                    <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
-                    <strong class="text-white"><%= rating %></strong>
-                    <span>(<%= reviewCount %> đánh giá)</span>
-                </span>
+
+            <!-- Right Side: Contact & Price Widget in Hero Banner -->
+            <div class="w-full lg:w-96 shrink-0 glass-panel bg-black/30 p-6 rounded-3xl space-y-4 shadow-2xl">
+                <div>
+                    <p class="text-[9px] text-brand-muted uppercase font-bold tracking-wider mb-1">Giá tour tham khảo
+                    </p>
+
+                    <!-- Adult Ticket Price -->
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-brand-accent font-black text-3xl">
+                            <%= currentPrice.toLocaleString('vi-VN') %> đ
+                        </span>
+                        <% if (data.gia_khuyen_mai> 0) { %>
+                            <span class="text-brand-muted font-semibold text-sm line-through decoration-red-500/50">
+                                <%= data.gia_nguoi_lon.toLocaleString('vi-VN') %> đ
+                            </span>
+                            <% } %>
+                    </div>
+                    <p class="text-[9px] text-brand-muted mt-1 uppercase font-bold tracking-widest">Giá áp dụng cho 1
+                        khách người lớn</p>
+
+                    <!-- Child Ticket Price -->
+                    <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                        <span class="text-brand-muted font-bold">Vé trẻ em từ:</span>
+                        <span class="text-white font-extrabold text-sm">
+                            <%= data.gia_tre_em > 0 ? (data.gia_tre_em.toLocaleString('vi-VN') + ' đ') : 'Liên hệ báo giá' %>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Contact buttons -->
+                <div class="grid grid-cols-2 gap-3">
+                    <!-- Call Hotline Button -->
+                    <a href="tel:19006789"
+                        class="py-3 bg-brand-accent hover:bg-brand-primary text-brand-dark rounded-xl font-bold uppercase tracking-wider text-[10px] active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-brand-accent/15 cursor-pointer text-center">
+                        <i data-lucide="phone" class="w-3.5 h-3.5"></i>
+                        <span>Hotline gọi</span>
+                    </a>
+
+                    <!-- Contact via Zalo Button -->
+                    <a href="https://zalo.me/0912345678" target="_blank"
+                        class="py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold uppercase tracking-wider text-[10px] active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-blue-600/20 cursor-pointer text-center">
+                        <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
+                        <span>Zalo Chat</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="flex items-center gap-2 text-xs text-brand-muted font-bold bg-white/5 px-4 py-2.5 rounded-2xl border border-white/5">
-            <a href="/" class="hover:text-brand-accent transition-colors">Trang chủ</a>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-            <a href="/tours" class="hover:text-brand-accent transition-colors">Danh sách Tours</a>
-            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
-            <span class="text-brand-accent truncate max-w-[150px]"><%= data.ten_tour %></span>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Content Grid -->
-<section class="py-12 bg-brand-dark">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <!-- Left Side: Detail Content (lg:col-span-8) -->
-            <div class="lg:col-span-8 space-y-8 text-left">
+    <!-- Content Section -->
+    <section class="py-16 bg-brand-dark">
+        <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
+            <div class="space-y-8 text-left">
+
                 <!-- Short Description / Introduction -->
                 <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-4">
-                    <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                    <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
                         <i data-lucide="info" class="w-5 h-5 text-brand-accent"></i>
                         <span>Giới thiệu hành trình</span>
                     </h3>
                     <p class="text-brand-muted text-sm leading-relaxed whitespace-pre-line opacity-95">
-                        <%= data.mo_ta_ngan %>
+                        <%= data.mo_ta_chi_tiet %>
                     </p>
                 </div>
 
                 <!-- Highlights (Điểm nổi bật) -->
-                <% if (data.diem_noi_bat && data.diem_noi_bat.length > 0) { %>
-                    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-4">
-                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                <% if (data.diem_noi_bat && data.diem_noi_bat.length> 0) { %>
+                    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5">
+                        <h3 class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
                             <i data-lucide="sparkles" class="w-5 h-5 text-brand-accent"></i>
                             <span>Điểm nhấn nổi bật</span>
                         </h3>
-                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <% data.diem_noi_bat.forEach((highlight, idx) => { %>
-                                <li class="flex items-start gap-3 text-brand-muted text-sm leading-relaxed">
-                                    <span class="flex items-center justify-center w-5 h-5 rounded-full bg-brand-accent/15 text-brand-accent font-bold text-xs mt-0.5">
-                                        <%= idx + 1 %>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <% data.diem_noi_bat.forEach((highlight, idx)=> { %>
+                                <div
+                                    class="flex items-start gap-3 bg-white/5 border border-white/10 hover:border-brand-accent/20 p-4 rounded-2xl transition-all duration-300">
+                                    <span
+                                        class="flex items-center justify-center w-6 h-6 rounded-full bg-brand-accent/15 text-brand-accent font-black text-xs mt-0.5 shrink-0">
+                                        <%= (idx + 1).toString().padStart(2, '0' ) %>
                                     </span>
-                                    <span><%= highlight %></span>
-                                </li>
-                            <% }) %>
-                        </ul>
-                    </div>
-                <% } %>
-
-                <!-- Detailed Description (Mô tả chi tiết) -->
-                <% if (data.mo_ta_chi_tiet) { %>
-                    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-4">
-                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
-                            <i data-lucide="file-text" class="w-5 h-5 text-brand-accent"></i>
-                            <span>Lịch trình & Chi tiết Tour</span>
-                        </h3>
-                        <div class="text-brand-muted text-sm leading-relaxed whitespace-pre-line opacity-95">
-                            <%= data.mo_ta_chi_tiet %>
-                        </div>
-                    </div>
-                <% } %>
-
-                <!-- Services (Included & Excluded) -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Included -->
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
-                        <h4 class="font-extrabold text-brand-secondary flex items-center gap-2 text-sm uppercase tracking-wider">
-                            <i data-lucide="check-circle" class="w-5 h-5"></i>
-                            <span>Dịch vụ bao gồm</span>
-                        </h4>
-                        <ul class="space-y-2 text-xs text-brand-muted">
-                            <% if (data.dich_vu_bao_gom && data.dich_vu_bao_gom.length > 0) { %>
-                                <% data.dich_vu_bao_gom.forEach(item => { %>
-                                    <li class="flex gap-2">
-                                        <span class="text-brand-secondary font-bold">•</span>
-                                        <span><%= item %></span>
-                                    </li>
+                                    <span class="text-brand-muted text-xs md:text-sm leading-relaxed">
+                                        <%= highlight %>
+                                    </span>
+                                </div>
                                 <% }) %>
-                            <% } else { %>
-                                <li class="text-brand-muted opacity-60">Đang cập nhật...</li>
-                            <% } %>
-                        </ul>
+                        </div>
                     </div>
+                    <% } %>
 
-                    <!-- Excluded -->
-                    <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
-                        <h4 class="font-extrabold text-red-400 flex items-center gap-2 text-sm uppercase tracking-wider">
-                            <i data-lucide="x-circle" class="w-5 h-5"></i>
-                            <span>Không bao gồm</span>
-                        </h4>
-                        <ul class="space-y-2 text-xs text-brand-muted">
-                            <% if (data.dich_vu_khong_bao_gom && data.dich_vu_khong_bao_gom.length > 0) { %>
-                                <% data.dich_vu_khong_bao_gom.forEach(item => { %>
-                                    <li class="flex gap-2">
-                                        <span class="text-red-400 font-bold">•</span>
-                                        <span><%= item %></span>
-                                    </li>
-                                <% }) %>
-                            <% } else { %>
-                                <li class="text-brand-muted opacity-60">Đang cập nhật...</li>
-                            <% } %>
-                        </ul>
-                    </div>
-                </div>
+                        <!-- Detailed Description (Lịch trình) -->
+                            <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-6">
+                                <h3
+                                    class="text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
+                                    <i data-lucide="calendar-range" class="w-5 h-5 text-brand-accent"></i>
+                                    <span>Lịch trình chi tiết</span>
+                                </h3>
+
+                                <div class="relative pl-6 border-l border-brand-accent/25 space-y-8">
+                                    <% if (tour_schedule && tour_schedule.length > 0) { %>
+                                        <% tour_schedule.forEach((day) => { %>
+                                            <div class="relative pb-2 group">
+                                                <!-- Bullet marker -->
+                                                <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-950 border-2 border-brand-accent flex items-center justify-center group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_rgba(var(--brand-accent-rgb),0.5)]">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse"></span>
+                                                </div>
+                                                
+                                                <!-- Day Badge & Title -->
+                                                <div class="mb-2">
+                                                    <span class="inline-block px-2 py-1 bg-brand-accent/20 border border-brand-accent/30 text-brand-accent rounded text-[10px] font-black uppercase tracking-wider mb-2">Ngày <%= day.ngay_thu %></span>
+                                                    <h4 class="text-sm md:text-base font-black text-white leading-tight">
+                                                        <%= day.tieu_de %>
+                                                    </h4>
+                                                </div>
+
+                                                <!-- Content -->
+                                                <% if (day.noi_dung) { %>
+                                                    <p class="text-brand-muted text-xs md:text-sm leading-relaxed whitespace-pre-line opacity-90 mb-4"><%= day.noi_dung %></p>
+                                                <% } %>
+
+                                                <!-- Details Grid (Food, Hotel) -->
+                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                                                    <% if (day.bua_an) { %>
+                                                        <div class="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                                            <i data-lucide="utensils" class="w-4 h-4 text-brand-accent mt-0.5"></i>
+                                                            <div>
+                                                                <div class="text-[10px] font-bold text-slate-400 uppercase">Bữa ăn</div>
+                                                                <div class="text-xs text-white font-medium"><%= day.bua_an %></div>
+                                                            </div>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (day.khach_san) { %>
+                                                        <div class="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors">
+                                                            <i data-lucide="bed" class="w-4 h-4 text-brand-accent mt-0.5"></i>
+                                                            <div>
+                                                                <div class="text-[10px] font-bold text-slate-400 uppercase">Khách sạn</div>
+                                                                <div class="text-xs text-white font-medium"><%= day.khach_san %></div>
+                                                            </div>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+
+                                                <!-- Locations -->
+                                                <% if (day.dia_diem_tham_quan && day.dia_diem_tham_quan.length > 0) { %>
+                                                    <div class="flex flex-wrap gap-2 mt-3 items-center">
+                                                        <% const validLocs = day.dia_diem_tham_quan.filter(l => l.trim() !== ''); %>
+                                                        <% if (validLocs.length > 0) { %>
+                                                            <div class="text-[10px] font-bold text-slate-400 uppercase mr-1">Tham quan:</div>
+                                                            <% validLocs.forEach(loc => { %>
+                                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-brand-emerald/10 border border-brand-emerald/20 text-brand-emerald text-[10px] font-bold rounded-lg cursor-default hover:bg-brand-emerald/20 transition-colors">
+                                                                    <i data-lucide="map-pin" class="w-3 h-3"></i> <%= loc %>
+                                                                </span>
+                                                            <% }) %>
+                                                        <% } %>
+                                                    </div>
+                                                <% } %>
+                                            </div>
+                                        <% }) %>
+                                    <% } else { %>
+                                        <div class="relative pb-2">
+                                            <div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-slate-950 border-2 border-brand-accent"></div>
+                                            <p class="text-brand-muted text-sm leading-relaxed italic opacity-95">
+                                                Lịch trình chi tiết đang được cập nhật...
+                                            </p>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+
+                                <!-- Services (Included & Excluded) -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Included -->
+                                    <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+                                        <h4
+                                            class="font-extrabold text-brand-secondary flex items-center gap-2 text-xs uppercase tracking-wider">
+                                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-secondary"></i>
+                                            <span>Dịch vụ bao gồm</span>
+                                        </h4>
+                                        <ul class="space-y-2.5 text-xs text-brand-muted">
+                                            <% if (data.dich_vu_bao_gom && data.dich_vu_bao_gom.length> 0) { %>
+                                                <% data.dich_vu_bao_gom.forEach(item=> { %>
+                                                    <li class="flex gap-2">
+                                                        <span class="text-brand-secondary font-black">•</span>
+                                                        <span>
+                                                            <%= item %>
+                                                        </span>
+                                                    </li>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <li class="text-brand-muted opacity-60">Đang cập nhật...
+                                                            </li>
+                                                            <% } %>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Excluded -->
+                                    <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+                                        <h4
+                                            class="font-extrabold text-red-400 flex items-center gap-2 text-xs uppercase tracking-wider">
+                                            <i data-lucide="x-circle" class="w-4 h-4 text-red-400"></i>
+                                            <span>Không bao gồm</span>
+                                        </h4>
+                                        <ul class="space-y-2.5 text-xs text-brand-muted">
+                                            <% if (data.dich_vu_khong_bao_gom && data.dich_vu_khong_bao_gom.length> 0) {
+                                                %>
+                                                <% data.dich_vu_khong_bao_gom.forEach(item=> { %>
+                                                    <li class="flex gap-2">
+                                                        <span class="text-red-400 font-black">•</span>
+                                                        <span>
+                                                            <%= item %>
+                                                        </span>
+                                                    </li>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <li class="text-brand-muted opacity-60">Đang cập nhật...
+                                                            </li>
+                                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Grid: Guidelines & Commitments -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-white/5 mt-12">
+                                    <!-- Trust Services Banner -->
+                                    <div
+                                        class="glass-panel p-6 rounded-3xl border border-brand-accent/20 bg-brand-dark/45 space-y-4 text-left">
+                                        <h4
+                                            class="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-2">
+                                            <i data-lucide="shield-check" class="w-4 h-4 text-brand-accent"></i>
+                                            <span>Cam kết từ Thuần Phong Việt</span>
+                                        </h4>
+
+                                        <div class="space-y-4 text-xs text-brand-muted">
+                                            <div class="flex items-start gap-3">
+                                                <i data-lucide="smile"
+                                                    class="w-4 h-4 text-brand-secondary shrink-0 mt-0.5"></i>
+                                                <div>
+                                                    <h5 class="font-bold text-white mb-0.5">Dịch vụ chu đáo, tận tâm
+                                                    </h5>
+                                                    <p class="leading-relaxed opacity-85">Đội ngũ hướng dẫn viên giàu
+                                                        kinh nghiệm đồng hành suốt tuyến, hỗ trợ khách hàng tối đa.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-start gap-3">
+                                                <i data-lucide="sparkles"
+                                                    class="w-4 h-4 text-brand-secondary shrink-0 mt-0.5"></i>
+                                                <div>
+                                                    <h5 class="font-bold text-white mb-0.5">Thiết kế tour riêng linh
+                                                        hoạt</h5>
+                                                    <p class="leading-relaxed opacity-85">Tư vấn lịch trình phù hợp theo
+                                                        yêu cầu, ngân sách của đoàn, tập thể doanh nghiệp hoàn toàn miễn
+                                                        phí.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex items-start gap-3">
+                                                <i data-lucide="heart-handshake"
+                                                    class="w-4 h-4 text-brand-secondary shrink-0 mt-0.5"></i>
+                                                <div>
+                                                    <h5 class="font-bold text-white mb-0.5">Chính sách bảo vệ khách hàng
+                                                    </h5>
+                                                    <p class="leading-relaxed opacity-85">Cam kết dịch vụ đúng chuẩn như
+                                                        mô tả, hoàn lại chi phí hoặc bồi thường nếu không đúng cam kết.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Booking / Advice guidelines -->
+                                    <div
+                                        class="glass-panel p-6 rounded-3xl border border-white/10 bg-brand-dark/40 space-y-4 text-left">
+                                        <h4
+                                            class="font-bold text-white text-xs uppercase tracking-wider flex items-center gap-2">
+                                            <i data-lucide="help-circle" class="w-4 h-4 text-brand-accent"></i>
+                                            <span>Lưu ý & Quy định chung</span>
+                                        </h4>
+                                        <ul
+                                            class="space-y-3 text-[11px] text-brand-muted list-disc list-inside leading-relaxed opacity-90">
+                                            <li>Vui lòng liên hệ đặt trước ít nhất 7 ngày để chúng tôi sắp xếp dịch vụ
+                                                tốt nhất.</li>
+                                            <li>Chính sách hoàn/hủy áp dụng linh hoạt tùy thuộc vào từng thời điểm và
+                                                từng hạng mục dịch vụ.</li>
+                                            <li>Trường hợp có trẻ nhỏ đi cùng, vui lòng khai báo độ tuổi chi tiết để
+                                                nhận báo giá ưu đãi chính xác.</li>
+                                            <li>Giá tour tham khảo có thể thay đổi vào các dịp lễ tết hoặc mùa du lịch
+                                                cao điểm.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
             </div>
-
-            <!-- Right Side: Booking Card (lg:col-span-4) -->
-            <div class="lg:col-span-4">
-                <div class="glass-panel p-6 rounded-3xl border border-brand-accent/20 bg-brand-dark/60 sticky top-28 space-y-6 text-left">
-                    <div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-brand-accent font-black text-2xl">
-                                <%= currentPrice.toLocaleString('vi-VN') %> đ
-                            </span>
-                            <% if (data.gia_khuyen_mai > 0) { %>
-                                <span class="text-brand-muted font-semibold text-sm line-through decoration-red-500/50">
-                                    <%= data.gia_nguoi_lon.toLocaleString('vi-VN') %> đ
-                                </span>
-                            <% } %>
-                        </div>
-                        <p class="text-[10px] text-brand-muted mt-1 uppercase font-bold tracking-wider">Giá áp dụng cho 1 khách người lớn</p>
-                    </div>
-
-                    <form id="detail-booking-form" class="space-y-4 text-xs">
-                        <h4 class="font-bold text-white text-sm border-b border-white/10 pb-2">Đặt giữ chỗ trực tuyến</h4>
-                        
-                        <!-- Full Name -->
-                        <div>
-                            <label class="block text-brand-muted font-bold uppercase mb-1">Họ & tên trưởng đoàn</label>
-                            <input 
-                                type="text" 
-                                required
-                                id="detail-fullname-field"
-                                value="Huong"
-                                placeholder="Ví dụ: Huynh My Huong"
-                                class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none"
-                            />
-                        </div>
-
-                        <!-- Phone -->
-                        <div>
-                            <label class="block text-brand-muted font-bold uppercase mb-1">Số điện thoại</label>
-                            <input 
-                                type="tel" 
-                                required
-                                id="detail-phone-field"
-                                value="0912345678"
-                                placeholder="Nhập SĐT liên hệ"
-                                class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none"
-                            />
-                        </div>
-
-                        <!-- Email -->
-                        <div>
-                            <label class="block text-brand-muted font-bold uppercase mb-1">Địa chỉ Email</label>
-                            <input 
-                                type="email" 
-                                required
-                                id="detail-email-field"
-                                value="huynhmyduc2005@gmail.com"
-                                placeholder="Email nhận vé"
-                                class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none"
-                            />
-                        </div>
-
-                        <!-- Start Date -->
-                        <div>
-                            <label class="block text-brand-muted font-bold uppercase mb-1">Ngày khởi hành mong muốn</label>
-                            <input 
-                                type="date" 
-                                required
-                                id="detail-startdate-field"
-                                class="w-full bg-black/40 border border-white/10 rounded-xl p-3 text-white focus:border-brand-accent focus:ring-1 focus:ring-brand-accent focus:outline-none [color-scheme:dark]"
-                            />
-                        </div>
-
-                        <!-- Guests Count -->
-                        <div>
-                            <label class="block text-brand-muted font-bold uppercase mb-1">Số lượng khách</label>
-                            <div class="flex items-center">
-                                <button 
-                                    type="button" 
-                                    onclick="adjustDetailGuests(-1)"
-                                    class="px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/15 text-white font-extrabold rounded-l-xl transition-all"
-                                >
-                                    -
-                                </button>
-                                <span id="detail-guests-display" class="flex-1 text-center bg-black/40 border-t border-b border-white/10 py-2.5 text-white font-extrabold text-sm">
-                                    1
-                                </span>
-                                <button 
-                                    type="button" 
-                                    onclick="adjustDetailGuests(1)"
-                                    class="px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/15 text-white font-extrabold rounded-r-xl transition-all"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Price summary -->
-                        <div class="p-4 bg-black/40 rounded-xl border border-white/5 space-y-1.5 mt-4 text-[11px]">
-                            <div class="flex justify-between">
-                                <span class="text-brand-muted">Đơn giá vé:</span>
-                                <span class="font-bold text-white"><%= currentPrice.toLocaleString('vi-VN') %> đ</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-brand-muted">Số khách:</span>
-                                <span id="detail-count-display" class="font-bold text-white">x 1</span>
-                            </div>
-                            <div class="flex justify-between pt-2 border-t border-white/10 text-brand-accent font-black text-sm">
-                                <span>Tổng cộng:</span>
-                                <span id="detail-total-display"><%= currentPrice.toLocaleString('vi-VN') %> đ</span>
-                            </div>
-                        </div>
-
-                        <button 
-                            type="submit" 
-                            id="detail-checkout-btn"
-                            class="w-full py-3.5 bg-brand-accent text-brand-dark rounded-xl font-bold uppercase tracking-wider text-xs hover:bg-brand-primary active:scale-[0.98] transition-all cursor-pointer shadow-lg shadow-brand-accent/10 mt-6"
-                        >
-                            Thanh toán & Giữ vé ngay
-                        </button>
-                    </form>
-
-                    <div class="text-[10px] text-brand-muted text-center pt-3 border-t border-white/5 leading-relaxed">
-                        Hỗ trợ tư vấn 24/7 qua hotline chính thức: <strong>1900 6789</strong>. Hủy vé linh hoạt trước 48h.
-                    </div>
-                </div>
-            </div>
-            
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Universal Dynamic Toast Message for details page -->
-<div 
-    id="detail-toast" 
-    class="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-brand-accent/95 text-brand-dark font-extrabold shadow-xl flex items-center gap-2 border border-white/20 backdrop-blur-md hidden transition-all duration-300 transform -translate-y-4 opacity-0"
->
-    <i data-lucide="sparkles" class="w-5 h-5 animate-pulse text-brand-dark"></i>
-    <span id="detail-toast-text"></span>
-</div>
-
-<script>
-    const tourData = {
-        id: "<%= data.ma_tour %>",
-        title: "<%= data.ten_tour %>",
-        price: Number("<%= currentPrice %>"),
-        maxGuests: Number("<%= data.so_nguoi_toi_da || 20 %>")
-    };
-
-    let guestsCount = 1;
-
-    function showDetailToast(message) {
-        const toast = document.getElementById('detail-toast');
-        const text = document.getElementById('detail-toast-text');
-        if (!toast || !text) return;
-        text.innerText = message;
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            toast.classList.remove('opacity-0', '-translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-        }, 50);
-
-        setTimeout(() => {
-            toast.classList.remove('opacity-100', 'translate-y-0');
-            toast.classList.add('opacity-0', '-translate-y-4');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 300);
-        }, 3000);
-    }
-
-    function adjustDetailGuests(amount) {
-        const newCount = guestsCount + amount;
-        if (newCount >= 1 && newCount <= tourData.maxGuests) {
-            guestsCount = newCount;
-            updateDetailCalculation();
-        }
-    }
-
-    function updateDetailCalculation() {
-        document.getElementById('detail-guests-display').innerText = guestsCount;
-        document.getElementById('detail-count-display').innerText = 'x ' + guestsCount;
-        document.getElementById('detail-total-display').innerText = (tourData.price * guestsCount).toLocaleString('vi-VN') + ' đ';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // Set default date to next week
-        const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-        const dateInput = document.getElementById('detail-startdate-field');
-        if (dateInput) {
-            dateInput.value = nextWeek;
-        }
-
-        // Initialize Lucide Icons for dynamic content
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-
-        // Form Submit
-        const form = document.getElementById('detail-booking-form');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const submitBtn = document.getElementById('detail-checkout-btn');
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = `
-                    <span class="flex items-center justify-center gap-2">
-                        <span class="w-4 h-4 border-2 border-brand-dark border-t-transparent rounded-full animate-spin"></span>
-                        <span>Đang giữ vé...</span>
-                    </span>
-                `;
-
-                setTimeout(() => {
-                    const totalPrice = tourData.price * guestsCount;
-                    const bookingId = `B-${Math.floor(1000 + Math.random() * 9000)}`;
-                    const bookingDate = new Date().toISOString().split('T')[0];
-                    const fullName = document.getElementById('detail-fullname-field').value;
-                    const phone = document.getElementById('detail-phone-field').value;
-                    const email = document.getElementById('detail-email-field').value;
-                    const startDate = document.getElementById('detail-startdate-field').value;
-
-                    const newBooking = {
-                        id: bookingId,
-                        tourId: tourData.id,
-                        tourTitle: tourData.title,
-                        fullName: fullName,
-                        phone: phone,
-                        email: email,
-                        startDate: startDate,
-                        guestsCount: guestsCount,
-                        totalPrice: totalPrice,
-                        status: 'confirmed',
-                        bookingDate: bookingDate
-                    };
-
-                    // Add to localStorage
-                    let bookings = JSON.parse(localStorage.getItem('tpv_bookings')) || [];
-                    bookings.unshift(newBooking);
-                    localStorage.setItem('tpv_bookings', JSON.stringify(bookings));
-
-                    // Sync the Bookings Dropdown in layout if function exists
-                    if (window.updateBookingsDropdown) {
-                        window.updateBookingsDropdown();
-                    }
-
-                    showDetailToast('Đặt giữ vé thành công! Vui lòng kiểm tra email của bạn.');
-
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = "Thanh toán & Giữ vé ngay";
-                }, 1500);
-            });
-        }
-    });
-</script>
-<% } else { %>
-<section class="py-32 bg-brand-dark text-center">
-    <div class="max-w-md mx-auto space-y-4">
-        <i data-lucide="compass" class="w-16 h-16 text-brand-accent mx-auto animate-bounce"></i>
-        <h2 class="text-xl font-bold text-white">Không tìm thấy thông tin tour</h2>
-        <p class="text-xs text-brand-muted">Tour này có thể không tồn tại hoặc đã bị gỡ bỏ khỏi hệ thống.</p>
-        <a 
-            href="/tours" 
-            class="inline-block px-6 py-2.5 bg-brand-accent hover:bg-brand-primary text-brand-dark text-xs font-black rounded-full transition-colors active:scale-95"
-        >
-            Quay lại Danh sách Tours
-        </a>
-    </div>
-</section>
-<% } %>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons for dynamic content
+            if (window.lucide) {
+                window.lucide.createIcons();
+            }
+        });
+    </script>
+    <% } else { %>
+        <section class="py-32 bg-brand-dark text-center">
+            <div class="max-w-md mx-auto space-y-4">
+                <i data-lucide="compass" class="w-16 h-16 text-brand-accent mx-auto animate-bounce"></i>
+                <h2 class="text-xl font-bold text-white">Không tìm thấy thông tin tour</h2>
+                <p class="text-xs text-brand-muted">Tour này có thể không tồn tại hoặc đã bị gỡ bỏ khỏi hệ thống.</p>
+                <a href="/tours"
+                    class="inline-block px-6 py-2.5 bg-brand-accent hover:bg-brand-primary text-brand-dark text-xs font-black rounded-full transition-colors active:scale-95">
+                    Quay lại Danh sách Tours
+                </a>
+            </div>
+        </section>
+        <% } %>

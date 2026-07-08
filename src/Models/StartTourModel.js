@@ -38,7 +38,8 @@ const StartTourModel = new mongoose.Schema({
         default: 'available'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('Start_Tour', StartTourModel);

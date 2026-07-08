@@ -2,6 +2,7 @@ const LocationModel = require('../Models/LocationModel');
 
 const locationSeed = [
     {
+        oldCategoryCode: '03',
         ten_dia_diem: 'Hội An',
         slug: 'hoi-an',
         quoc_gia: 'Việt Nam',
@@ -11,6 +12,7 @@ const locationSeed = [
         trang_thai: 'active'
     },
     {
+        oldCategoryCode: '04',
         ten_dia_diem: 'Hạ Long',
         slug: 'ha-long',
         quoc_gia: 'Việt Nam',
@@ -20,6 +22,7 @@ const locationSeed = [
         trang_thai: 'active'
     },
     {
+        oldCategoryCode: '02',
         ten_dia_diem: 'Sa Pa',
         slug: 'sa-pa',
         quoc_gia: 'Việt Nam',
@@ -29,6 +32,7 @@ const locationSeed = [
         trang_thai: 'active'
     },
     {
+        oldCategoryCode: '01',
         ten_dia_diem: 'Phú Quốc',
         slug: 'phu-quoc',
         quoc_gia: 'Việt Nam',
@@ -39,13 +43,21 @@ const locationSeed = [
     }
 ];
 
-async function seedLocations() {
+async function seedLocations(categoryIdMap) {
     console.log('Đang xóa toàn bộ địa điểm cũ...');
     await LocationModel.deleteMany({});
     console.log('Đang thêm địa điểm mới...');
     const locationIdMap = {};
     const prepLocations = locationSeed.map(loc => {
-        const doc = new LocationModel(loc);
+        const doc = new LocationModel({
+            ten_dia_diem: loc.ten_dia_diem,
+            quoc_gia: loc.quoc_gia,
+            tinh_thanh: loc.tinh_thanh,
+            mo_ta: loc.mo_ta,
+            hinh_anh: loc.hinh_anh,
+            trang_thai: loc.trang_thai,
+            ma_danh_muc: categoryIdMap ? categoryIdMap[loc.oldCategoryCode] : null
+        });
         doc.ma_dia_diem = doc._id.toString();
         const oldCode = loc.slug.replace(/-/g, '');
         locationIdMap[oldCode] = doc.ma_dia_diem;

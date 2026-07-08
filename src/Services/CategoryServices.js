@@ -14,6 +14,13 @@ class CategoryService {
         }
     }
 
+    async getCategory() {
+        const category = await CategoryModel.find({
+            trang_thai: 'active'
+        });
+        return category;
+    }
+
     async postCategory(categoryData) {
         const newCategory = new CategoryModel(categoryData);
         newCategory.ma_danh_muc = newCategory._id.toString();
@@ -29,6 +36,17 @@ class CategoryService {
             }
         )
         return updatedCategory;
+    }
+
+    async getCategoryFavourite(limit) {
+        let query = CategoryModel.find({
+            trang_thai: 'active'
+        });
+        if (limit) {
+            query = query.limit(limit);
+        }
+        const category = await query;
+        return category;
     }
 };
 

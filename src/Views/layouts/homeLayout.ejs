@@ -63,7 +63,7 @@
 
   <!-- Top Banner Navigation Bar -->
   <header
-    class="fixed top-0 left-0 right-0 z-40 bg-brand-dark/40 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+    class="sticky top-0 z-50 bg-slate-800/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
     <nav class="flex justify-between items-center w-full px-4 md:px-8 py-4 max-w-screen-2xl mx-auto" id="main-nav">
       <div class="text-2xl font-black text-brand-accent tracking-tighter cursor-pointer flex items-center gap-1.5"
         onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
@@ -80,13 +80,15 @@
           Trang chủ
         </a>
         <a href="/tours"
-          class="pb-1 transition-all <%= page === 'tours' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
+          class="pb-1 transition-all <%= page === 'list_tours' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
           Danh sách Tours
         </a>
-        <a href="#categories-section" class="pb-1 transition-all text-brand-text hover:text-brand-primary">
-          Cẩm nang du lịch
+        <a href="/blogs" 
+          class="pb-1 transition-all <%= page === 'blogs' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
+          Blog
         </a>
-        <a href="#feedback-footer" class="text-brand-text hover:text-brand-primary transition-colors">
+        <a href="/contacts" 
+          class="pb-1 transition-all <%= page === 'contacts' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
           Liên hệ
         </a>
       </div>
@@ -157,47 +159,52 @@
               class="text-xs font-bold text-white hidden sm:inline group-hover:text-brand-accent transition-colors">Huong</span>
           </button>
 
-          <!-- Bookings / Notification Dropdown (hidden by default) -->
+          <!-- Profile Dropdown Options -->
           <div
-            class="absolute right-0 mt-3 w-80 glass-panel rounded-2xl shadow-2xl p-4 z-50 text-left border border-white/15 hidden"
+            class="absolute right-0 mt-3 w-64 glass-panel rounded-2xl shadow-2xl p-4 z-50 text-left border border-white/15 hidden"
             id="bookings-dropdown">
-            <div class="flex justify-between items-center pb-2 mb-3 border-b border-white/10">
-              <h4 class="font-bold text-brand-accent flex items-center gap-1.5 text-sm">
-                <i data-lucide="ticket" class="w-4 h-4 text-brand-accent"></i>
-                <span>Vé Đã Đặt Của Bạn</span>
-              </h4>
-              <button onclick="document.getElementById('bookings-dropdown').classList.add('hidden')"
-                class="text-brand-muted hover:text-white">
-                <i data-lucide="x" class="w-4 h-4"></i>
-              </button>
+
+            <!-- User Info Header -->
+            <div class="flex items-center gap-3 pb-3 mb-2 border-b border-white/10">
+              <img alt="Huong avatar" class="w-10 h-10 rounded-full object-cover border border-brand-accent"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7-BT8hEUDXMbFTeQu0Xurif9vYxMXdxVnEsc5FvAmCVega3qmJiWNyafHkSNtO5iHqYrz7Ew5aEJQOySgsa8kDWvPCNPNWmhgeDpI35N78OgqvefT5gKJzEdHa0v_aAhjs_s6biFnJkkhAkXSGyocJQSYA31WNC-zP0a1bvyWjzVZ6SUnouQ5CwKgReQIbFJUFky1P0hDEUzbgIycJpmJiHGkdkEnt8DUBrHlqX2VFTuXGbX-EZ5uYyBTomcP7HoQwaT7v6UseQ4" />
+              <div>
+                <h4 class="font-extrabold text-white text-xs">Huong</h4>
+                <p class="text-[10px] text-brand-muted opacity-80">huong@tpvtravel.vn</p>
+              </div>
             </div>
 
-            <div class="space-y-3 max-h-72 overflow-y-auto pr-1">
-              <div
-                class="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/5 relative group">
-                <span
-                  class="absolute top-2.5 right-2.5 bg-green-500/20 text-green-300 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Đã xác nhận
-                </span>
-                <p class="text-[10px] text-brand-accent font-mono">B-1004</p>
-                <h5 class="text-xs font-bold text-white mt-1 pr-14 line-clamp-1">Vịnh Hạ Long 2 Ngày 1 Đêm</h5>
+            <!-- Options Navigation List -->
+            <div class="space-y-1 text-xs">
+              <a href="/admin/dashboard"
+                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
+                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                <span>Trang quản trị</span>
+              </a>
 
-                <div
-                  class="grid grid-cols-2 gap-y-1.5 gap-x-2 mt-2 pt-2 border-t border-white/5 text-[10px] text-brand-muted">
-                  <p class="flex items-center gap-1">
-                    <i data-lucide="calendar" class="w-3 h-3 text-brand-accent"></i>
-                    <span>2026-06-15</span>
-                  </p>
-                  <p class="flex items-center gap-1">
-                    <i data-lucide="users" class="w-3 h-3 text-brand-accent"></i>
-                    <span>2 Vé</span>
-                  </p>
-                </div>
-                <div class="flex justify-between items-center mt-2.5 pt-1.5 border-t border-white/5">
-                  <span class="text-[9px] text-brand-muted">Ngày đặt: 2026-06-01</span>
-                  <span class="text-xs font-extrabold text-brand-accent">7.600.000 đ</span>
-                </div>
-              </div>
+              <a href="#"
+                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                <span>Thông tin tài khoản</span>
+              </a>
+              <a href="#" onclick="alert('Danh sách vé đang trống.')"
+                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
+                <i data-lucide="ticket" class="w-4 h-4"></i>
+                <span>Vé đã đặt</span>
+              </a>
+              <a href="#" onclick="alert('Tính năng liên hệ hỗ trợ 24/7.')"
+                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
+                <i data-lucide="phone-call" class="w-4 h-4"></i>
+                <span>Yêu cầu tư vấn</span>
+              </a>
+
+              <div class="border-t border-white/5 my-1.5 pt-1.5"></div>
+
+              <a href="#" onclick="alert('Đăng xuất thành công!')"
+                class="flex items-center gap-2.5 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-colors">
+                <i data-lucide="log-out" class="w-4 h-4"></i>
+                <span>Đăng xuất</span>
+              </a>
             </div>
           </div>
         </div>
@@ -228,24 +235,13 @@
         </div>
       </div>
 
-      <!-- Quick link categories helper -->
-      <div>
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Các Loại Hình Tour</h4>
-        <ul class="space-y-2 text-[11px]">
-          <li><a href="#" class="hover:text-brand-accent">Biển & Sóng Nước Đảo Ngọc</a></li>
-          <li><a href="#" class="hover:text-brand-accent">Trekking Khám Phá Núi rừng kỳ bí</a></li>
-          <li><a href="#" class="hover:text-brand-accent">Nhịp Sống Văn Hóa & Di Sản Cổ</a></li>
-          <li><a href="#" class="hover:text-brand-accent">Khám Phá Kì Quan Sóng Nước</a></li>
-        </ul>
-      </div>
-
       <!-- Newsletter signups simulated -->
-      <div class="md:col-span-2 space-y-4">
+      <div class="md:col-span-2 md:col-start-3 space-y-4 text-right flex flex-col items-end">
         <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2">Đăng Ký Nhận Tin Khuyến Mãi</h4>
         <p className="text-[11px]/relaxed">Nhập email để liên tục đón đầu các hành trình hot giảm giá đến 40% hàng tuần
           từ TPVTravel.</p>
 
-        <div class="flex gap-2">
+        <div class="flex gap-2 w-full md:max-w-md">
           <input type="email" placeholder="Nhập địa chỉ email của bạn..."
             class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent"
             id="newsletter-email-input" />
@@ -262,7 +258,7 @@
 
     <!-- Copy right row details -->
     <div
-      class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4">
+      class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-4 pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4">
       <p>© 2026 TPVTravel. Đã đăng ký bản quyền thương hiệu. Thiết kế lấy cảm hứng từ thiên nhiên Việt Nam.</p>
       <div class="flex items-center gap-6">
         <span class="hover:text-white cursor-pointer">Điều khoản dịch vụ</span>

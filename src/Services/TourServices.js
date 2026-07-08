@@ -42,6 +42,18 @@ class TourService {
         );
         return updatedTour;
     }
+
+    async getTourFavourite(limit) {
+        let query = TourModel.find({
+            trang_thai: 'active',
+            la_noi_bat: true
+        });
+        if (limit) {
+            query = query.limit(limit);
+        }
+        const tour_favourites = await query;
+        return tour_favourites;
+    }
 }
 
 module.exports = new TourService();

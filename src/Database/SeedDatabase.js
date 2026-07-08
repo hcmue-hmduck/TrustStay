@@ -42,7 +42,7 @@ async function runSeed() {
         console.log('--------------------------------------------------');
 
         // 4. Địa điểm (Locations)
-        const locationIdMap = await seedLocations();
+        const locationIdMap = await seedLocations(categoryIdMap);
         console.log('--------------------------------------------------');
 
         // 5. Tours

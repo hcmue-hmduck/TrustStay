@@ -27,7 +27,8 @@ const BlogModel = new mongoose.Schema({
         default: 'draft'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('BaiViet', BlogModel);

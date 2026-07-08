@@ -6,14 +6,10 @@ const LocationModel = new mongoose.Schema({
         required: true,
         unique: true
     },
+    ma_danh_muc: String,
     ten_dia_diem: {
         type: String,
         required: true
-    },
-    slug: {
-        type: String,
-        required: true,
-        unique: true
     },
     quoc_gia: String,
     tinh_thanh: String,
@@ -24,7 +20,8 @@ const LocationModel = new mongoose.Schema({
         default: 'active'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 });
 
 module.exports = mongoose.model('Location', LocationModel);

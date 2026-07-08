@@ -13,4 +13,7 @@ router.get('/tours', HomeController.getHomeTours);
 
 router.get('/tour-details/:ma_tour', HomeController.getTourDetail);
 
+router.get('/blogs', HomeController.getHomeBlog);
+router.get('/contacts', HomeController.getHomeContact);
+
 module.exports = router;

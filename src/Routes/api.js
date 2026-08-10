@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const upload = require('../Configs/configMulter');
+// const upload = require('../Configs/configMulter');
 
 const UserController = require('../Controllers/apiControllers/UserController');
 const CategoryController = require('../Controllers/apiControllers/CategoryController');
@@ -10,7 +10,7 @@ const RoomRequestController = require('../Controllers/apiControllers/RoomRequest
 const ReviewController = require('../Controllers/apiControllers/ReviewController');
 const BlogController = require('../Controllers/apiControllers/BlogController');
 const LocationController = require('../Controllers/apiControllers/LocationController');
-const UploadController = require('../Controllers/apiControllers/UploadController');
+// const UploadController = require('../Controllers/apiControllers/UploadController');
 
 router.get('/user', UserController.getAllUser);
 
@@ -47,8 +47,8 @@ router.put('/location/:ma_dia_diem', LocationController.putLocation);
 router.delete('/location/:ma_dia_diem', LocationController.deleteLocation);
 
 // Upload routes
-router.post('/upload-file', upload.single('file'), UploadController.postFile);
-router.post('/upload-files', upload.array('files'), UploadController.postFiles);
-router.get('/images/:fileId', UploadController.getImage);
+// router.post('/upload-file', upload.single('file'), UploadController.postFile);
+// router.post('/upload-files', upload.array('files'), UploadController.postFiles);
+// router.get('/images/:fileId', UploadController.getImage);
 
 module.exports = router;

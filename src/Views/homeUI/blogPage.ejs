@@ -1,9 +1,9 @@
-<!-- Hero Header Section for Blog -->
-<section class="relative min-h-[50vh] flex flex-col justify-center py-12 overflow-hidden">
+<!-- Hero Header Section for Customer Rental Experience Blog -->
+<section class="relative min-h-[48vh] flex flex-col justify-center py-12 overflow-hidden text-left">
     <!-- Cinematic Backdrop Image -->
     <div class="absolute inset-0 z-0">
-        <img alt="Blog background cover" class="w-full h-full object-cover brightness-[0.25]"
-            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80&w=2021"
+        <img alt="Rental Blog background cover" class="w-full h-full object-cover brightness-[0.25]"
+            src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=2000"
             referrerpolicy="no-referrer" />
         <div class="absolute inset-0 bg-gradient-to-b from-[#020e1f]/50 via-[#020e1f]/80 to-[#020e1f]"></div>
     </div>
@@ -15,25 +15,29 @@
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 glass-panel rounded-full shadow-[0_0_15px_rgba(164,230,255,0.1)]">
                 <i data-lucide="book-open" class="w-4 h-4 text-brand-accent"></i>
-                <span class="text-[10px] font-extrabold text-brand-accent uppercase tracking-widest">Góc Chia Sẻ</span>
+                <span class="text-[10px] font-extrabold text-brand-accent uppercase tracking-widest">Góc Chia Sẻ & Review Khách Hàng</span>
             </div>
 
-            <!-- Slogan -->
-            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight tracking-tight mb-6">
-                Cẩm Nang <span class="hero-gradient-text">Du Lịch</span>
+            <!-- Title -->
+            <h1 class="text-3xl md:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+                Kinh Nghiệm <span class="hero-gradient-text">Thuê Phòng Trọ</span>
             </h1>
 
-            <p class="text-sm md:text-base text-brand-muted font-medium mb-10 max-w-2xl mx-auto opacity-90 leading-relaxed">
-                Khám phá những vùng đất mới, kinh nghiệm du lịch thực tế và những câu chuyện truyền cảm hứng từ hành trình của TPVTravel.
+            <p class="text-sm md:text-base text-brand-muted font-medium mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
+                Tổng hợp những nhận xét thực tế, kinh nghiệm soi hợp đồng, mẹo decor và câu chuyện tìm trọ thực chiến từ cộng đồng người thuê TrustStay.
             </p>
 
-            <!-- Search Bar -->
-            <div class="max-w-2xl mx-auto mb-8 glass-panel p-2.5 rounded-full flex items-center border border-white/10 shadow-2xl">
-                <i data-lucide="search" class="w-5 h-5 text-brand-muted ml-4"></i>
-                <input type="text" placeholder="Tìm kiếm bài viết, kinh nghiệm, địa điểm..." 
-                    class="flex-1 bg-transparent border-none text-sm font-medium text-white px-4 py-2 focus:outline-none placeholder:text-brand-muted/50" />
-                <button class="px-6 py-2.5 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all shadow-[0_0_15px_rgba(164,230,255,0.3)]">
-                    Tìm kiếm
+            <!-- Search & Create Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-3xl mx-auto mb-4">
+                <div class="w-full sm:flex-1 glass-panel p-2 rounded-full flex items-center border border-white/10 shadow-2xl">
+                    <i data-lucide="search" class="w-5 h-5 text-brand-muted ml-4"></i>
+                    <input type="text" id="blogSearchInput" onkeyup="filterBlogArticles()" placeholder="Tìm bài viết kinh nghiệm, review phòng..." 
+                        class="flex-1 bg-transparent border-none text-xs font-medium text-white px-4 py-2 focus:outline-none placeholder:text-brand-muted/50" />
+                </div>
+
+                <button onclick="openCreateBlogModal()" class="w-full sm:w-auto px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all shadow-[0_0_15px_rgba(164,230,255,0.3)] flex items-center justify-center gap-2 shrink-0 cursor-pointer">
+                    <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                    <span>VIẾT BÀI CHIA SẺ</span>
                 </button>
             </div>
         </div>
@@ -41,48 +45,54 @@
 </section>
 
 <!-- Blog Listing Section -->
-<section class="py-12 bg-[#020e1f] relative z-10">
+<section class="py-12 bg-[#020e1f] relative z-10 text-left">
     <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
         <% if (data && data.length > 0) { %>
             
             <!-- Featured Blog (First Item) -->
             <% const featured = data[0]; %>
-            <div class="glass-panel rounded-3xl overflow-hidden border border-white/10 group mb-16 hover:border-brand-accent/40 transition-colors duration-500 shadow-2xl">
+            <div id="blog-card-<%= featured.ma_bai_viet %>" class="blog-article-card glass-panel rounded-3xl overflow-hidden border border-white/10 group mb-16 hover:border-brand-accent/40 transition-colors duration-500 shadow-2xl">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <!-- Image -->
-                    <div class="relative h-64 lg:h-[420px] overflow-hidden">
-                        <img src="<%= featured.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1000' %>" 
+                    <a href="/blogs/<%= featured.ma_bai_viet %>" class="relative h-64 lg:h-[420px] overflow-hidden block">
+                        <img src="<%= featured.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80' %>" 
                              alt="<%= featured.tieu_de %>" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div class="absolute top-5 left-5">
                             <span class="px-3 py-1.5 bg-brand-accent text-brand-dark text-[10px] font-black rounded-lg uppercase tracking-widest shadow-lg">
-                                BÀI NỔI BẬT
+                                BÀI VIẾT NỔI BẬT
                             </span>
                         </div>
-                    </div>
+                    </a>
                     
                     <!-- Content -->
                     <div class="p-8 lg:p-12 flex flex-col justify-center relative">
-                        <!-- Decorative glow -->
-                        <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-accent/10 blur-[100px] rounded-full pointer-events-none"></div>
-
                         <div class="flex items-center gap-4 text-[10px] font-bold text-brand-muted uppercase tracking-widest mb-4">
                             <span class="flex items-center gap-1.5">
                                 <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-accent"></i>
-                                <%= new Date(featured.createdAt).toLocaleDateString('vi-VN') %>
+                                <%= new Date(featured.createdAt || Date.now()).toLocaleDateString('vi-VN') %>
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/10 text-white/80">
+                                Chia sẻ từ Người Thuê
                             </span>
                         </div>
                         
-                        <h2 class="text-2xl lg:text-4xl font-black text-white leading-tight mb-5 group-hover:text-brand-accent transition-colors">
-                            <a href="/blogs/<%= featured.ma_bai_viet %>"><%= featured.tieu_de %></a>
+                        <h2 class="text-2xl lg:text-3xl font-black text-white leading-tight mb-4 group-hover:text-brand-accent transition-colors article-title">
+                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="hover:text-brand-accent transition-colors"><%= featured.tieu_de %></a>
                         </h2>
                         
-                        <p class="text-brand-muted text-sm leading-relaxed mb-8 line-clamp-4">
-                            <%= featured.tom_tat || 'Khám phá chi tiết hành trình trong bài viết này cùng những kinh nghiệm quý báu được chia sẻ từ chúng tôi.' %>
+                        <p class="text-brand-muted text-xs md:text-sm leading-relaxed mb-6 line-clamp-4 article-summary">
+                            <%= featured.tom_tat || featured.noi_dung %>
                         </p>
-                        
-                        <div class="mt-auto">
-                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-accent/30 text-brand-accent text-xs font-black hover:bg-brand-accent hover:text-brand-dark transition-all group/link">
+
+                        <% if (featured.noi_dung) { %>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-xs text-white/90 leading-relaxed mb-6 line-clamp-2 italic">
+                                "<%= featured.noi_dung %>"
+                            </div>
+                        <% } %>
+
+                        <div class="pt-2">
+                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-accent/40 text-brand-accent text-xs font-black hover:bg-brand-accent hover:text-brand-dark transition-all group/link">
                                 <span>Đọc Tiếp Bài Viết</span>
                                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform"></i>
                             </a>
@@ -93,36 +103,38 @@
 
             <!-- Grid Blogs -->
             <% if (data.length > 1) { %>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogGridContainer">
                     <% data.slice(1).forEach(blog => { %>
-                        <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 flex flex-col group hover:-translate-y-2 hover:border-brand-accent/30 hover:shadow-[0_15px_30px_-15px_rgba(164,230,255,0.15)] transition-all duration-300">
+                        <div id="blog-card-<%= blog.ma_bai_viet %>" class="blog-article-card glass-panel rounded-2xl overflow-hidden border border-white/10 flex flex-col group hover:-translate-y-2 hover:border-brand-accent/30 hover:shadow-[0_15px_30px_-15px_rgba(164,230,255,0.15)] transition-all duration-300">
                             <!-- Image -->
-                            <div class="relative h-56 overflow-hidden">
-                                <img src="<%= blog.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=1000' %>" 
+                            <a href="/blogs/<%= blog.ma_bai_viet %>" class="relative h-56 overflow-hidden block">
+                                <img src="<%= blog.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80' %>" 
                                      alt="<%= blog.tieu_de %>" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-[#020e1f] via-transparent to-transparent opacity-90"></div>
-                            </div>
+                            </a>
                             
                             <!-- Content -->
                             <div class="p-6 flex-1 flex flex-col justify-between z-10 relative -mt-10">
                                 <div>
                                     <div class="flex items-center gap-3 text-[10px] font-bold text-brand-muted uppercase tracking-widest mb-3">
                                         <span class="px-2.5 py-1 bg-[#020e1f]/80 rounded text-brand-accent border border-white/10 backdrop-blur-md">
-                                            <%= new Date(blog.createdAt).toLocaleDateString('vi-VN') %>
+                                            <%= new Date(blog.createdAt || Date.now()).toLocaleDateString('vi-VN') %>
                                         </span>
+                                        <span>Góc Người Thuê</span>
                                     </div>
-                                    <h3 class="text-lg font-black text-white leading-snug mb-3 group-hover:text-brand-accent transition-colors line-clamp-2">
-                                        <a href="/blogs/<%= blog.ma_bai_viet %>"><%= blog.tieu_de %></a>
+                                    <h3 class="text-base font-black text-white leading-snug mb-3 group-hover:text-brand-accent transition-colors line-clamp-2 article-title">
+                                        <a href="/blogs/<%= blog.ma_bai_viet %>" class="hover:text-brand-accent transition-colors"><%= blog.tieu_de %></a>
                                     </h3>
-                                    <p class="text-brand-muted text-xs leading-relaxed line-clamp-3">
-                                        <%= blog.tom_tat || 'Đọc thêm để biết thêm chi tiết về kinh nghiệm và bài học quý giá này.' %>
+                                    <p class="text-brand-muted text-xs leading-relaxed line-clamp-3 article-summary">
+                                        <%= blog.tom_tat || blog.noi_dung %>
                                     </p>
                                 </div>
-                                
+
                                 <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
                                     <a href="/blogs/<%= blog.ma_bai_viet %>" class="text-brand-accent text-xs font-bold hover:text-brand-primary transition-colors flex items-center gap-1.5">
-                                        Đọc bài viết <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                                        <span>Đọc bài viết</span>
+                                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                                     </a>
                                 </div>
                             </div>
@@ -133,40 +145,123 @@
 
         <% } else { %>
             <!-- Empty State -->
-            <div class="py-24 text-center glass-panel rounded-3xl border border-white/10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-48 bg-brand-accent/5 blur-[80px] rounded-full"></div>
-                <div class="w-20 h-20 bg-brand-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-brand-accent/20 relative z-10">
+            <div class="py-20 text-center glass-panel rounded-3xl border border-white/10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-accent/20">
                     <i data-lucide="file-text" class="w-8 h-8 text-brand-accent"></i>
                 </div>
-                <h3 class="text-xl font-black text-white mb-2 relative z-10">Chưa có bài viết nào</h3>
-                <p class="text-brand-muted text-sm relative z-10 max-w-md mx-auto">Chúng tôi đang biên tập và sẽ sớm cập nhật thêm các bài viết hấp dẫn về du lịch. Vui lòng quay lại sau nhé!</p>
+                <h3 class="text-xl font-black text-white mb-2">Chưa có bài chia sẻ nào</h3>
+                <p class="text-brand-muted text-xs max-w-md mx-auto mb-6">Hãy là người đầu tiên chia sẻ kinh nghiệm thuê trọ, review không gian sống của bạn cho cộng đồng TrustStay!</p>
+                <button onclick="openCreateBlogModal()" class="px-6 py-2.5 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary">
+                    + Viết bài chia sẻ ngay
+                </button>
             </div>
         <% } %>
     </div>
 </section>
 
-<!-- Pagination -->
-<% if (data && data.length > 0) { %>
-<div class="py-8 bg-[#020e1f] flex justify-center pb-24 border-t border-white/5">
-    <div class="flex items-center gap-2">
-        <button class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-brand-muted hover:text-white hover:bg-white/10 transition-colors cursor-not-allowed opacity-50">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+<!-- CREATE CUSTOMER BLOG MODAL -->
+<div id="createBlogModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
+    <div class="glass-panel bg-slate-900/95 max-w-2xl w-full rounded-3xl p-6 md:p-8 border border-brand-accent/40 shadow-2xl relative text-left">
+        
+        <button onclick="closeCreateBlogModal()" class="absolute top-5 right-5 text-brand-muted hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
         </button>
-        <button class="w-9 h-9 rounded-full bg-brand-accent text-brand-dark font-black flex items-center justify-center shadow-[0_0_15px_rgba(164,230,255,0.3)]">
-            1
-        </button>
-        <button class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-white font-bold hover:bg-white/10 transition-colors border border-white/5">
-            2
-        </button>
-        <button class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-white font-bold hover:bg-white/10 transition-colors border border-white/5">
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-        </button>
+
+        <div class="space-y-2 mb-6 border-b border-white/10 pb-4">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/15 text-brand-accent text-[11px] font-bold">
+                <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i> Góc Chia Sẻ Khách Hàng
+            </div>
+            <h3 class="text-xl font-black text-white">Đăng Bài Chia Sẻ Kinh Nghiệm Thuê Trọ</h3>
+            <p class="text-xs text-brand-muted">Chia sẻ trải nghiệm xem phòng, mẹo chọn trọ hoặc kinh nghiệm cá nhân đến cộng đồng.</p>
+        </div>
+
+        <form id="createBlogForm" onsubmit="submitCustomerBlog(event)" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Tiêu đề bài viết <span class="text-red-400">*</span></label>
+                <input type="text" name="tieu_de" required placeholder="Ví dụ: Kinh nghiệm đàm phán hợp đồng thuê trọ sinh viên..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Tóm tắt ngắn</label>
+                <input type="text" name="tom_tat" placeholder="Tóm tắt nội dung chính trong 1-2 câu..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Link hình ảnh bìa (tùy chọn)</label>
+                <input type="url" name="hinh_anh_dai_dien" placeholder="https://images.unsplash.com/..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Nội dung bài viết chi tiết <span class="text-red-400">*</span></label>
+                <textarea name="noi_dung" rows="5" required placeholder="Chia sẻ kinh nghiệm thực tế, chi phí sinh hoạt, lưu ý chủ trọ, thiết bị phòng..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"></textarea>
+            </div>
+
+            <div class="pt-2 flex justify-end gap-3">
+                <button type="button" onclick="closeCreateBlogModal()" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs border border-white/10">
+                    Hủy bỏ
+                </button>
+                <button type="submit" class="px-7 py-3 bg-brand-accent hover:bg-brand-primary text-brand-dark font-black rounded-xl transition-all shadow-lg flex items-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                    <span>ĐĂNG BÀI VIẾT</span>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-<% } %>
 
-<!-- Re-initialize icons if loaded via AJAX/Dynamic -->
 <script>
+    function openCreateBlogModal() {
+        document.getElementById('createBlogModal').classList.remove('hidden');
+    }
+
+    function closeCreateBlogModal() {
+        document.getElementById('createBlogModal').classList.add('hidden');
+    }
+
+    async function submitCustomerBlog(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const res = await fetch('/api/blogs/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (result.success) {
+                alert('Đăng bài chia sẻ kinh nghiệm thành công!');
+                closeCreateBlogModal();
+                form.reset();
+                window.location.reload();
+            } else {
+                alert('Có lỗi xảy ra: ' + (result.message || 'Không thể đăng bài.'));
+            }
+        } catch (err) {
+            alert('Lỗi kết nối máy chủ!');
+        }
+    }
+
+    function filterBlogArticles() {
+        const query = (document.getElementById('blogSearchInput').value || '').toLowerCase().trim();
+        const cards = document.querySelectorAll('.blog-article-card');
+
+        cards.forEach(card => {
+            const titleEl = card.querySelector('.article-title');
+            const summaryEl = card.querySelector('.article-summary');
+            const titleText = titleEl ? titleEl.innerText.toLowerCase() : '';
+            const summaryText = summaryEl ? summaryEl.innerText.toLowerCase() : '';
+
+            if (titleText.includes(query) || summaryText.includes(query)) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }

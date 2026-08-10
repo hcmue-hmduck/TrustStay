@@ -1,0 +1,72 @@
+<div class="space-y-6 text-left">
+  
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-900">
+    <div>
+      <h1 class="text-2xl font-mono font-black text-white uppercase tracking-tight flex items-center gap-2">
+        <i data-lucide="book-open" class="w-6 h-6 text-brand-accent"></i>
+        <span>Quản Lý Bài Viết Chia Sẻ Kinh Nghiệm</span>
+      </h1>
+      <p class="text-xs text-brand-muted mt-1">Danh sách các bài đăng chia sẻ kinh nghiệm thuê trọ, review không gian sống từ khách hàng & quản trị viên</p>
+    </div>
+  </div>
+
+  <!-- Blogs Table Section -->
+  <div class="glass-card rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-300">
+        <thead class="bg-slate-950/80 text-brand-muted uppercase text-[10px] tracking-wider font-mono border-b border-slate-900">
+          <tr>
+            <th class="p-4">Hình ảnh</th>
+            <th class="p-4">Tiêu đề bài viết</th>
+            <th class="p-4">Tóm tắt ngắn</th>
+            <th class="p-4">Ngày đăng</th>
+            <th class="p-4">Trạng thái</th>
+            <th class="p-4 text-right">Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-slate-900/60">
+          <% if (data && data.length > 0) { %>
+            <% data.forEach(blog => { %>
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4">
+                  <img src="<%= blog.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=300&q=80' %>" alt="<%= blog.tieu_de %>" class="w-16 h-12 rounded-lg object-cover border border-white/10" />
+                </td>
+
+                <td class="p-4 max-w-xs">
+                  <a href="/blogs/<%= blog.ma_bai_viet %>" target="_blank" class="font-bold text-white hover:text-brand-accent transition-colors line-clamp-2">
+                    <%= blog.tieu_de %>
+                  </a>
+                </td>
+
+                <td class="p-4 max-w-sm">
+                  <p class="text-slate-400 leading-relaxed line-clamp-2"><%= blog.tom_tat || blog.noi_dung %></p>
+                </td>
+
+                <td class="p-4 font-mono text-slate-400">
+                  <%= new Date(blog.createdAt || Date.now()).toLocaleDateString('vi-VN') %>
+                </td>
+
+                <td class="p-4">
+                  <span class="px-2.5 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full text-[10px] font-bold">Đã xuất bản</span>
+                </td>
+
+                <td class="p-4 text-right">
+                  <a href="/blogs/<%= blog.ma_bai_viet %>" target="_blank" class="px-3 py-1 bg-brand-primary/20 hover:bg-brand-primary/40 text-brand-accent border border-brand-accent/30 rounded-lg text-[10px] font-bold transition-all inline-block">
+                    Xem bài viết
+                  </a>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6" class="p-8 text-center text-brand-muted">Chưa có bài viết kinh nghiệm nào.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

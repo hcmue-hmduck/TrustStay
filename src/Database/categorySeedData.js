@@ -2,27 +2,27 @@ const CategoryModel = require('../Models/CategoryModel');
 
 const categorySeed = [
     {
-        ten_danh_muc: 'Du Lịch Biển Đảo',
-        mo_ta: 'Tận hưởng ánh nắng vàng, cát trắng và làn nước trong xanh tại những bãi biển và đảo ngọc đẹp nhất Việt Nam.',
-        hinh_anh: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+        ten_danh_muc: 'Phòng Trọ Khép Kín',
+        mo_ta: 'Phòng trọ có WC riêng, lối đi riêng, giờ giấc tự do, phù hợp cho sinh viên và người đi làm.',
+        hinh_anh: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80',
         trang_thai: 'active'
     },
     {
-        ten_danh_muc: 'Du Lịch Nghỉ Dưỡng & Núi',
-        mo_ta: 'Hòa mình vào thiên nhiên hoang sơ, tận hưởng không khí trong lành se lạnh nơi núi cao và nghỉ dưỡng đẳng cấp.',
-        hinh_anh: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80',
+        ten_danh_muc: 'Căn Hộ Mini / Studio',
+        mo_ta: 'Căn hộ nhỏ đầy đủ nội thất, khu vực bếp riêng, máy lạnh, máy giặt, an ninh 24/7.',
+        hinh_anh: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
         trang_thai: 'active'
     },
     {
-        ten_danh_muc: 'Du Lịch Văn Hóa & Lịch Sử',
-        mo_ta: 'Khám phá các di sản văn hóa thế giới, di tích lịch sử lâu đời và nét đẹp truyền thống địa phương độc đáo.',
-        hinh_anh: 'https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80',
+        ten_danh_muc: 'Ký Túc Xá / Ở Ghép (Sleepbox)',
+        mo_ta: 'Giường tầng hoặc sleepbox cao cấp giá rẻ, bao trọn chi phí điện nước, phù hợp tiết kiệm chi phí.',
+        hinh_anh: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=800&q=80',
         trang_thai: 'active'
     },
     {
-        ten_danh_muc: 'Du Lịch Khám Phá & Mạo Hiểm',
-        mo_ta: 'Thử thách bản thân với các hoạt động ngoài trời, trekking leo núi, khám phá hang động kỳ vĩ.',
-        hinh_anh: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+        ten_danh_muc: 'Nhà Nguyên Căn Cho Thuê',
+        mo_ta: 'Nhà riêng nhiều phòng ngủ, thích hợp cho hộ gia đình hoặc nhóm bạn ở chung lâu dài.',
+        hinh_anh: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80',
         trang_thai: 'active'
     }
 ];
@@ -30,7 +30,7 @@ const categorySeed = [
 async function seedCategories() {
     console.log('Đang xóa toàn bộ danh mục cũ...');
     await CategoryModel.deleteMany({});
-    console.log('Đang thêm danh mục mới...');
+    console.log('Đang thêm danh mục phòng trọ mới...');
     const categoryIdMap = {};
     const prepCategories = categorySeed.map((cat, index) => {
         const doc = new CategoryModel(cat);
@@ -40,7 +40,7 @@ async function seedCategories() {
         return doc;
     });
     await CategoryModel.insertMany(prepCategories);
-    console.log('Seed danh mục thành công.');
+    console.log('Seed danh mục phòng trọ thành công.');
     return categoryIdMap;
 }
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const TourModel = new mongoose.Schema({
-    ma_tour: {
+const RoomModel = new mongoose.Schema({
+    ma_phong: {
         type: String,
         required: true,
         unique: true
@@ -10,16 +10,21 @@ const TourModel = new mongoose.Schema({
     ma_danh_muc: {
         type: String,
         required: true,
-        ref: 'DanhMucTour'
+        ref: 'Category'
     },
 
     ma_dia_diem: {
         type: String,
         required: true,
-        ref: 'DiaDiem'
+        ref: 'Location'
     },
 
-    ten_tour: {
+    ma_chu_tro: {
+        type: String,
+        ref: 'User'
+    },
+
+    ten_phong: {
         type: String,
         required: true
     },
@@ -27,40 +32,31 @@ const TourModel = new mongoose.Schema({
     mo_ta_ngan: String,
     mo_ta_chi_tiet: String,
 
-    gia_nguoi_lon: {
+    gia_thue: {
         type: Number,
         required: true
     },
 
-    gia_tre_em: {
+    tien_coc: {
         type: Number,
         default: 0
     },
 
-    gia_khuyen_mai: {
+    dien_tich: {
         type: Number,
         default: 0
     },
-
-    thoi_gian: String,
-    diem_khoi_hanh: String,
 
     so_nguoi_toi_da: {
         type: Number,
-        default: 20
+        default: 2
     },
+
+    dia_chi_chi_tiet: String,
 
     hinh_anh_dai_dien: String,
 
-    diem_noi_bat: [{
-        type: String
-    }],
-
-    dich_vu_bao_gom: [{
-        type: String
-    }],
-
-    dich_vu_khong_bao_gom: [{
+    tien_nghi: [{
         type: String
     }],
 
@@ -78,4 +74,4 @@ const TourModel = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('Tour', TourModel);
+module.exports = mongoose.model('Room', RoomModel);

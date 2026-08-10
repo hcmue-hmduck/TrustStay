@@ -9,11 +9,10 @@ router.use((req, res, next) => {
 });
 
 router.get('/', HomeController.getHomePage);
-router.get('/tours', HomeController.getHomeTours);
-
-router.get('/tour-details/:ma_tour', HomeController.getTourDetail);
-
+router.get('/rooms', HomeController.getHomeRooms);
+router.get('/room-details/:ma_phong', HomeController.getRoomDetail);
 router.get('/blogs', HomeController.getHomeBlog);
+router.get('/blogs/:ma_bai_viet', HomeController.getHomeBlogDetail);
 router.get('/contacts', HomeController.getHomeContact);
 
 module.exports = router;

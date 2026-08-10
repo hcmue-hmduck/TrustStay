@@ -1,21 +1,16 @@
 const mongoose = require('mongoose');
 
-const TourRequestModel = new mongoose.Schema({
+const RoomRequestModel = new mongoose.Schema({
     ma_yeu_cau: {
         type: String,
         required: true,
         unique: true
     },
 
-    ma_tour: {
+    ma_phong: {
         type: String,
         required: true,
-        ref: 'Tour'
-    },
-
-    ma_lich_khoi_hanh: {
-        type: String,
-        ref: 'LichKhoiHanh'
+        ref: 'Room'
     },
 
     ho_ten_khach: {
@@ -30,14 +25,13 @@ const TourRequestModel = new mongoose.Schema({
         required: true
     },
 
-    so_luong_nguoi_lon: {
-        type: Number,
-        default: 1
+    ngay_hen_xem: {
+        type: Date
     },
 
-    so_luong_tre_em: {
+    so_nguoi_o: {
         type: Number,
-        default: 0
+        default: 1
     },
 
     ghi_chu: String,
@@ -51,4 +45,4 @@ const TourRequestModel = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('Tour_Request', TourRequestModel);
+module.exports = mongoose.model('Room_Request', RoomRequestModel);

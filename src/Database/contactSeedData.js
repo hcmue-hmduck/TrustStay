@@ -2,19 +2,19 @@ const ContactModel = require('../Models/ContactModel');
 
 const contactSeed = [
     {
-        ho_ten: 'Lê Hoài Nam',
+        ho_ten: 'Chuyên Viên 1',
         email: 'hoainam@gmail.com',
         so_dien_thoai: '0966554433',
-        tieu_de: 'Tư vấn tour tập thể cho công ty 50 người',
-        noi_dung: 'Chào công ty, chúng tôi muốn đặt tour đi Phú Quốc vào tháng 9 tới cho khoảng 50 nhân viên. Xin vui lòng gửi báo giá và lịch trình chi tiết.',
+        tieu_de: 'Tư vấn phòng trọ khu vực Bách Khoa - Hà Nội',
+        noi_dung: 'Em là sinh viên năm nhất chuẩn bị nhập học ĐH Bách Khoa, muốn tìm phòng trọ khép kín tầm 3 - 4 triệu/tháng gần trường. Nhờ TrustStay tư vấn giúp em!',
         trang_thai: 'new'
     },
     {
-        ho_ten: 'Hoàng Ngọc Ánh',
+        ho_ten: 'Chuyên Viên 2',
         email: 'ngocanh@gmail.com',
         so_dien_thoai: '0933221100',
-        tieu_de: 'Hỏi về chính sách hoàn huỷ tour',
-        noi_dung: 'Tôi muốn hỏi nếu huỷ tour do lý do bất khả kháng trước 7 ngày thì chính sách hoàn tiền như thế nào?',
+        tieu_de: 'Hỏi về quy trình hẹn xem phòng trực tiếp',
+        noi_dung: 'Tôi muốn hẹn xem căn hộ Studio tại Quận 7 vào cuối tuần này. Dịch vụ hẹn xem phòng có mất phí không ạ?',
         trang_thai: 'read'
     }
 ];

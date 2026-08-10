@@ -1,0 +1,96 @@
+<div class="space-y-6 text-left">
+  
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-slate-900">
+    <div>
+      <h1 class="text-2xl font-mono font-black text-white uppercase tracking-tight flex items-center gap-2">
+        <i data-lucide="calendar" class="w-6 h-6 text-brand-accent"></i>
+        <span>Quản Lý Yêu Cầu Hẹn Xem Phòng</span>
+      </h1>
+      <p class="text-xs text-brand-muted mt-1">Danh sách lượt đăng ký hẹn xem phòng từ khách thuê trên hệ thống TrustStay</p>
+    </div>
+  </div>
+
+  <!-- Requests Table Section -->
+  <div class="glass-card rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-300">
+        <thead class="bg-slate-950/80 text-brand-muted uppercase text-[10px] tracking-wider font-mono border-b border-slate-900">
+          <tr>
+            <th class="p-4">Mã yêu cầu</th>
+            <th class="p-4">Họ tên khách</th>
+            <th class="p-4">Số điện thoại</th>
+            <th class="p-4">Email</th>
+            <th class="p-4">Ngày hẹn xem</th>
+            <th class="p-4">Số người</th>
+            <th class="p-4">Ghi chú</th>
+            <th class="p-4">Trạng thái</th>
+            <th class="p-4 text-right">Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody class="divide-y divide-slate-900/60">
+          <% if (data && data.length > 0) { %>
+            <% data.forEach(req => { %>
+              <tr class="hover:bg-white/[0.02] transition-colors">
+                <td class="p-4 font-mono font-bold text-brand-accent"><%= req.ma_yeu_cau %></td>
+                <td class="p-4 font-bold text-white"><%= req.ho_ten_khach %></td>
+                <td class="p-4 text-brand-accent font-bold"><%= req.so_dien_thoai_khach %></td>
+                <td class="p-4 text-slate-400"><%= req.email_khach || '-' %></td>
+                <td class="p-4 font-mono">
+                  <%= req.ngay_hen_xem ? new Date(req.ngay_hen_xem).toLocaleDateString('vi-VN') : 'Thỏa thuận' %>
+                </td>
+                <td class="p-4 font-mono"><%= req.so_nguoi_o || 1 %> người</td>
+                <td class="p-4 max-w-xs truncate text-slate-400"><%= req.ghi_chu || '-' %></td>
+                <td class="p-4">
+                  <% if (req.trang_thai === 'pending') { %>
+                    <span class="px-2.5 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/20 rounded-full text-[10px] font-bold">Chờ liên hệ</span>
+                  <% } else { %>
+                    <span class="px-2.5 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full text-[10px] font-bold">Đã xác nhận</span>
+                  <% } %>
+                </td>
+                <td class="p-4 text-right space-x-1">
+                  <% if (req.trang_thai === 'pending') { %>
+                    <button onclick="updateRequestStatus('<%= req.ma_yeu_cau %>', 'confirmed')" class="px-3 py-1 bg-green-500/20 hover:bg-green-500/30 text-green-400 border border-green-500/30 rounded-lg text-[10px] font-bold transition-all cursor-pointer">
+                      Đã liên hệ
+                    </button>
+                  <% } else { %>
+                    <button onclick="updateRequestStatus('<%= req.ma_yeu_cau %>', 'pending')" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-slate-300 rounded-lg text-[10px] font-bold transition-all cursor-pointer">
+                      Đánh dấu chờ
+                    </button>
+                  <% } %>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="9" class="p-8 text-center text-brand-muted">Chưa có yêu cầu hẹn xem phòng nào.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  async function updateRequestStatus(ma_yeu_cau, trang_thai) {
+    try {
+      const res = await fetch('/api/room-requests/update/' + ma_yeu_cau, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trang_thai })
+      });
+      const result = await res.json();
+      if (result.success) {
+        window.showAdminToast('Cập nhật trạng thái lịch hẹn thành công!');
+        setTimeout(() => location.reload(), 600);
+      } else {
+        alert('Cập nhật thất bại: ' + result.message);
+      }
+    } catch(err) {
+      alert('Lỗi kết nối máy chủ!');
+    }
+  }
+</script>

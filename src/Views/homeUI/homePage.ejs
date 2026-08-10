@@ -1,1128 +1,519 @@
-<!-- Dynamic Toast Message -->
-<div id="toast-notification"
-    class="fixed top-24 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-full bg-brand-accent/95 text-brand-dark font-extrabold shadow-xl flex items-center gap-2 border border-white/20 backdrop-blur-md hidden transition-all duration-300 transform -translate-y-4 opacity-0">
-    <i data-lucide="sparkles" class="w-5 h-5 animate-pulse text-brand-dark"></i>
-    <span id="toast-text"></span>
-</div>
+<div class="relative w-full overflow-hidden">
 
-<!-- Hero Container Section -->
-<section class="relative min-h-[calc(100vh-65px)] flex flex-col justify-center py-12">
-    <!-- Cinematic Backdrop Image -->
-    <div class="absolute inset-0 z-0">
-        <img alt="Hero da nang golden bridge" class="w-full h-full object-cover brightness-[0.35]"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKFu6RpvjNNyJ0gKDj2oyYCYnQLy8Zl65nngEBjviN35mFSMx129dSHDIRuk1V-dds1bFg72ejzS0YlOVTdaybTMXPBVimICm3xtTsFP5XRWCU2S_BhChy2fO9fJtNlqdKyz5g-UBrtvZc6cVTZ64Ybu_oSpLeZb6ZSqlJJuP31iy2xGHpr2JFcwOmCOHVetwE-GcpXY4COLChfdIaMn0pIeLf8neoLLBFwS_n_n0nfeYThkKTvAZqSW3MSoDonVHGwWxtZ0Eh9B8"
-            referrerpolicy="no-referrer" />
-        <div class="absolute inset-0 bg-gradient-to-b from-brand-dark/30 via-transparent to-brand-dark"></div>
+  <!-- Hero Section -->
+  <section class="relative min-h-[580px] flex items-center justify-center pt-24 pb-16 px-4 md:px-8">
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1920&q=80"
+        alt="TrustStay Background" class="w-full h-full object-cover brightness-[0.35]" />
+      <div class="absolute inset-0 bg-gradient-to-b from-[#020e1f]/80 via-[#020e1f]/60 to-[#020e1f]"></div>
     </div>
 
-    <!-- Outer Alignment Container -->
-    <div class="max-w-screen-2xl mx-auto w-full px-4 md:px-8 z-10 flex flex-col items-center">
-        <!-- Content Panel -->
-        <div class="w-full max-w-5xl text-center">
-            <!-- Satisfied Clients Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 glass-panel rounded-full animate-fade-in"
-                id="highlight-badge-customer">
-                <span class="w-2.5 h-2.5 bg-brand-accent rounded-full shadow-[0_0_8px_#a4e6ff] animate-pulse"></span>
-                <span class="text-xs font-bold text-brand-accent uppercase tracking-widest">Hơn 50,000 khách hàng hài
-                    lòng</span>
-            </div>
-
-            <!-- Slogan -->
-            <h1 class="text-4xl md:text-7xl font-black text-white leading-tight tracking-tight mb-4 animate-fade-in-up">
-                Trải Nghiệm <br class="md:hidden" />
-                <span class="hero-gradient-text">Lời Nói Đi Đôi Hành Động</span>
-            </h1>
-
-            <p
-                class="text-base md:text-xl text-brand-muted font-medium mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in-up-delay">
-                Mỗi chuyến đi là một câu chuyện độc sắc đầy cảm hứng và kỉ niệm khó phai.
-            </p>
-
-            <!-- Interactive Search Bar Form -->
-            <div class="max-w-4xl mx-auto mb-16 animate-fade-in-up-more">
-                <form id="search-form"
-                    class="glass-panel p-4 rounded-3xl md:rounded-full flex flex-col md:flex-row items-center gap-2 shadow-2xl border border-white/10">
-                    <!-- Destination Input -->
-                    <div
-                        class="flex-1 w-full flex items-center gap-3 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10 group">
-                        <i data-lucide="map-pin"
-                            class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
-                        <div class="text-left w-full">
-                            <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Địa
-                                điểm</span>
-                            <input type="text" id="search-destination-input" placeholder="Bạn muốn đi đâu?"
-                                class="bg-transparent border-none p-0 text-white placeholder:text-brand-muted/50 focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5" />
-                        </div>
-                        <button type="button" id="clear-dest-btn"
-                            class="p-1 hover:text-brand-accent text-brand-muted hidden">
-                            <i data-lucide="x" class="w-3 h-3"></i>
-                        </button>
-                    </div>
-
-                    <!-- Date Input -->
-                    <div
-                        class="flex-1 w-full flex items-center gap-3 px-5 py-3 border-b md:border-b-0 md:border-r border-white/10 group">
-                        <i data-lucide="calendar"
-                            class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
-                        <div class="text-left w-full">
-                            <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Ngày
-                                khởi
-                                hành</span>
-                            <input type="date" id="search-date-input"
-                                class="bg-transparent border-none p-0 text-white focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5 [color-scheme:dark]" />
-                        </div>
-                    </div>
-
-                    <!-- Guests Input -->
-                    <div class="flex-1 w-full flex items-center gap-3 px-5 py-3">
-                        <i data-lucide="users"
-                            class="w-5 h-5 text-brand-accent group-hover:scale-110 transition-transform"></i>
-                        <div class="text-left w-full">
-                            <span class="block text-[10px] uppercase font-bold tracking-wider text-brand-muted/70">Số
-                                khách</span>
-                            <input type="number" id="search-guests-input" min="1" max="50"
-                                placeholder="Thêm số lượng khách"
-                                class="bg-transparent border-none p-0 text-white placeholder:text-brand-muted/50 focus:outline-none focus:ring-0 text-sm font-bold w-full mt-0.5" />
-                        </div>
-                    </div>
-
-                    <div class="w-full md:w-auto flex items-center gap-2">
-                        <button type="button" id="reset-filter-btn"
-                            class="px-4 py-3.5 rounded-full border border-white/10 hover:bg-white/5 text-xs font-bold text-white transition-all whitespace-nowrap hidden">
-                            Xoá lọc
-                        </button>
-                        <button type="submit"
-                            class="w-full md:w-auto px-8 py-3.5 bg-brand-accent text-brand-dark rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-primary active:scale-95 transition-all shadow-lg shadow-brand-accent/20 cursor-pointer"
-                            id="search-submit-btn">
-                            <i data-lucide="search" class="w-4 h-4"></i>
-                            <span>Tìm kiếm</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <!-- Social Proof Stats Bar -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto pt-8 border-t border-white/10"
-                id="stats-container">
-                <!-- Rendered by JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Scroll Down Indicator -->
-    <style>
-        @keyframes arrowScrollDown {
-            0% {
-                opacity: 0;
-                transform: translateY(-8px) scale(0.85);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateY(8px) scale(0.85);
-            }
-        }
-
-        @keyframes textShimmerFlow {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .scroll-arrow-animate {
-            animation: arrowScrollDown 1.8s infinite ease-in-out;
-        }
-
-        .delay-arrow-1 {
-            animation-delay: 0.3s;
-        }
-
-        .delay-arrow-2 {
-            animation-delay: 0.6s;
-        }
-
-        .shimmer-text-glow {
-            background: linear-gradient(90deg, #00d2ff 0%, #a4e6ff 50%, #00d2ff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShimmerFlow 3s infinite linear;
-            filter: drop-shadow(0 0 8px rgba(164, 230, 255, 0.3));
-            /* Fix Vietnamese uppercase/gradient text diacritics clipping */
-            display: inline-block;
-            line-height: 1.4;
-            padding-top: 0.15em;
-            padding-bottom: 0.15em;
-        }
-    </style>
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3.5 cursor-pointer z-10 group"
-        onclick="document.getElementById('bento-destinations').scrollIntoView({ behavior: 'smooth' })">
-        <span
-            class="text-sm md:text-base tracking-[0.35em] font-black shimmer-text-glow transition-all duration-300 group-hover:scale-105">
-            Khám Phá Thêm
-        </span>
-        <div class="flex flex-col items-center -space-y-3.5 mt-1.5">
-            <i data-lucide="chevrons-down" class="w-7 h-7 stroke-[3] text-brand-accent scroll-arrow-animate"></i>
-            <i data-lucide="chevron-down"
-                class="w-7 h-7 stroke-[3] text-brand-accent scroll-arrow-animate delay-arrow-1"></i>
-            <i data-lucide="chevron-down"
-                class="w-7 h-7 stroke-[2.5] text-brand-accent/60 scroll-arrow-animate delay-arrow-2"></i>
-        </div>
-    </div>
-</section>
-
-<!-- Bento Grid Destinations Section -->
-<section class="pt-0 pb-24 bg-brand-dark/60 scroll-mt-24" id="bento-destinations">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
-
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-            <div>
-                <p
-                    class="text-brand-accent font-extrabold text-xs md:text-sm tracking-wider mb-2 flex items-center gap-1.5">
-                    <i data-lucide="compass" class="w-4 h-4 animate-spin-slow"></i>
-                    <span>Điểm Đến Phổ Biến</span>
-                </p>
-                <h2 class="text-3xl md:text-5xl font-black text-white">Khám Phá <span class="text-brand-accent">Việt Nam
-                        hùng vĩ</span></h2>
-            </div>
-            <button
-                onclick="document.getElementById('tour-results').scrollIntoView({ behavior: 'smooth' }); showToast('Hiển thị đầy đủ hành trình');"
-                class="text-xs font-bold text-brand-muted hover:text-brand-accent transition-colors flex items-center gap-1.5 uppercase tracking-wider">
-                <span>Xem tất cả điểm đến</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
+    <div class="relative z-10 max-w-5xl w-full text-center space-y-6">
+      
+      <!-- Brand Name & Slogan Block -->
+      <div class="space-y-4 pt-2">
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent text-xs md:text-sm font-black uppercase tracking-widest shadow-[0_0_20px_rgba(56,189,248,0.2)] backdrop-blur-md">
+          <i data-lucide="shield-check" class="w-4 h-4 text-brand-accent"></i>
+          <span>Nền tảng tìm phòng trọ minh bạch & uy tín</span>
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-4 h-auto lg:h-[600px] w-full" id="bento-destinations-wrapper"
-            data-locations='<%- JSON.stringify(location.map(l => l.ma_dia_diem)) %>'>
-            <% location.forEach((loc, idx)=> { %>
-                <% if (loc.trang_thai==='active' ) { %>
-                    <div id="bento-card-<%=loc.ma_dia_diem%>" onclick="toggleBentoView('<%=loc.ma_dia_diem%>')"
-                        class="relative <%= idx === 0 ? 'lg:flex-[4.5] h-[350px] shadow-2xl' : 'flex-1 h-[120px] shadow-xl' %> lg:h-full rounded-3xl overflow-hidden group cursor-pointer border border-white/5 transition-all duration-500 ease-in-out">
-                        <img alt="<%=loc.ten_dia_diem%>"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1000ms] brightness-[0.6] group-hover:brightness-[0.7]"
-                            src="<%=loc.hinh_anh%>" referrerPolicy="no-referrer" />
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/40 to-transparent">
-                        </div>
+        <h1 class="font-mono text-5xl md:text-7xl font-black tracking-tight text-white uppercase drop-shadow-[0_0_35px_rgba(56,189,248,0.35)]">
+          TRUST<span class="hero-gradient-text">STAY</span>
+        </h1>
 
-                        <!-- Inactive rotated label -->
-                        <div id="bento-label-<%=loc.ma_dia_diem%>"
-                            class="absolute inset-0 flex items-center justify-center transition-opacity duration-300 <%= idx === 0 ? 'opacity-0' : 'opacity-100' %>">
-                            <div
-                                class="transform lg:-rotate-90 font-bold text-center tracking-widest text-xs md:text-sm uppercase text-white transition-all group-hover:text-brand-accent whitespace-nowrap">
-                                <%=loc.ten_dia_diem%>
-                            </div>
-                        </div>
-
-                        <!-- Active state panel -->
-                        <div id="bento-info-<%=loc.ma_dia_diem%>"
-                            class="absolute inset-0 p-6 md:p-8 lg:p-12 flex flex-col justify-between text-left <%= idx === 0 ? 'opacity-100 pointer-events-auto' : 'hidden opacity-0 pointer-events-none' %> transition-opacity duration-500">
-                            <!-- Top content -->
-                            <div class="flex justify-between items-start">
-                                <div class="glass-panel px-4 py-2 rounded-full flex items-center gap-2">
-                                    <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
-                                    <span class="text-[10px] font-black uppercase tracking-widest text-white">Xu
-                                        hướng</span>
-                                </div>
-                                <div
-                                    class="flex items-center gap-1 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold border border-white/10">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-accent text-brand-accent"></i>
-                                    <span>4.8</span>
-                                </div>
-                            </div>
-
-                            <!-- Bottom content -->
-                            <div class="space-y-3 lg:space-y-4 max-w-xl">
-                                <p class="text-brand-accent text-xs font-black tracking-wider">
-                                    <%=loc.tinh_thanh%> - <%=loc.quoc_gia%>
-                                </p>
-                                <h3 class="text-2xl md:text-3xl lg:text-5xl font-black text-white leading-tight">
-                                    <%=loc.ten_dia_diem%>
-                                </h3>
-                                <p class="text-brand-muted text-xs md:text-sm lg:text-base leading-relaxed opacity-95">
-                                    <%=loc.mo_ta%>
-                                </p>
-
-                                <div class="pt-2 flex items-center gap-4">
-                                    <button
-                                        onclick="event.stopPropagation(); showToast('Tính năng đang được cập nhật!')"
-                                        class="px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-brand-accent/10 pointer-events-auto">
-                                        <span>Đặt hành trình ngay</span>
-                                        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <% } %>
-                        <% }) %>
+        <div class="flex items-center justify-center gap-3">
+          <span class="h-0.5 w-12 md:w-16 bg-gradient-to-r from-transparent to-brand-accent/60"></span>
+          <p class="text-xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-accent via-white to-cyan-300 tracking-wide font-sans">
+            Trọ Thật — Trải Nghiệm Thật
+          </p>
+          <span class="h-0.5 w-12 md:w-16 bg-gradient-to-l from-transparent to-brand-accent/60"></span>
         </div>
+      </div>
 
-    </div>
-</section>
+      <p class="text-sm md:text-base text-brand-muted max-w-2xl mx-auto leading-relaxed pt-1">
+        Hàng nghìn phòng trọ khép kín, căn hộ mini, sleepbox giá tốt được xác thực thông tin chính xác. Liên hệ xem phòng trực tiếp nhanh chóng không qua trung gian!
+      </p>
 
-<!-- Featured Packs Grid Section -->
-<section class="py-28 bg-brand-dark/40 border-t border-white/5 scroll-mt-24" id="tour-results">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
-
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-            <div>
-                <p
-                    class="text-brand-accent font-extrabold text-xs md:text-sm tracking-wider mb-2 flex items-center gap-1.5">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent"></i>
-                    <span>Lựa Chọn Phù Hợp Nhất</span>
-                </p>
-                <h2 class="text-3xl md:text-5xl font-black text-white">Được <span class="text-brand-accent">Yêu Thích
-                        Nhất</span></h2>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <span id="search-status-badge"
-                    class="text-xs text-brand-muted bg-white/5 px-3 py-1 rounded-full border border-white/5 hidden">
-                    <!-- Text by JS -->
-                </span>
-                <button onclick="resetFilters()"
-                    class="text-xs font-bold text-brand-muted hover:text-brand-accent transition-all uppercase tracking-wider">
-                    Đặt lại bộ lọc
-                </button>
-            </div>
-        </div>
-
-        <div id="tours-grid-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <% tour_noi_bat.forEach(tour=> { %>
-                <div
-                    class="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-brand-accent/50 hover:shadow-2xl transition-all duration-300 border border-white/10 group">
-                    <!-- Card Banner -->
-                    <div class="relative h-48 overflow-hidden">
-                        <img alt="<%= tour.ten_tour %>"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-95"
-                            src="<%= tour.hinh_anh_dai_dien %>" referrerPolicy="no-referrer" />
-
-                        <!-- Discount Tag -->
-                        <% let originalPrice=tour.gia_nguoi_lon || 0; let currentPrice=tour.gia_khuyen_mai &&
-                            tour.gia_khuyen_mai> 0 ? tour.gia_khuyen_mai : originalPrice;
-                            let discountPercent = originalPrice > 0 ? Math.round((1 - (currentPrice / originalPrice)) *
-                            100) : 0;
-                            %>
-                            <% if (discountPercent> 0) { %>
-                                <div class="absolute top-4 left-4">
-                                    <span class="px-2.5 py-1 bg-red-600 text-white text-[10px] font-black rounded-lg">
-                                        -<%= discountPercent %>%
-                                    </span>
-                                </div>
-                                <% } %>
-
-                                    <!-- Favorite button toggle -->
-                                    <button onclick="toggleFavorite('<%= tour.ma_tour %>')"
-                                        class="absolute top-4 right-4 w-9 h-9 rounded-full bg-brand-dark/50 backdrop-blur-md flex items-center justify-center text-white hover:text-brand-accent transition-all active:scale-90"
-                                        title="Yêu thích">
-                                        <i data-lucide="heart" class="w-4 h-4 text-white"
-                                            id="fav-icon-<%= tour.ma_tour %>"></i>
-                                    </button>
-                    </div>
-
-                    <!-- Card Details -->
-                    <div class="p-5 flex-1 flex flex-col justify-between text-left">
-                        <div>
-                            <!-- Map Location -->
-                            <div
-                                class="flex items-center gap-1 text-brand-muted/90 text-[10px] font-black uppercase mb-1.5 tracking-wider">
-                                <i data-lucide="map-pin" class="w-3 h-3 text-brand-accent"></i>
-                                <% let foundLoc=location.find(loc=> loc.ma_dia_diem === tour.ma_dia_diem);
-                                    %>
-                                    <span>
-                                        <%=foundLoc.tinh_thanh%> - <%=foundLoc.quoc_gia%>
-                                    </span>
-                            </div>
-
-                            <!-- Title -->
-                            <h4
-                                class="text-white font-extrabold text-sm md:text-base group-hover:text-brand-accent transition-colors line-clamp-1">
-                                <%= tour.ten_tour %>
-                            </h4>
-
-                            <!-- Specs -->
-                            <div
-                                class="flex items-center justify-between text-brand-muted text-[11px] font-semibold mt-3.5 mb-4 pb-3.5 border-b border-white/5">
-                                <div class="flex items-center gap-3">
-                                    <span class="flex items-center gap-1">
-                                        <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-accent"></i>
-                                        <span>
-                                            <%= tour.thoi_gian %>
-                                        </span>
-                                    </span>
-                                    <span class="flex items-center gap-1">
-                                        <i data-lucide="users" class="w-3.5 h-3.5 text-brand-accent"></i>
-                                        <span>Tối đa <%= tour.so_nguoi_toi_da %> khách</span>
-                                    </span>
-                                </div>
-                                <div class="flex items-center gap-1 text-xs">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400"></i>
-                                    <span class="text-white font-black">4.8</span>
-                                    <span class="text-brand-muted">(120)</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pricing and Action -->
-                        <div>
-                            <div class="flex items-baseline gap-2 mb-4">
-                                <span class="text-brand-accent font-black text-lg">
-                                    <%= currentPrice.toLocaleString('vi-VN') %> đ
-                                </span>
-                                <% if (tour.gia_khuyen_mai && tour.gia_khuyen_mai> 0) { %>
-                                    <span
-                                        class="text-brand-muted font-medium text-[11px] line-through decoration-red-500/50">
-                                        <%= originalPrice.toLocaleString('vi-VN') %> đ
-                                    </span>
-                                    <% } %>
-                            </div>
-
-                            <a href="/tour-details/<%= tour.ma_tour %>" target="_blank" rel="noopener noreferrer"
-                                class="w-full py-2.5 bg-brand-accent/10 border border-brand-accent/20 text-brand-accent rounded-full text-xs font-black group-hover:bg-brand-accent group-hover:text-brand-dark transition-all flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer">
-                                <span>Xem chi tiết</span>
-                                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+      <!-- Search Filter Widget Bar -->
+      <div class="glass-panel p-4 md:p-6 rounded-3xl max-w-4xl mx-auto shadow-2xl mt-8 text-left border border-white/10">
+        <form action="/rooms" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          
+          <!-- Category Filter -->
+          <div>
+            <label class="block text-[11px] font-bold text-brand-muted uppercase tracking-wider mb-1.5">Loại phòng</label>
+            <div class="relative">
+              <select name="ma_danh_muc" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent appearance-none cursor-pointer">
+                <option value="" class="bg-slate-900 text-white">Tất cả loại phòng</option>
+                <% category.forEach(cat => { %>
+                  <option value="<%= cat.ma_danh_muc %>" class="bg-slate-900 text-white"><%= cat.ten_danh_muc %></option>
                 <% }) %>
-        </div>
-    </div>
-</section>
-
-<!-- Hành Trình Của Bạn Section -->
-<section class="py-28 bg-brand-dark" id="categories-section">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
-
-        <div class="text-center mb-20">
-            <div
-                class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-3">
-                <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent animate-pulse"></i>
-                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent">Hành Trình Đa
-                    Dạng</span>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-brand-muted absolute right-3 top-3 pointer-events-none"></i>
             </div>
-            <h2 class="text-3xl md:text-6xl font-black text-white leading-tight">
-                Hành Trình <span class="hero-gradient-text">Của Bạn</span>
-            </h2>
-            <p class="text-brand-muted max-w-2xl mx-auto mt-4 text-sm md:text-base">
-                Khám phá các phong cách du lịch đặc sắc, được thiết kế tinh xảo để mang lại trọn vẹn niềm vui và dấu ấn
-                đáng quý cho chuyến đi của bạn.
-            </p>
-        </div>
+          </div>
 
-        <div class="space-y-28" id="categories-list-container">
-            <% category.forEach((cat, idx)=> { %>
-                <% if (cat.trang_thai==='active' ) { %>
-                    <% let isEven=idx % 2===0; %>
-                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                            <!-- Image showcase wrapper -->
-                            <div
-                                class="lg:col-span-6 w-full h-[250px] sm:h-[350px] lg:h-[400px] relative rounded-3xl overflow-hidden shadow-2xl border border-white/5 group <%= isEven ? 'order-1 lg:order-1' : 'order-1 lg:order-2' %>">
-                                <img alt="<%= cat.ten_danh_muc %>"
-                                    class="w-full h-full object-cover transition-transform duration-[1000ms] group-hover:scale-105"
-                                    src="<%= cat.hinh_anh %>" referrerPolicy="no-referrer" />
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent">
-                                </div>
-
-                                <!-- Badge -->
-                                <div
-                                    class="absolute top-6 left-6 px-4 py-2 glass-panel rounded-full flex items-center gap-2">
-                                    <span class="w-2 h-2 bg-brand-accent rounded-full animate-ping"></span>
-                                    <span class="text-[10px] font-black uppercase tracking-widest text-white">
-                                        <%= cat.ten_danh_muc %>
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- Info details wrapper -->
-                            <div
-                                class="lg:col-span-6 text-left <%= isEven ? 'order-2 lg:order-2' : 'order-2 lg:order-1' %> p-8 lg:p-12 border border-brand-accent/20 rounded-[2rem] bg-white/[0.02] shadow-[0_0_30px_rgba(0,210,255,0.05)] relative group-hover:border-brand-accent/40 transition-all duration-500">
-                                <p
-                                    class="text-brand-accent font-extrabold text-xs tracking-widest mb-3 uppercase flex items-center gap-1.5">
-                                    <i data-lucide="milestone" class="w-4 h-4"></i>
-                                    <span>
-                                        <%= (idx + 1).toString().padStart(2, '0' ) %>
-                                    </span>
-                                </p>
-                                <h3 class="text-2xl md:text-4xl font-extrabold text-white mb-4 flex items-center gap-2">
-                                    <span>
-                                        <%= cat.ten_danh_muc %>
-                                    </span>
-                                </h3>
-                                <p class="text-brand-muted text-sm md:text-base leading-relaxed mb-6 opacity-90">
-                                    <%= cat.mo_ta %>
-                                </p>
-
-                                <!-- Tags -->
-                                <% let category_loc=location.filter(loc=> loc.ma_danh_muc === cat.ma_danh_muc &&
-                                    loc.trang_thai === 'active') %>
-                                    <% if (category_loc.length> 0) { %>
-                                        <div class="flex flex-wrap gap-2.5 mb-8">
-                                            <% category_loc.forEach(loc=> { %>
-                                                <span"
-                                                    class="flex items-center gap-1.5 text-xs font-bold text-white bg-white/5 border border-white/10 hover:border-brand-accent/30 hover:bg-white/10 px-4 py-2 rounded-full cursor-pointer transition-colors">
-                                                    <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-accent"></i>
-                                                    <span>
-                                                        <%= loc.ten_dia_diem %>
-                                                    </span>
-                                                    </span>
-                                                    <% }) %>
-                                        </div>
-                                        <% } %>
-
-                                            <button
-                                                onclick="exploreCategory('<%= cat.ma_danh_muc %>', '<%= cat.ten_danh_muc %>')"
-                                                class="px-8 py-3.5 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-brand-accent/10 cursor-pointer">
-                                                <span>Khám phá ngay</span>
-                                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                                            </button>
-                            </div>
-                        </div>
-                        <% } %>
-                            <% }) %>
-        </div>
-
-    </div>
-</section>
-
-<!-- Nhận Xét Khách Hàng Section -->
-<section class="py-24 bg-brand-dark/40 border-t border-white/5" id="testimonials-section">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
-
-        <div class="text-center mb-16">
-            <div
-                class="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-accent/10 border border-brand-accent/20 rounded-full mb-3">
-                <i data-lucide="heart-handshake" class="w-4 h-4 text-brand-accent"></i>
-                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-accent">Nhận xét từ khách
-                    hàng</span>
+          <!-- Location Filter -->
+          <div>
+            <label class="block text-[11px] font-bold text-brand-muted uppercase tracking-wider mb-1.5">Khu vực</label>
+            <div class="relative">
+              <select name="ma_dia_diem" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent appearance-none cursor-pointer">
+                <option value="" class="bg-slate-900 text-white">Tất cả khu vực</option>
+                <% location.forEach(loc => { %>
+                  <option value="<%= loc.ma_dia_diem %>" class="bg-slate-900 text-white"><%= loc.ten_dia_diem %></option>
+                <% }) %>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-brand-muted absolute right-3 top-3 pointer-events-none"></i>
             </div>
-            <h2 class="text-3xl md:text-5xl font-black text-white">Khách Hàng <span class="text-brand-accent">Nói Gì Về
-                    Chúng Tôi</span></h2>
-            <p class="text-brand-muted max-w-2xl mx-auto mt-4 text-xs md:text-sm">
-                Sự hài lòng và những kỷ niệm vàng của quý khách trên mỗi hành trình là động lực phát triển lớn nhất của
-                đội ngũ TravelGo.
-            </p>
-        </div>
+          </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Review 1 -->
-            <div
-                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-1 text-brand-accent">
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                    </div>
-                    <p
-                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
-                        "Chuyến du ngoạn Vịnh Hạ Long 5 sao thực sự vượt quá mong đợi của gia dịch tôi. Du thuyền vô
-                        cùng sang trọng, phòng ốc sạch sẽ và ẩm thực hải sản phong phú. Đội ngũ hướng dẫn viên vô cùng
-                        chu đáo."
-                    </p>
-                </div>
-                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
-                    <div
-                        class="w-10 h-10 rounded-full bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent font-black text-sm">
-                        MA
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Nguyễn Minh Anh</h4>
-                        <p class="text-[10px] text-brand-muted mt-0.5">Khách du lịch • Hà Nội</p>
-                    </div>
-                </div>
+          <!-- Price Filter -->
+          <div>
+            <label class="block text-[11px] font-bold text-brand-muted uppercase tracking-wider mb-1.5">Giá tối đa (/tháng)</label>
+            <div class="relative">
+              <select name="gia_max" class="w-full bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-brand-accent appearance-none cursor-pointer">
+                <option value="" class="bg-slate-900 text-white">Mọi mức giá</option>
+                <option value="2000000" class="bg-slate-900 text-white">Dưới 2 Triệu</option>
+                <option value="4000000" class="bg-slate-900 text-white">Dưới 4 Triệu</option>
+                <option value="6000000" class="bg-slate-900 text-white">Dưới 6 Triệu</option>
+                <option value="10000000" class="bg-slate-900 text-white">Dưới 10 Triệu</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-brand-muted absolute right-3 top-3 pointer-events-none"></i>
             </div>
+          </div>
 
-            <!-- Review 2 -->
-            <div
-                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-1 text-brand-accent">
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                    </div>
-                    <p
-                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
-                        "Dịch vụ vô cùng chuyên nghiệp và chu đáo. Tôi đã book tour Phú Quốc trọn gói cho công ty với
-                        hơn 20 người, mọi người đều rất hài lòng từ khâu chuẩn bị, đưa đón sân bay đến các bữa ăn đặc
-                        sản."
-                    </p>
-                </div>
-                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
-                    <div
-                        class="w-10 h-10 rounded-full bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary font-black text-sm">
-                        TH
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Trần Thanh Hải</h4>
-                        <p class="text-[10px] text-brand-muted mt-0.5">Quản lý doanh nghiệp • TP. HCM</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Review 3 -->
-            <div
-                class="glass-panel bg-white/5 border border-white/10 rounded-3xl p-8 hover:border-brand-accent/30 transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between group">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-1 text-brand-accent">
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                    </div>
-                    <p
-                        class="text-brand-muted text-xs md:text-sm leading-relaxed italic group-hover:text-white transition-colors">
-                        "Sapa mùa lúa chín vàng óng ả đẹp tựa như tranh vẽ. Khách sạn view núi Fansipan cực chill, ban
-                        sáng thức dậy ngắm mây trôi bồng bềnh rất thích. Tư vấn viên hỗ trợ nhiệt tình 24/7."
-                    </p>
-                </div>
-                <div class="flex items-center gap-4 pt-6 mt-6 border-t border-white/5">
-                    <div
-                        class="w-10 h-10 rounded-full bg-pink-500/20 border border-pink-500/30 flex items-center justify-center text-pink-400 font-black text-sm">
-                        TT
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-white text-xs uppercase tracking-wide">Lê Thu Thảo</h4>
-                        <p class="text-[10px] text-brand-muted mt-0.5">Freelancer • Đà Nẵng</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- Tours Nổi Bật 3D Section -->
-<section class="py-24 bg-brand-dark border-t border-white/5" id="tours-3d-section">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 overflow-hidden">
-
-        <div class="text-center mb-12 flex flex-col items-center justify-center">
-            <p
-                class="text-brand-accent font-extrabold text-xs md:text-sm tracking-wider mb-2 flex items-center gap-1.5 justify-center">
-                <i data-lucide="box" class="w-4 h-4"></i>
-                <span>Không Gian 3D</span>
-            </p>
-            <h2 class="text-3xl md:text-5xl font-black text-white tracking-wide">Tours Nổi Bật</h2>
-        </div>
-
-        <style>
-            .scene-3d {
-                perspective: 1200px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .stage-3d {
-                transform-style: preserve-3d;
-                will-change: transform;
-                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            }
-
-            .carousel-3d-card {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                margin-left: -140px;
-                /* -half of width */
-                margin-top: -190px;
-                /* -half of height */
-                width: 280px;
-                height: 380px;
-                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
-                transform-style: preserve-3d;
-            }
-
-            .tilt-card-inner {
-                width: 100%;
-                height: 100%;
-                transform-style: preserve-3d;
-                transition: transform 0.2s ease-out;
-            }
-        </style>
-
-        <!-- 3D Carousel container with left/right arrows -->
-        <div class="relative w-full max-w-4xl mx-auto h-[480px] flex items-center justify-center overflow-visible mb-6">
-            <!-- Left Arrow Button -->
-            <button onclick="prev3D()"
-                class="absolute left-0 md:left-4 z-30 w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg backdrop-blur-md">
-                <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          <!-- Submit Button -->
+          <div class="flex items-end">
+            <button type="submit" class="w-full bg-brand-accent hover:bg-brand-primary text-brand-dark font-black py-2.5 px-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 text-xs">
+              <i data-lucide="search" class="w-4 h-4"></i>
+              <span>Tìm Phòng Trọ</span>
             </button>
-
-            <!-- 3D Scene -->
-            <div class="w-full h-full scene-3d overflow-visible">
-                <!-- 3D Stage (rotates dynamically) -->
-                <div id="stage-3d" class="w-[300px] h-[380px] stage-3d relative" data-tours-3d='<%- JSON.stringify(tour_noi_bat.map(t => {
-                    let originalPrice = t.gia_nguoi_lon || 0;
-                    let currentPrice = t.gia_khuyen_mai && t.gia_khuyen_mai > 0 ? t.gia_khuyen_mai : originalPrice;
-                    let foundLoc = location.find(l => l.ma_dia_diem === t.ma_dia_diem) || {};
-                    return {
-                        id: t.ma_tour,
-                        location: foundLoc.tinh_thanh || "Việt Nam",
-                        title: t.ten_tour,
-                        duration: t.thoi_gian,
-                        price: currentPrice.toLocaleString("vi-VN") + " đ",
-                        rating: "4.8",
-                        image: t.hinh_anh_dai_dien
-                    };
-                })) %>'>
-                    <!-- 4 Cards populated dynamically by JS -->
-                    <% tour_noi_bat.forEach((tour, idx)=> {
-                        let tourLoc = location.find(l => l.ma_dia_diem === tour.ma_dia_diem) || {};
-                        let tourPrice = (tour.gia_khuyen_mai && tour.gia_khuyen_mai > 0 ? tour.gia_khuyen_mai :
-                        (tour.gia_nguoi_lon || 0)).toLocaleString('vi-VN') + ' đ';
-                        %>
-                        <div id="card-3d-<%= idx %>" class="carousel-3d-card rounded-3xl cursor-pointer">
-                            <div
-                                class="tilt-card-inner w-full h-full bg-slate-900/80 border border-white/10 rounded-3xl p-4 flex flex-col justify-between shadow-xl">
-                                <!-- Top Image with Rating overlay -->
-                                <div class="relative w-full h-[180px] rounded-2xl overflow-hidden mb-4">
-                                    <img src="<%= tour.hinh_anh_dai_dien %>" alt="<%= tour.ten_tour %>"
-                                        class="w-full h-full object-cover" />
-                                    <div
-                                        class="absolute top-3 right-3 bg-black/50 backdrop-blur-md px-2.5 py-1 rounded-full flex items-center gap-1 border border-white/10 text-white text-[10px] font-bold">
-                                        <i data-lucide="star" class="w-3 h-3 fill-yellow-500 text-yellow-500"></i>
-                                        <span>4.8</span>
-                                    </div>
-                                </div>
-
-                                <!-- Details -->
-                                <div class="space-y-2 flex-1 flex flex-col justify-between">
-                                    <div class="space-y-1 text-left">
-                                        <div
-                                            class="flex items-center gap-1 text-[10px] font-bold text-blue-400 uppercase">
-                                            <i data-lucide="map-pin" class="w-3 h-3"></i>
-                                            <span>
-                                                <%= tourLoc.tinh_thanh %>
-                                            </span>
-                                        </div>
-                                        <h4 class="text-sm font-black text-white leading-snug line-clamp-2">
-                                            <%= tour.ten_tour %>
-                                        </h4>
-                                    </div>
-
-                                    <div class="pt-3 border-t border-white/5 flex items-center justify-between">
-                                        <div class="text-[10px] text-brand-muted flex items-center gap-1 font-bold">
-                                            <i data-lucide="calendar" class="w-3 h-3"></i>
-                                            <span>
-                                                <%= tour.thoi_gian %>
-                                            </span>
-                                        </div>
-                                        <div class="text-right">
-                                            <p class="text-[8px] text-brand-muted uppercase">Từ</p>
-                                            <p class="text-xs font-black text-blue-400">
-                                                <%= tourPrice %>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <% }) %>
-                </div>
-            </div>
-
-            <!-- Right Arrow Button -->
-            <button onclick="next3D()"
-                class="absolute right-0 md:right-4 z-30 w-12 h-12 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer shadow-lg backdrop-blur-md">
-                <i data-lucide="chevron-right" class="w-6 h-6"></i>
-            </button>
-        </div>
-
-        <!-- Pagination indicators -->
-        <div class="flex items-center justify-center gap-3 mt-10 mb-8">
-            <div class="flex items-center gap-2" id="dots-3d-container">
-                <!-- Dots populated by JS -->
-            </div>
-        </div>
-
-        <!-- Bottom Showcase Box -->
-        <div id="showcase-3d-panel"
-            class="bg-white text-slate-800 rounded-3xl p-6 md:p-8 max-w-2xl mx-auto shadow-2xl transition-all duration-500 border border-slate-100">
-        </div>
-
+          </div>
+        </form>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Trust & Review Section banner -->
-<section class="py-24 bg-brand-dark border-t border-white/5">
-    <div class="max-w-5xl mx-auto px-4 md:px-8 text-center">
-        <i data-lucide="globe" class="w-10 h-10 text-brand-accent mx-auto mb-4 animate-spin-slow"></i>
-        <h3 class="text-2xl font-extrabold text-white">Đối Tác Đồng Hành Đáng Tin Cậy</h3>
-        <p class="text-brand-muted text-sm mt-2 max-w-lg mx-auto">TravelGo hợp tác chặt chẽ cùng các hãng hàng không
-            hàng đầu và tổ hợp nghỉ dưỡng 5 sao nhằm đem đến chuyến đi ưu đãi trọn vẹn và chu đáo nhất.</p>
-        <div
-            class="flex flex-wrap items-center justify-center gap-12 mt-8 opacity-40 hover:opacity-75 transition-opacity duration-300">
-            <span class="font-black tracking-widest text-lg">VIETNAM AIRLINES</span>
-            <span class="font-bold tracking-wider text-lg">VINPEARL RESORTS</span>
-            <span class="font-extrabold tracking-widest text-lg">SUN GROUP</span>
-            <span class="font-mono font-black text-lg">BAMBOO AIRWAYS</span>
-        </div>
+  <!-- Categories Section -->
+  <section class="max-w-screen-2xl mx-auto px-4 md:px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">Loại Hình Phòng Trọ Phổ Biến</h2>
+        <p class="text-xs text-brand-muted mt-1">Đa dạng sự lựa chọn đáp ứng mọi nhu cầu ở từ cá nhân tới gia đình</p>
+      </div>
+      <a href="/rooms" class="text-xs font-bold text-brand-accent hover:underline flex items-center gap-1">
+        <span>Xem tất cả loại phòng</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
     </div>
-</section>
 
-<!-- Data Store & Application Script -->
-<script>
-    const heroStats = [
-        { value: '500+', label: 'Tours' },
-        { value: '50K+', label: 'Khách hàng' },
-        { value: '4.9/5', label: 'Đánh giá' },
-        { value: '10+', label: 'Năm kinh nghiệm' }
-    ];
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <% category.forEach(cat => { %>
+        <a href="/rooms?ma_danh_muc=<%= cat.ma_danh_muc %>" class="group relative rounded-3xl overflow-hidden glass-panel border border-white/10 hover:border-brand-accent/50 transition-all duration-300 shadow-xl h-64 flex flex-col justify-end p-6">
+          <img src="<%= cat.hinh_anh %>" alt="<%= cat.ten_danh_muc %>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 brightness-[0.45]" />
+          <div class="relative z-10">
+            <h3 class="text-lg font-black text-white group-hover:text-brand-accent transition-colors"><%= cat.ten_danh_muc %></h3>
+            <p class="text-[11px] text-brand-muted line-clamp-2 mt-1 opacity-90"><%= cat.mo_ta %></p>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </section>
 
-    // Toast function
-    function showToast(message) {
-        const toast = document.getElementById('toast-notification');
-        const text = document.getElementById('toast-text');
-        text.innerText = message;
-        toast.classList.remove('hidden');
-        setTimeout(() => {
-            toast.classList.remove('opacity-0', '-translate-y-4');
-            toast.classList.add('opacity-100', 'translate-y-0');
-        }, 50);
+  <!-- Featured Rooms Section -->
+  <section class="max-w-screen-2xl mx-auto px-4 md:px-8 py-12">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+      <div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="flame" class="w-3.5 h-3.5"></i>
+          <span>Tin đăng nổi bật</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-black text-white tracking-tight">Phòng Trọ Nổi Bật Mới Đăng</h2>
+      </div>
 
-        setTimeout(() => {
-            toast.classList.remove('opacity-100', 'translate-y-0');
-            toast.classList.add('opacity-0', '-translate-y-4');
-            setTimeout(() => {
-                toast.classList.add('hidden');
-            }, 300);
-        }, 3000);
-    }
+      <a href="/rooms" class="text-xs font-bold text-brand-accent hover:underline flex items-center gap-1">
+        <span>Xem tất cả danh sách</span>
+        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
 
-    // Toggle Bento Item View
-    function toggleBentoView(id) {
-        const activeCard = document.getElementById(`bento-card-${id}`);
-        const activePanel = document.getElementById(`bento-info-${id}`);
-        const activeLabel = document.getElementById(`bento-label-${id}`);
+    <!-- Carousel Container -->
+    <div id="featured-rooms-carousel" class="relative group/carousel">
+      <!-- Side Nav Overlay Buttons for desktop -->
+      <button id="featured-prev-btn-side" aria-label="Phòng trước" class="hidden md:flex absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass-panel border border-white/20 bg-slate-900/90 text-white items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition-all duration-300 shadow-2xl opacity-0 group-hover/carousel:opacity-100 active:scale-95">
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <button id="featured-next-btn-side" aria-label="Phòng tiếp theo" class="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass-panel border border-white/20 bg-slate-900/90 text-white items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition-all duration-300 shadow-2xl opacity-0 group-hover/carousel:opacity-100 active:scale-95">
+        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+      </button>
 
-        if (!activeCard) return;
-
-        const isCurrentlyActive = activeCard.classList.contains('lg:flex-[4.5]');
-
-        // Get bento keys from data attribute to prevent EJS syntax errors in JS files
-        const bentoWrapper = document.getElementById('bento-destinations-wrapper');
-        const bentoKeys = bentoWrapper ? JSON.parse(bentoWrapper.getAttribute('data-locations') || '[]') : ['halong', 'phuquoc', 'hoian', 'sapa'];
-        const defaultKey = bentoKeys[0] || 'halong';
-
-        // If clicking a card that is already active:
-        if (isCurrentlyActive) {
-            // If it's already the default active card, do nothing (keep it open)
-            if (id === defaultKey) return;
-
-            // If it's another card, close it and open the default card back
-            toggleBentoView(defaultKey);
-            return;
-        }
-
-        // Reset all cards to flex-1 (including the default card)
-        bentoKeys.forEach(key => {
-            const card = document.getElementById(`bento-card-${key}`);
-            const panel = document.getElementById(`bento-info-${key}`);
-            const label = document.getElementById(`bento-label-${key}`);
-
-            if (card) {
-                card.classList.remove('lg:flex-[4.5]');
-                card.classList.add('flex-1');
-
-                // Height on mobile
-                card.classList.remove('h-[350px]');
-                card.classList.add('h-[120px]');
-            }
-            if (panel) {
-                panel.classList.add('opacity-0', 'pointer-events-none');
-                panel.classList.remove('opacity-100');
-                // Hide panel after fade transition to prevent text wrapping in small columns
-                setTimeout(() => {
-                    if (panel.classList.contains('opacity-0')) {
-                        panel.classList.add('hidden');
-                    }
-                }, 500);
-            }
-            if (label) {
-                label.classList.remove('opacity-0');
-                label.classList.add('opacity-100');
-            }
-        });
-
-        // Activate clicked card
-        activeCard.classList.remove('flex-1');
-        activeCard.classList.add('lg:flex-[4.5]');
-
-        // Height on mobile
-        activeCard.classList.remove('h-[120px]');
-        activeCard.classList.add('h-[350px]');
-
-        if (activePanel) {
-            activePanel.classList.remove('hidden');
-            // Small delay to allow display: flex state to register in DOM, then fade in
-            setTimeout(() => {
-                activePanel.classList.remove('opacity-0', 'pointer-events-none');
-                activePanel.classList.add('opacity-100');
-            }, 50);
-        }
-        if (activeLabel) {
-            activeLabel.classList.remove('opacity-100');
-            activeLabel.classList.add('opacity-0');
-        }
-    }
-
-    // Close Dropdowns on Document Click
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('#bento-destinations')) {
-            const bentoWrapper = document.getElementById('bento-destinations-wrapper');
-            const bentoKeys = bentoWrapper ? JSON.parse(bentoWrapper.getAttribute('data-locations') || '[]') : ['halong', 'phuquoc', 'hoian', 'sapa'];
-            const defaultKey = bentoKeys[0] || 'halong';
-            const defaultCard = document.getElementById(`bento-card-${defaultKey}`);
-            if (defaultCard && !defaultCard.classList.contains('lg:flex-[4.5]')) {
-                toggleBentoView(defaultKey);
-            }
-        }
-    });
-
-    // Render Stats
-    function renderStats() {
-        const container = document.getElementById('stats-container');
-        container.innerHTML = heroStats.map(stat => `
-            <div class="flex flex-col items-center">
-                <span class="text-2xl md:text-4xl font-extrabold text-brand-accent">${stat.value}</span>
-                <span class="text-xs text-brand-muted/80 uppercase tracking-wider mt-1">${stat.label}</span>
-            </div>
-        `).join('');
-    }
-
-    // Explore category button
-    function exploreCategory(catId, catTitle) {
-        showToast(`Đang khám phá danh mục: ${catTitle}`);
-    }
-
-    // Toggle favorite
-    function toggleFavorite(id) {
-        const icon = document.getElementById(`fav-icon-${id}`);
-        if (icon) {
-            icon.classList.toggle('fill-red-500');
-            icon.classList.toggle('text-red-500');
-            icon.classList.toggle('text-white');
-        }
-    }
-
-    // Form search submit
-    document.getElementById('search-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showToast('Chức năng tìm kiếm sẽ khả dụng trong phiên bản tới!');
-    });
-
-
-
-    // 3D Tours Carousel Logic
-    const stage3DElement = document.getElementById('stage-3d');
-    const tours3DData = stage3DElement ? JSON.parse(stage3DElement.getAttribute('data-tours-3d') || '[]') : [];
-
-    let virtualIndex = 1; // Ninh Bình is index 1
-
-    function setup3DCarousel() {
-        const stage = document.getElementById('stage-3d');
-        const dotsContainer = document.getElementById('dots-3d-container');
-        if (!stage) return;
-
-        // Render Dots once
-        if (dotsContainer) {
-            dotsContainer.innerHTML = tours3DData.map((_, idx) => {
-                return `
-                    <span 
-                        id="dot-3d-${idx}"
-                        onclick="clickDot3D(${idx})"
-                        class="w-2.5 h-2.5 rounded-full cursor-pointer transition-all duration-300 bg-white/20 hover:bg-white/45"
-                    ></span>
-                `;
-            }).join('');
-        }
-
-        // Attach click listeners dynamically to card-3d elements
-        tours3DData.forEach((_, idx) => {
-            const card = document.getElementById(`card-3d-${idx}`);
-            if (card) {
-                card.addEventListener('click', () => select3DActive(idx));
-            }
-        });
-
-        // Apply initial rotation and classes
-        updateCarouselState();
-        init3DTilt();
-    }
-
-    function updateCarouselState() {
-        const stage = document.getElementById('stage-3d');
-        if (!stage) return;
-
-        // Rotate stage without tilt
-        stage.style.transform = `rotateY(${-virtualIndex * 90}deg)`;
-
-        // Calculate current active index (modulo 4)
-        const activeIdx = (virtualIndex % 4 + 4) % 4;
-
-        // Update card styles
-        tours3DData.forEach((_, idx) => {
-            const card = document.getElementById(`card-3d-${idx}`);
-            const dot = document.getElementById(`dot-3d-${idx}`);
-            if (card) {
-                const isActive = idx === activeIdx;
-                const inner = card.querySelector('.tilt-card-inner');
-
-                // Calculate billboard rotation so card always faces front
-                const billboardRot = -idx * 90 + virtualIndex * 90;
-
-                // Update transform with scale & translateZ
-                card.style.transform = `rotateY(${idx * 90}deg) translateZ(320px) rotateY(${billboardRot}deg) scale(${isActive ? 1.05 : 0.8})`;
-
-                if (isActive) {
-                    card.classList.remove('opacity-50', 'z-10');
-                    card.classList.add('opacity-100', 'z-20');
-                    if (inner) {
-                        inner.classList.add('border-blue-500', 'shadow-[0_0_25px_rgba(30,144,255,0.25)]');
-                        inner.classList.remove('border-white/10');
-                    }
-                } else {
-                    card.classList.remove('opacity-100', 'z-20');
-                    card.classList.add('opacity-50', 'z-10');
-                    if (inner) {
-                        inner.classList.remove('border-blue-500', 'shadow-[0_0_25px_rgba(30,144,255,0.25)]');
-                        inner.classList.add('border-white/10');
-                    }
-                }
-            }
-
-            if (dot) {
-                if (idx === activeIdx) {
-                    dot.classList.add('bg-blue-500', 'px-3');
-                    dot.classList.remove('bg-white/20');
-                } else {
-                    dot.classList.remove('bg-blue-500', 'px-3');
-                    dot.classList.add('bg-white/20');
-                }
-            }
-        });
-
-        // Update Bottom Showcase Box
-        renderBottomShowcase(activeIdx);
-    }
-
-    function renderBottomShowcase(activeIdx) {
-        const panel = document.getElementById('showcase-3d-panel');
-        if (!panel) return;
-
-        const tour = tours3DData[activeIdx];
-
-        panel.innerHTML = `
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="space-y-3 flex-1 text-center md:text-left">
-                    <h3 class="text-xl md:text-2xl font-black text-slate-800 leading-tight">${tour.title}</h3>
-                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-500 font-bold">
-                        <span class="flex items-center gap-1">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-600 fill-blue-600/10"></i>
-                            <span>${tour.location}</span>
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-600"></i>
-                            <span>${tour.duration}</span>
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <i data-lucide="star" class="w-3.5 h-3.5 text-yellow-500 fill-yellow-500"></i>
-                            <span>${tour.rating}</span>
-                        </span>
+      <!-- Carousel Viewport & Track -->
+      <div class="overflow-hidden rounded-3xl py-2 px-1">
+        <div id="featured-carousel-track" class="flex transition-transform duration-500 ease-out -mx-3">
+          <% room_noi_bat.forEach(room => { 
+            const roomLoc = location.find(l => l.ma_dia_diem === room.ma_dia_diem) || {};
+            const roomCat = category.find(c => c.ma_danh_muc === room.ma_danh_muc) || {};
+          %>
+            <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3">
+              <div class="glass-panel rounded-3xl overflow-hidden border border-white/10 hover:border-brand-accent/40 transition-all duration-300 shadow-xl flex flex-col group h-full">
+                <!-- Thumbnail -->
+                <div class="relative aspect-[16/10] overflow-hidden">
+                  <img src="<%= room.hinh_anh_dai_dien %>" alt="<%= room.ten_phong %>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div class="absolute top-3 left-3 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full border border-white/10 text-[10px] font-bold text-brand-accent uppercase">
+                    <%= roomCat.ten_danh_muc || 'Phòng trọ' %>
+                  </div>
+                  <% if (room.la_noi_bat) { %>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 bg-red-500 text-white rounded-full text-[10px] font-black uppercase shadow-lg flex items-center gap-1">
+                      <i data-lucide="star" class="w-3 h-3 fill-white"></i> HOT
                     </div>
+                  <% } %>
                 </div>
-                <div class="flex flex-col sm:flex-row items-center gap-6 w-full md:w-auto">
-                    <div class="text-center sm:text-right">
-                        <p class="text-[10px] text-slate-400 font-black uppercase tracking-wider">Tổng giá vé từ</p>
-                        <p class="text-2xl font-black text-blue-600">${tour.price}</p>
+
+                <!-- Details -->
+                <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div>
+                    <div class="flex items-center gap-2 text-xs text-brand-accent font-semibold mb-1">
+                      <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                      <span><%= roomLoc.ten_dia_diem || 'TP.HCM' %></span>
+                      <% if (room.dien_tich) { %>
+                        <span class="text-white/40">•</span>
+                        <i data-lucide="maximize" class="w-3.5 h-3.5 text-brand-muted"></i>
+                        <span class="text-brand-muted"><%= room.dien_tich %> m²</span>
+                      <% } %>
                     </div>
-                    <button 
-                        onclick="showToast('Tính năng đang được cập nhật!')"
-                        class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-xs font-black transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-blue-600/20 active:scale-95 w-full sm:w-auto justify-center"
-                    >
-                        <span>Đặt tour ngay</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
+
+                    <h3 class="text-base font-bold text-white group-hover:text-brand-accent transition-colors line-clamp-2 leading-snug">
+                      <a href="/room-details/<%= room.ma_phong %>"><%= room.ten_phong %></a>
+                    </h3>
+
+                    <p class="text-xs text-brand-muted line-clamp-2 mt-2 leading-relaxed opacity-80">
+                      <%= room.mo_ta_ngan %>
+                    </p>
+                  </div>
+
+                  <!-- Amenities Badges Preview -->
+                  <% if (room.tien_nghi && room.tien_nghi.length > 0) { %>
+                    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
+                      <% room.tien_nghi.slice(0, 3).forEach(item => { %>
+                        <span class="px-2 py-0.5 bg-white/5 text-brand-muted rounded-md text-[10px] font-medium border border-white/5">
+                          <%= item %>
+                        </span>
+                      <% }) %>
+                      <% if (room.tien_nghi.length > 3) { %>
+                        <span class="px-2 py-0.5 bg-white/5 text-brand-muted rounded-md text-[10px] font-medium">
+                          +<%= room.tien_nghi.length - 3 %>
+                        </span>
+                      <% } %>
+                    </div>
+                  <% } %>
+
+                  <!-- Footer Price & Action -->
+                  <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                    <div>
+                      <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Giá thuê</span>
+                      <p class="text-lg font-black text-brand-accent">
+                        <%= room.gia_thue.toLocaleString('vi-VN') %> <span class="text-xs font-normal text-white/70">đ/tháng</span>
+                      </p>
+                    </div>
+
+                    <a href="/room-details/<%= room.ma_phong %>" class="px-4 py-2 bg-brand-accent/15 hover:bg-brand-accent text-brand-accent hover:text-brand-dark rounded-xl text-xs font-bold transition-all border border-brand-accent/30 flex items-center gap-1.5">
+                      <span>Liên hệ xem</span>
+                      <i data-lucide="phone-call" class="w-3.5 h-3.5"></i>
+                    </a>
+                  </div>
                 </div>
+              </div>
             </div>
-        `;
-        lucide.createIcons();
-    }
+          <% }) %>
+        </div>
+      </div>
 
-    function next3D() {
-        virtualIndex++;
-        updateCarouselState();
-    }
+      <!-- Carousel Footer Controls & Autoplay indicator -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6 px-1">
+        <!-- Autoplay Status & Progress Bar -->
+        <div class="flex items-center gap-3 text-xs text-brand-muted">
+          <div class="flex items-center gap-1.5">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
+            </span>
+            <span class="text-[11px] font-medium">Tự động chuyển sau 10s</span>
+          </div>
+          <div class="w-28 h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div id="featured-autoplay-bar" class="h-full bg-brand-accent rounded-full transition-all ease-linear" style="width: 0%;"></div>
+          </div>
+        </div>
 
-    function prev3D() {
-        virtualIndex--;
-        updateCarouselState();
-    }
+        <!-- Carousel Pagination Dots -->
+        <div id="featured-carousel-dots" class="flex items-center gap-2"></div>
+      </div>
+    </div>
+  </section>
 
-    function select3DActive(idx) {
-        clickDot3D(idx);
-    }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('featured-carousel-track');
+      if (!track) return;
 
-    function clickDot3D(targetIdx) {
-        const currentActualIdx = (virtualIndex % 4 + 4) % 4;
-        let diff = targetIdx - currentActualIdx;
-        if (diff > 2) diff -= 4;
-        if (diff < -2) diff += 4;
-        virtualIndex += diff;
-        updateCarouselState();
-    }
+      const prevBtn = document.getElementById('featured-prev-btn');
+      const nextBtn = document.getElementById('featured-next-btn');
+      const prevSideBtn = document.getElementById('featured-prev-btn-side');
+      const nextSideBtn = document.getElementById('featured-next-btn-side');
+      const dotsContainer = document.getElementById('featured-carousel-dots');
+      const progressBar = document.getElementById('featured-autoplay-bar');
+      const carouselContainer = document.getElementById('featured-rooms-carousel');
 
-    function init3DTilt() {
-        const cards = document.querySelectorAll('.carousel-3d-card');
-        cards.forEach(card => {
-            const inner = card.querySelector('.tilt-card-inner');
-            if (!inner) return;
+      const items = track.children;
+      const totalItems = items.length;
+      if (totalItems === 0) return;
 
-            card.addEventListener('mousemove', (e) => {
-                if (!card.classList.contains('opacity-100')) return;
+      let currentIndex = 0;
+      let progressTimer = null;
+      const AUTOPLAY_DELAY = 10000; // 10s
+      const PROGRESS_INTERVAL = 100; // update progress every 100ms
+      let progressElapsed = 0;
 
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const xc = rect.width / 2;
-                const yc = rect.height / 2;
-                const angleX = (yc - y) / 8;
-                const angleY = (x - xc) / 8;
-                inner.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.03, 1.03, 1.03)`;
-            });
-            card.addEventListener('mouseleave', () => {
-                inner.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-            });
-        });
-    }
+      function getVisibleCount() {
+        if (window.innerWidth >= 1024) return 3;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+      }
 
-    // App Initialization
-    window.addEventListener('DOMContentLoaded', () => {
-        renderStats();
-        setup3DCarousel();
+      function getMaxIndex() {
+        const visible = getVisibleCount();
+        return Math.max(0, totalItems - visible);
+      }
+
+      function renderDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        const maxIdx = getMaxIndex();
+
+        for (let i = 0; i <= maxIdx; i++) {
+          const dot = document.createElement('button');
+          dot.setAttribute('aria-label', `Trang ${i + 1}`);
+          dot.className = `h-2 rounded-full transition-all duration-300 cursor-pointer ${
+            i === currentIndex ? 'w-6 bg-brand-accent' : 'w-2 bg-white/20 hover:bg-white/40'
+          }`;
+          dot.addEventListener('click', () => {
+            goToSlide(i);
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function updateCarousel() {
+        const visible = getVisibleCount();
+        const maxIdx = getMaxIndex();
+
+        if (currentIndex > maxIdx) {
+          currentIndex = maxIdx;
+        }
+        if (currentIndex < 0) {
+          currentIndex = 0;
+        }
+
+        const translatePercent = currentIndex * (100 / visible);
+        track.style.transform = `translateX(-${translatePercent}%)`;
+
+        renderDots();
+      }
+
+      function goToSlide(index) {
+        const maxIdx = getMaxIndex();
+        if (index > maxIdx) {
+          currentIndex = 0;
+        } else if (index < 0) {
+          currentIndex = maxIdx;
+        } else {
+          currentIndex = index;
+        }
+        updateCarousel();
+        resetAutoplay();
+      }
+
+      function nextSlide() {
+        const maxIdx = getMaxIndex();
+        if (currentIndex >= maxIdx) {
+          currentIndex = 0;
+        } else {
+          currentIndex++;
+        }
+        updateCarousel();
+      }
+
+      function prevSlide() {
+        const maxIdx = getMaxIndex();
+        if (currentIndex <= 0) {
+          currentIndex = maxIdx;
+        } else {
+          currentIndex--;
+        }
+        updateCarousel();
+      }
+
+      function startAutoplay() {
+        stopAutoplay();
+        progressElapsed = 0;
+        if (progressBar) progressBar.style.width = '0%';
+
+        progressTimer = setInterval(() => {
+          progressElapsed += PROGRESS_INTERVAL;
+          const percentage = Math.min(100, (progressElapsed / AUTOPLAY_DELAY) * 100);
+          if (progressBar) progressBar.style.width = `${percentage}%`;
+
+          if (progressElapsed >= AUTOPLAY_DELAY) {
+            nextSlide();
+            progressElapsed = 0;
+            if (progressBar) progressBar.style.width = '0%';
+          }
+        }, PROGRESS_INTERVAL);
+      }
+
+      function stopAutoplay() {
+        if (progressTimer) {
+          clearInterval(progressTimer);
+          progressTimer = null;
+        }
+      }
+
+      function resetAutoplay() {
+        startAutoplay();
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+      if (prevSideBtn) prevSideBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+      if (nextSideBtn) nextSideBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+
+      if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', stopAutoplay);
+        carouselContainer.addEventListener('mouseleave', startAutoplay);
+      }
+
+      window.addEventListener('resize', () => {
+        updateCarousel();
+      });
+
+      // Touch / Swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            nextSlide();
+          } else {
+            prevSlide();
+          }
+        }
+        startAutoplay();
+      }, { passive: true });
+
+      // Initialize
+      updateCarousel();
+      startAutoplay();
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
     });
-</script>
+  </script>
+
+  <!-- Why Choose TrustStay Section -->
+  <section class="max-w-screen-2xl mx-auto px-4 md:px-8 py-16 my-8 text-left">
+    <div class="glass-panel p-8 md:p-14 rounded-3xl border border-white/10 relative overflow-hidden shadow-2xl">
+      <!-- Glow ambient lights -->
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-accent/15 blur-[120px] rounded-full pointer-events-none"></div>
+      <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-brand-primary/15 blur-[120px] rounded-full pointer-events-none"></div>
+
+      <div class="relative z-10 space-y-10">
+        
+        <!-- Header -->
+        <div class="max-w-3xl space-y-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-accent/15 border border-brand-accent/30 text-brand-accent text-xs font-black uppercase tracking-widest">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <span>Ưu Điểm Vượt Trội</span>
+          </div>
+          <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+            Tại Sao Nên Chọn <span class="hero-gradient-text">TrustStay</span>?
+          </h2>
+          <p class="text-sm md:text-base text-brand-muted leading-relaxed max-w-2xl font-normal">
+            Chúng tôi mang đến giải pháp kết nối tìm kiếm phòng trọ an toàn, minh bạch và tối ưu nhất dành cho sinh viên cũng như người đi làm tại TP.HCM.
+          </p>
+        </div>
+
+        <!-- 4 Grid Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="group p-6 rounded-3xl bg-slate-900/60 border border-white/10 hover:border-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between space-y-4 relative overflow-hidden">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent group-hover:scale-110 group-hover:bg-brand-accent group-hover:text-slate-950 transition-all shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                <i data-lucide="shield-check" class="w-7 h-7"></i>
+              </div>
+              <h4 class="font-black text-white text-lg">Xác Thực 100%</h4>
+              <p class="text-xs md:text-sm text-brand-muted leading-relaxed font-normal">Hình ảnh phòng thực tế, diện tích chính xác và giá thuê minh bạch không khai khống.</p>
+            </div>
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-brand-accent">01 / MINH BẠCH</span>
+              <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="group p-6 rounded-3xl bg-slate-900/60 border border-white/10 hover:border-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between space-y-4 relative overflow-hidden">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-green-500/15 border border-green-500/30 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-400 group-hover:text-slate-950 transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                <i data-lucide="phone-call" class="w-7 h-7"></i>
+              </div>
+              <h4 class="font-black text-white text-lg">Liên Hệ Trực Tiếp</h4>
+              <p class="text-xs md:text-sm text-brand-muted leading-relaxed font-normal">Đặt lịch hẹn xem phòng trực tiếp với chủ trọ nhanh chóng, không qua cò đất hay trung gian.</p>
+            </div>
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-green-400">02 / TRỰC TIẾP</span>
+              <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="group p-6 rounded-3xl bg-slate-900/60 border border-white/10 hover:border-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between space-y-4 relative overflow-hidden">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 group-hover:scale-110 group-hover:bg-amber-400 group-hover:text-slate-950 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                <i data-lucide="building-2" class="w-7 h-7"></i>
+              </div>
+              <h4 class="font-black text-white text-lg">Đa Dạng Loại Hình</h4>
+              <p class="text-xs md:text-sm text-brand-muted leading-relaxed font-normal">Tùy chọn phong phú từ phòng trọ sinh viên giá rẻ, Căn hộ Studio mini đến Sleepbox cao cấp.</p>
+            </div>
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-amber-400">03 / ĐA DẠNG</span>
+              <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="group p-6 rounded-3xl bg-slate-900/60 border border-white/10 hover:border-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 shadow-xl flex flex-col justify-between space-y-4 relative overflow-hidden">
+            <div class="space-y-4">
+              <div class="w-14 h-14 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-400 group-hover:text-slate-950 transition-all shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+                <i data-lucide="headphones" class="w-7 h-7"></i>
+              </div>
+              <h4 class="font-black text-white text-lg">Hỗ Trợ 24/7</h4>
+              <p class="text-xs md:text-sm text-brand-muted leading-relaxed font-normal">Đội ngũ tư vấn viên nhiệt tình hỗ trợ giải đáp mọi thắc mắc về hợp đồng & thủ tục thuê trọ.</p>
+            </div>
+            <div class="pt-2 border-t border-white/5 flex items-center justify-between">
+              <span class="text-[11px] font-mono font-bold text-cyan-400">04 / ĐỒNG HÀNH</span>
+              <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

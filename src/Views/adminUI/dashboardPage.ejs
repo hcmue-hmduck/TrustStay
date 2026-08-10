@@ -1,147 +1,201 @@
 <div class="space-y-8 text-left">
-    <!-- Header Banner -->
-    <div class="relative overflow-hidden rounded-3xl glass-card p-6 md:p-8 border border-white/5 shadow-2xl">
-        <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-accent/10 rounded-full blur-3xl"></div>
-        <div class="relative z-10">
-            <h1 class="text-3xl font-black text-white tracking-tight">Chào mừng trở lại, Administrator!</h1>
-            <p class="text-sm text-brand-muted mt-2 font-medium">Hệ thống đang hoạt động ổn định. Dưới đây là tổng quan tình trạng dữ liệu tours hiện tại.</p>
-        </div>
+  
+  <!-- Page Title & Quick Actions -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-slate-900">
+    <div>
+      <h1 class="text-2xl font-mono font-black text-white uppercase tracking-tight flex items-center gap-2">
+        <i data-lucide="layout-dashboard" class="w-6 h-6 text-brand-accent"></i>
+        <span>Bảng Điều Khiển Quản Trị TrustStay</span>
+      </h1>
+      <p class="text-xs text-brand-muted mt-1">Tổng quan hoạt động hệ thống, phòng trọ, lượt hẹn xem và bài viết kinh nghiệm</p>
     </div>
 
-    <!-- Quick Stats Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <!-- Stat Card 1 -->
-        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-accent/30 transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Tổng số Tours</p>
-                    <h3 class="text-3xl font-black text-white mt-1.5"><%= data.length %></h3>
-                </div>
-                <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent group-hover:scale-110 transition-transform">
-                    <i data-lucide="map" class="w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
-                <span class="text-brand-emerald">●</span> Đang lưu trữ trong MongoDB
-            </div>
-        </div>
+    <a href="/admin/rooms/create" class="px-5 py-2.5 bg-brand-primary hover:bg-brand-accent text-slate-950 font-bold text-xs rounded-xl transition-all shadow-lg flex items-center gap-2">
+      <i data-lucide="plus-circle" class="w-4 h-4"></i>
+      <span>Thêm Phòng Trọ Mới</span>
+    </a>
+  </div>
 
-        <!-- Stat Card 2 -->
-        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-emerald/30 transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Đang Hoạt Động</p>
-                    <h3 class="text-3xl font-black text-brand-emerald mt-1.5">
-                        <%= data.filter(t => t.trang_thai === 'active').length %>
-                    </h3>
-                </div>
-                <div class="w-12 h-12 rounded-xl bg-brand-emerald/10 border border-brand-emerald/20 flex items-center justify-center text-brand-emerald group-hover:scale-110 transition-transform">
-                    <i data-lucide="eye" class="w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
-                <span>Hiển thị công khai ngoài Client</span>
-            </div>
+  <!-- Top Stat Cards Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+    
+    <!-- Total Rooms -->
+    <a href="/admin/rooms" class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2 hover:border-brand-accent/30 transition-all block">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Tổng phòng trọ</span>
+        <div class="w-8 h-8 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent">
+          <i data-lucide="home" class="w-4 h-4"></i>
         </div>
+      </div>
+      <p class="text-2xl font-mono font-black text-white"><%= data ? data.length : 0 %></p>
+      <p class="text-[10px] text-green-400 font-bold flex items-center gap-1">
+        <i data-lucide="trending-up" class="w-3 h-3"></i>
+        <span>Đang cho thuê</span>
+      </p>
+    </a>
 
-        <!-- Stat Card 3 -->
-        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-yellow-500/30 transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Tours Nổi Bật</p>
-                    <h3 class="text-3xl font-black text-yellow-500 mt-1.5">
-                        <%= data.filter(t => t.la_noi_bat).length %>
-                    </h3>
-                </div>
-                <div class="w-12 h-12 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-yellow-500 group-hover:scale-110 transition-transform">
-                    <i data-lucide="star" class="w-6 h-6 fill-yellow-500/10"></i>
-                </div>
-            </div>
-            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
-                <span>Ưu tiên xuất hiện đầu trang chủ</span>
-            </div>
+    <!-- Viewing Requests -->
+    <a href="/admin/requests" class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2 hover:border-brand-accent/30 transition-all block">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Yêu cầu hẹn xem</span>
+        <div class="w-8 h-8 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400">
+          <i data-lucide="calendar" class="w-4 h-4"></i>
         </div>
+      </div>
+      <p class="text-2xl font-mono font-black text-white"><%= requests ? requests.length : 0 %></p>
+      <p class="text-[10px] text-brand-muted">Khách hẹn xem phòng</p>
+    </a>
 
-        <!-- Stat Card 4 (Mock for integration view) -->
-        <div class="glass-card p-5 rounded-2xl border border-white/5 relative group hover:border-brand-primary/30 transition-all duration-300">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-[10px] uppercase tracking-wider font-extrabold text-brand-muted">Lượt Đặt Vé</p>
-                    <h3 class="text-3xl font-black text-white mt-1.5">148</h3>
-                </div>
-                <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-accent group-hover:scale-110 transition-transform">
-                    <i data-lucide="ticket-percent" class="w-6 h-6"></i>
-                </div>
-            </div>
-            <div class="text-[10px] text-brand-muted mt-4 font-bold flex items-center gap-1">
-                <span class="text-brand-accent">+24 đơn</span> mới tuần này
-            </div>
+    <!-- Categories -->
+    <a href="/admin/categories" class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2 hover:border-brand-accent/30 transition-all block">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Danh mục phòng</span>
+        <div class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+          <i data-lucide="layers" class="w-4 h-4"></i>
         </div>
+      </div>
+      <p class="text-2xl font-mono font-black text-white"><%= categories ? categories.length : 0 %></p>
+      <p class="text-[10px] text-purple-400 font-bold">Phân loại phòng trọ</p>
+    </a>
+
+    <!-- Locations -->
+    <a href="/admin/locations" class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2 hover:border-brand-accent/30 transition-all block">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Khu vực địa điểm</span>
+        <div class="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+          <i data-lucide="map-pin" class="w-4 h-4"></i>
+        </div>
+      </div>
+      <p class="text-2xl font-mono font-black text-white"><%= locations ? locations.length : 0 %></p>
+      <p class="text-[10px] text-blue-400 font-bold">Quận huyện cho thuê</p>
+    </a>
+
+    <!-- Blog Experience Posts -->
+    <a href="/admin/blogs" class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2 hover:border-brand-accent/30 transition-all block">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Bài viết kinh nghiệm</span>
+        <div class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+        </div>
+      </div>
+      <p class="text-2xl font-mono font-black text-white"><%= blogs ? blogs.length : 0 %></p>
+      <p class="text-[10px] text-cyan-400 font-bold">Góc người thuê chia sẻ</p>
+    </a>
+
+    <!-- System Status -->
+    <div class="glass-card p-5 rounded-3xl border border-white/5 shadow-xl space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Trạng thái</span>
+        <div class="w-8 h-8 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center text-green-400">
+          <i data-lucide="shield-check" class="w-4 h-4"></i>
+        </div>
+      </div>
+      <p class="text-lg font-mono font-black text-green-400">ONLINE</p>
+      <p class="text-[10px] text-brand-muted">TrustStay v1.0 Ready</p>
     </div>
 
-    <!-- Quick Navigation Actions -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Action Card 1 -->
-        <a href="/admin/tours" class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-accent/20 transition-all block group">
-            <div class="flex items-start gap-4">
-                <div class="p-3 bg-brand-accent/10 text-brand-accent rounded-xl">
-                    <i data-lucide="settings" class="w-6 h-6"></i>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="font-extrabold text-white text-base group-hover:text-brand-accent transition-colors">Quản lý Danh sách Tours</h4>
-                    <p class="text-xs text-brand-muted leading-relaxed">Xem danh sách đầy đủ, tìm kiếm nhanh và thực hiện xóa các tour không còn hoạt động.</p>
-                </div>
-            </div>
-        </a>
+  </div>
 
-        <!-- Action Card 2 -->
-        <a href="/" target="_blank" class="glass-card p-6 rounded-2xl border border-white/5 hover:border-brand-emerald/20 transition-all block group">
-            <div class="flex items-start gap-4">
-                <div class="p-3 bg-brand-emerald/10 text-brand-emerald rounded-xl">
-                    <i data-lucide="external-link" class="w-6 h-6"></i>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="font-extrabold text-white text-base group-hover:text-brand-emerald transition-colors">Xem Trang chủ Khách hàng</h4>
-                    <p class="text-xs text-brand-muted leading-relaxed">Mở trang du lịch phía người dùng ngoài client để kiểm tra hiển thị thực tế các Tours.</p>
-                </div>
-            </div>
-        </a>
+  <!-- Recent Rooms Table -->
+  <div class="glass-card rounded-3xl border border-white/5 overflow-hidden shadow-2xl p-6 space-y-4">
+    <div class="flex justify-between items-center pb-4 border-b border-slate-900">
+      <h3 class="font-mono text-base font-bold text-white uppercase tracking-tight flex items-center gap-2">
+        <i data-lucide="list" class="w-4 h-4 text-brand-accent"></i>
+        <span>Danh Sách Tin Đăng Phòng Trọ Mới Nhất</span>
+      </h3>
+      <a href="/admin/rooms" class="text-xs text-brand-accent hover:underline font-bold flex items-center gap-1">
+        <span>Quản lý tất cả phòng</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+      </a>
     </div>
 
-    <!-- Featured Tours Preview Section -->
-    <div class="glass-card rounded-2xl overflow-hidden border border-white/5">
-        <div class="p-5 border-b border-white/5 bg-[#0b1329]/40 flex items-center justify-between">
-            <h4 class="font-extrabold text-sm text-white uppercase tracking-wider flex items-center gap-2">
-                <i data-lucide="star" class="w-4.5 h-4.5 text-yellow-500 fill-yellow-500/20"></i>
-                <span>Tours Nổi Bật Đang Hoạt Động</span>
-            </h4>
-            <a href="/admin/tours" class="text-xs text-brand-accent hover:underline font-bold">Xem tất cả →</a>
-        </div>
-        <div class="divide-y divide-white/5">
-            <% const featured = data.filter(t => t.la_noi_bat && t.trang_thai === 'active').slice(0, 3) %>
-            <% if (featured.length > 0) { %>
-                <% featured.forEach(tour => { %>
-                    <div class="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/5 transition-colors">
-                        <div class="flex items-center gap-3">
-                            <img src="<%= tour.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80' %>" alt="<%= tour.ten_tour %>" class="w-12 h-12 rounded-lg object-cover border border-white/5 shrink-0" />
-                            <div class="min-w-0">
-                                <p class="font-bold text-white truncate max-w-[320px] text-sm"><%= tour.ten_tour %></p>
-                                <p class="text-xs text-brand-muted mt-0.5"><%= tour.diem_khoi_hanh %> • <%= tour.thoi_gian %></p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-sm font-black text-brand-accent">
-                                <%= (tour.gia_khuyen_mai > 0 ? tour.gia_khuyen_mai : tour.gia_nguoi_lon).toLocaleString('vi-VN') %> đ
-                            </p>
-                            <p class="text-[10px] text-brand-muted mt-0.5">Giá áp dụng hiện tại</p>
-                        </div>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <div class="p-8 text-center text-brand-muted text-xs">
-                    Không có tour nổi bật nào đang hoạt động.
-                </div>
-            <% } %>
-        </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-300">
+        <thead class="bg-slate-950/80 text-brand-muted uppercase text-[10px] tracking-wider font-mono border-b border-slate-900">
+          <tr>
+            <th class="p-3">Hình ảnh</th>
+            <th class="p-3">Tên phòng trọ</th>
+            <th class="p-3">Giá thuê</th>
+            <th class="p-3">Diện tích</th>
+            <th class="p-3">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-900/60">
+          <% if (data && data.length > 0) { %>
+            <% data.slice(0, 5).forEach(room => { %>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="p-3">
+                  <img src="<%= room.hinh_anh_dai_dien %>" alt="<%= room.ten_phong %>" class="w-12 h-9 rounded object-cover border border-white/10" />
+                </td>
+                <td class="p-3 font-bold text-white max-w-xs truncate"><%= room.ten_phong %></td>
+                <td class="p-3 font-black text-brand-accent"><%= room.gia_thue ? room.gia_thue.toLocaleString('vi-VN') : 0 %> đ</td>
+                <td class="p-3 font-mono"><%= room.dien_tich %> m²</td>
+                <td class="p-3">
+                  <span class="px-2.5 py-0.5 bg-green-500/10 text-green-400 rounded-full text-[10px] font-bold border border-green-500/20">Hoạt động</span>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="5" class="p-4 text-center text-brand-muted">Chưa có phòng trọ nào.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
     </div>
+  </div>
+
+  <!-- Viewing Requests Section -->
+  <div id="requests" class="glass-card rounded-3xl border border-white/5 overflow-hidden shadow-2xl p-6 space-y-4">
+    <div class="flex justify-between items-center pb-4 border-b border-slate-900">
+      <h3 class="font-mono text-base font-bold text-white uppercase tracking-tight flex items-center gap-2">
+        <i data-lucide="phone-incoming" class="w-4 h-4 text-brand-accent"></i>
+        <span>Danh Sách Đăng Ký Xem Phòng Mới Nhất</span>
+      </h3>
+      <a href="/admin/requests" class="text-xs text-brand-accent hover:underline font-bold flex items-center gap-1">
+        <span>Xem tất cả yêu cầu</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-slate-300">
+        <thead class="bg-slate-950/80 text-brand-muted uppercase text-[10px] tracking-wider font-mono border-b border-slate-900">
+          <tr>
+            <th class="p-3">Mã yêu cầu</th>
+            <th class="p-3">Họ tên khách</th>
+            <th class="p-3">Số điện thoại</th>
+            <th class="p-3">Email</th>
+            <th class="p-3">Ghi chú</th>
+            <th class="p-3">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-900/60">
+          <% if (requests && requests.length > 0) { %>
+            <% requests.slice(0, 5).forEach(req => { %>
+              <tr class="hover:bg-white/[0.02]">
+                <td class="p-3 font-mono font-bold text-brand-accent"><%= req.ma_yeu_cau %></td>
+                <td class="p-3 font-bold text-white"><%= req.ho_ten_khach %></td>
+                <td class="p-3 text-brand-accent font-bold"><%= req.so_dien_thoai_khach %></td>
+                <td class="p-3 text-brand-muted"><%= req.email_khach || '-' %></td>
+                <td class="p-3 max-w-xs truncate text-slate-400"><%= req.ghi_chu || '-' %></td>
+                <td class="p-3">
+                  <% if (req.trang_thai === 'pending') { %>
+                    <span class="px-2.5 py-0.5 bg-yellow-500/15 text-yellow-400 rounded-full text-[10px] font-bold">Chờ liên hệ</span>
+                  <% } else { %>
+                    <span class="px-2.5 py-0.5 bg-green-500/15 text-green-400 rounded-full text-[10px] font-bold">Đã xác nhận</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6" class="p-4 text-center text-brand-muted">Chưa có yêu cầu hẹn xem phòng nào.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>

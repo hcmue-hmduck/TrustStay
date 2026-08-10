@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    <%= title || 'TPVTravel - Trải Nghiệm Lời Nói Đi Đôi Hành Động' %>
+    <%= title || 'TrustStay - Tìm & Cho Thuê Phòng Trọ Uy Tín' %>
   </title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,13 +41,21 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Glassmorphism styles -->
+  <!-- Custom Glassmorphism & Dropdown styles -->
   <style>
     .glass-panel {
       background: rgba(255, 255, 255, 0.03);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-dropdown {
+      background: rgba(10, 25, 47, 0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(164, 230, 255, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(164, 230, 255, 0.1);
     }
 
     .hero-gradient-text {
@@ -62,154 +70,123 @@
 <body class="relative min-h-screen bg-[#020e1f] text-brand-text overflow-x-hidden font-sans">
 
   <!-- Top Banner Navigation Bar -->
-  <header
-    class="sticky top-0 z-50 bg-slate-800/60 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+  <header class="sticky top-0 z-50 bg-[#020e1f]/85 backdrop-blur-md border-b border-white/10 transition-all duration-300">
     <nav class="flex justify-between items-center w-full px-4 md:px-8 py-4 max-w-screen-2xl mx-auto" id="main-nav">
-      <div class="text-2xl font-black text-brand-accent tracking-tighter cursor-pointer flex items-center gap-1.5"
-        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-        <i data-lucide="compass" class="w-6 h-6 animate-spin-slow text-brand-accent"></i>
-        <a href="/">
-          <span>TPVTravel</span>
-        </a>
-      </div>
+      
+      <!-- Brand Logo -->
+      <a href="/" class="text-2xl font-black text-brand-accent tracking-tighter cursor-pointer flex items-center gap-2 hover:scale-105 transition-transform">
+        <div class="w-9 h-9 rounded-xl bg-brand-accent/15 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_15px_rgba(164,230,255,0.2)]">
+          <i data-lucide="home" class="w-5 h-5"></i>
+        </div>
+        <span>Trust<span class="text-white">Stay</span></span>
+      </a>
 
-      <!-- Center Navigation Actions -->
-      <div class="hidden md:flex items-center gap-8 text-sm font-semibold">
+      <!-- Center Navigation Actions (Desktop) -->
+      <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
         <a href="/"
-          class="pb-1 transition-all <%= page === 'home' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
+          class="pb-1 transition-all <%= page === 'home' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
           Trang chủ
         </a>
-        <a href="/tours"
-          class="pb-1 transition-all <%= page === 'list_tours' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
-          Danh sách Tours
+        <a href="/rooms"
+          class="pb-1 transition-all <%= page === 'list_rooms' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          Danh sách Phòng trọ
         </a>
         <a href="/blogs" 
-          class="pb-1 transition-all <%= page === 'blogs' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
-          Blog
+          class="pb-1 transition-all <%= page === 'blogs' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          Kinh nghiệm thuê phòng
         </a>
         <a href="/contacts" 
-          class="pb-1 transition-all <%= page === 'contacts' ? 'text-brand-accent border-b-2 border-brand-accent font-bold' : 'text-brand-text hover:text-brand-primary' %>">
-          Liên hệ
+          class="pb-1 transition-all <%= page === 'contacts' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          Liên hệ tư vấn
         </a>
       </div>
 
       <!-- Right Header Controls -->
       <div class="flex items-center gap-3 relative">
-        <!-- Heart / Favorites Icon -->
-        <div class="relative">
-          <button class="p-2.5 rounded-full hover:bg-white/10 transition-all text-brand-text/80 relative"
-            title="Yêu thích" id="favorites-toggle-btn">
-            <i data-lucide="heart" class="w-5 h-5 fill-brand-accent text-brand-accent"></i>
-            <span
-              class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full border-2 border-brand-dark animate-bounce">
-              1
-            </span>
-          </button>
 
-          <!-- Favorites Dropdown Card (hidden by default) -->
-          <div
-            class="absolute right-0 mt-3 w-80 glass-panel rounded-2xl shadow-2xl p-4 overflow-hidden z-50 text-left border border-white/15 hidden"
-            id="favorites-dropdown">
-            <div class="flex justify-between items-center pb-2 mb-3 border-b border-white/10">
-              <h4 class="font-bold text-brand-accent flex items-center gap-1.5 text-sm">
-                <i data-lucide="heart" class="w-4 h-4 fill-brand-accent text-brand-accent"></i>
-                <span>Điểm Đến Yêu Thích</span>
-              </h4>
-              <button onclick="document.getElementById('favorites-dropdown').classList.add('hidden')"
-                class="text-brand-muted hover:text-white">
-                <i data-lucide="x" class="w-4 h-4"></i>
-              </button>
-            </div>
+        <!-- Saved Rooms Counter / Favorites -->
+        <a href="/rooms" class="p-2.5 rounded-full glass-panel hover:bg-white/10 hover:border-brand-accent/40 transition-all text-brand-text/80 relative cursor-pointer"
+          title="Xem phòng trọ">
+          <i data-lucide="search" class="w-4 h-4 text-brand-accent"></i>
+        </a>
 
-            <div class="space-y-3 max-h-72 overflow-y-auto pr-1">
-              <div
-                class="flex items-center gap-3 p-1.5 rounded-xl hover:bg-white/5 transition-colors cursor-pointer group">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=150&q=80"
-                  alt="Hội An" class="w-12 h-12 rounded-lg object-cover" />
-                <div class="flex-1 min-w-0">
-                  <p class="text-xs font-bold text-white group-hover:text-brand-primary transition-colors truncate">Hội
-                    An Cổ Kính</p>
-                  <p class="text-[10px] text-brand-muted flex items-center gap-1 mt-0.5">
-                    <i data-lucide="map-pin" class="w-3 h-3 text-brand-accent"></i>
-                    <span class="truncate">Quảng Nam</span>
-                  </p>
-                  <p class="text-xs font-black text-brand-accent mt-0.5">12.000.000 đ</p>
-                </div>
-                <button class="p-1 text-red-400 hover:text-red-300 hover:bg-white/5 rounded">
-                  <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Profile Menu Dropdown / Bookings -->
+        <!-- Profile Menu Dropdown Container -->
         <div class="relative">
           <button
-            class="flex items-center gap-2 pl-1.5 pr-3 py-1.5 glass-panel rounded-full hover:bg-white/10 hover:border-brand-accent/40 active:scale-95 transition-all group"
+            class="flex items-center gap-2.5 pl-2 pr-3.5 py-1.5 glass-panel rounded-full hover:bg-white/10 hover:border-brand-accent/40 active:scale-95 transition-all group cursor-pointer"
             id="user-profile-btn">
             <div class="relative">
-              <img alt="Huong avatar"
-                class="w-7 h-7 rounded-full object-cover border-2 border-brand-accent group-hover:scale-105 transition-transform"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7-BT8hEUDXMbFTeQu0Xurif9vYxMXdxVnEsc5FvAmCVega3qmJiWNyafHkSNtO5iHqYrz7Ew5aEJQOySgsa8kDWvPCNPNWmhgeDpI35N78OgqvefT5gKJzEdHa0v_aAhjs_s6biFnJkkhAkXSGyocJQSYA31WNC-zP0a1bvyWjzVZ6SUnouQ5CwKgReQIbFJUFky1P0hDEUzbgIycJpmJiHGkdkEnt8DUBrHlqX2VFTuXGbX-EZ5uYyBTomcP7HoQwaT7v6UseQ4" />
-              <span
-                class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-brand-dark animate-pulse"></span>
+              <div class="w-7 h-7 rounded-full bg-brand-accent/20 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-xs group-hover:scale-105 transition-transform">
+                TS
+              </div>
+              <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-brand-dark animate-pulse"></span>
             </div>
-            <span
-              class="text-xs font-bold text-white hidden sm:inline group-hover:text-brand-accent transition-colors">Huong</span>
+            <span class="text-xs font-bold text-white hidden sm:inline group-hover:text-brand-accent transition-colors">Tài khoản</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-brand-muted group-hover:text-brand-accent transition-colors"></i>
           </button>
 
-          <!-- Profile Dropdown Options -->
+          <!-- Premium Profile Dropdown Box -->
           <div
-            class="absolute right-0 mt-3 w-64 glass-panel rounded-2xl shadow-2xl p-4 z-50 text-left border border-white/15 hidden"
+            class="absolute right-0 mt-3 w-64 glass-dropdown rounded-2xl p-4 z-50 text-left hidden transition-all duration-200"
             id="bookings-dropdown">
 
             <!-- User Info Header -->
-            <div class="flex items-center gap-3 pb-3 mb-2 border-b border-white/10">
-              <img alt="Huong avatar" class="w-10 h-10 rounded-full object-cover border border-brand-accent"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7-BT8hEUDXMbFTeQu0Xurif9vYxMXdxVnEsc5FvAmCVega3qmJiWNyafHkSNtO5iHqYrz7Ew5aEJQOySgsa8kDWvPCNPNWmhgeDpI35N78OgqvefT5gKJzEdHa0v_aAhjs_s6biFnJkkhAkXSGyocJQSYA31WNC-zP0a1bvyWjzVZ6SUnouQ5CwKgReQIbFJUFky1P0hDEUzbgIycJpmJiHGkdkEnt8DUBrHlqX2VFTuXGbX-EZ5uYyBTomcP7HoQwaT7v6UseQ4" />
-              <div>
-                <h4 class="font-extrabold text-white text-xs">Huong</h4>
-                <p class="text-[10px] text-brand-muted opacity-80">huong@tpvtravel.vn</p>
+            <div class="flex items-center gap-3 pb-3 mb-3 border-b border-white/10">
+              <div class="w-10 h-10 rounded-full bg-brand-accent/20 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-sm shrink-0">
+                TS
+              </div>
+              <div class="overflow-hidden">
+                <h4 class="font-extrabold text-white text-xs truncate">Tài Khoản Khách Hàng</h4>
+                <p class="text-[10px] text-brand-muted truncate opacity-80">khachhang@truststay.vn</p>
               </div>
             </div>
 
-            <!-- Options Navigation List -->
+            <!-- Dropdown Options List -->
             <div class="space-y-1 text-xs">
-              <a href="/admin/dashboard"
-                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
-                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                <span>Trang quản trị</span>
+              <a href="/rooms"
+                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                <i data-lucide="search" class="w-4 h-4 text-brand-accent"></i>
+                <span>Tìm kiếm phòng trọ</span>
               </a>
 
-              <a href="#"
-                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
-                <i data-lucide="user" class="w-4 h-4"></i>
-                <span>Thông tin tài khoản</span>
-              </a>
-              <a href="#" onclick="alert('Danh sách vé đang trống.')"
-                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
-                <i data-lucide="ticket" class="w-4 h-4"></i>
-                <span>Vé đã đặt</span>
-              </a>
-              <a href="#" onclick="alert('Tính năng liên hệ hỗ trợ 24/7.')"
-                class="flex items-center gap-2.5 px-3 py-2 text-brand-muted hover:text-brand-accent hover:bg-white/5 rounded-xl transition-colors">
-                <i data-lucide="phone-call" class="w-4 h-4"></i>
-                <span>Yêu cầu tư vấn</span>
+              <a href="/blogs"
+                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                <i data-lucide="book-open" class="w-4 h-4 text-brand-accent"></i>
+                <span>Kinh nghiệm & Review</span>
               </a>
 
-              <div class="border-t border-white/5 my-1.5 pt-1.5"></div>
-
-              <a href="#" onclick="alert('Đăng xuất thành công!')"
-                class="flex items-center gap-2.5 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-colors">
-                <i data-lucide="log-out" class="w-4 h-4"></i>
-                <span>Đăng xuất</span>
+              <a href="/contacts"
+                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                <i data-lucide="phone-call" class="w-4 h-4 text-brand-accent"></i>
+                <span>Liên hệ hỗ trợ xem phòng</span>
               </a>
+
+              <div class="pt-2 border-t border-white/10 mt-2">
+                <a href="/admin/dashboard"
+                  class="flex items-center gap-2.5 px-3 py-2.5 text-brand-accent hover:bg-brand-accent/15 rounded-xl transition-all font-bold">
+                  <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+                  <span>Trang quản trị (Admin)</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-full glass-panel text-white hover:text-brand-accent">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+
       </div>
     </nav>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-menu-drawer" class="hidden md:hidden bg-[#020e1f]/95 border-b border-white/10 px-6 py-4 space-y-3 text-xs font-bold uppercase tracking-wider text-left">
+      <a href="/" class="block py-2 <%= page === 'home' ? 'text-brand-accent font-black' : 'text-white/80' %>">Trang chủ</a>
+      <a href="/rooms" class="block py-2 <%= page === 'list_rooms' ? 'text-brand-accent font-black' : 'text-white/80' %>">Danh sách Phòng trọ</a>
+      <a href="/blogs" class="block py-2 <%= page === 'blogs' ? 'text-brand-accent font-black' : 'text-white/80' %>">Kinh nghiệm thuê phòng</a>
+      <a href="/contacts" class="block py-2 <%= page === 'contacts' ? 'text-brand-accent font-black' : 'text-white/80' %>">Liên hệ tư vấn</a>
+    </div>
   </header>
 
   <!-- Main Content Body -->
@@ -218,95 +195,109 @@
   </main>
 
   <!-- Footer Section -->
-  <footer class="bg-[#020e1f] text-brand-muted text-xs py-5 border-t border-white/5" id="feedback-footer">
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 text-left">
-      <!-- Logo brand & introduction -->
+  <footer class="bg-[#020e1f] text-brand-muted text-xs py-12 border-t border-white/10" id="feedback-footer">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 text-left">
+      
+      <!-- Brand & Description -->
       <div class="space-y-4">
-        <div class="text-xl font-black text-brand-accent flex items-center gap-1.5 leading-tight">
-          <i data-lucide="compass" class="w-5 h-5 text-brand-accent"></i>
-          <span>TPVTravel</span>
+        <div class="text-xl font-black text-brand-accent flex items-center gap-2 leading-tight">
+          <div class="w-7 h-7 rounded-lg bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent">
+            <i data-lucide="home" class="w-4 h-4"></i>
+          </div>
+          <span>TrustStay</span>
         </div>
         <p class="text-[11px] leading-relaxed opacity-80">
-          Công ty TNHH Lữ Hành TPVTravel Việt Nam. Đem lại kỷ niệm vàng cùng hành trình tuyệt diệu và dịch vụ tận tâm ưu
-          ái chu đáo.
+          TrustStay - Nền tảng Tìm & Cho Thuê Phòng Trọ Uy Tín. Kết nối trực tiếp giữa người thuê và chủ trọ chất lượng cao tại TP.HCM, Hà Nội & các khu vực lân cận.
         </p>
-        <div class="pt-2 text-xs text-brand-accent font-bold">
-          Hotline hỗ trợ: <span class="text-white">1900 6789</span>
+        <div class="pt-1 text-xs text-brand-accent font-bold">
+          Hotline xem phòng 24/7: <span class="text-white">0909 123 456</span>
         </div>
       </div>
 
-      <!-- Newsletter signups simulated -->
-      <div class="md:col-span-2 md:col-start-3 space-y-4 text-right flex flex-col items-end">
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-2">Đăng Ký Nhận Tin Khuyến Mãi</h4>
-        <p className="text-[11px]/relaxed">Nhập email để liên tục đón đầu các hành trình hot giảm giá đến 40% hàng tuần
-          từ TPVTravel.</p>
+      <!-- Quick Navigation Links -->
+      <div class="space-y-3">
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Khám Phá TrustStay</h4>
+        <ul class="space-y-2 text-[11px]">
+          <li><a href="/" class="hover:text-brand-accent transition-colors">Trang chủ</a></li>
+          <li><a href="/rooms" class="hover:text-brand-accent transition-colors">Danh sách phòng trọ</a></li>
+          <li><a href="/blogs" class="hover:text-brand-accent transition-colors">Kinh nghiệm & Review thuê trọ</a></li>
+          <li><a href="/contacts" class="hover:text-brand-accent transition-colors">Liên hệ tư vấn xem phòng</a></li>
+        </ul>
+      </div>
 
-        <div class="flex gap-2 w-full md:max-w-md">
-          <input type="email" placeholder="Nhập địa chỉ email của bạn..."
-            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent"
+      <!-- Popular Areas -->
+      <div class="space-y-3">
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Khu Vực Hot</h4>
+        <ul class="space-y-2 text-[11px]">
+          <li><a href="/rooms?ma_dia_diem=Q7" class="hover:text-brand-accent transition-colors">Phòng trọ Quận 7 - TP.HCM</a></li>
+          <li><a href="/rooms?ma_dia_diem=BK" class="hover:text-brand-accent transition-colors">Phòng trọ Bách Khoa - Hà Nội</a></li>
+          <li><a href="/rooms?ma_dia_diem=TD" class="hover:text-brand-accent transition-colors">Trọ sinh viên Làng Đại Học</a></li>
+          <li><a href="/rooms?ma_dia_diem=Q10" class="hover:text-brand-accent transition-colors">Căn hộ Studio Quận 10</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Signups -->
+      <div class="space-y-3">
+        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Đăng Ký Nhận Tin Phòng Mới</h4>
+        <p class="text-[11px] leading-relaxed">Nhập email để nhận ngay thông báo phòng trọ mới đăng giá tốt hàng tuần.</p>
+
+        <div class="flex gap-2">
+          <input type="email" placeholder="Nhập địa chỉ email..."
+            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent"
             id="newsletter-email-input" />
-          <button onclick="alert('Đăng ký nhận bản tin khuyến mãi thành công! Check mail ưu đãi.')"
-            class="px-6 py-3 bg-brand-accent text-brand-dark rounded-xl font-bold hover:bg-brand-primary whitespace-nowrap cursor-pointer text-xs">
-            Gửi ngay
+          <button onclick="alert('Đăng ký nhận thông báo phòng trọ thành công!')"
+            class="px-4 py-2.5 bg-brand-accent text-brand-dark rounded-xl font-bold hover:bg-brand-primary whitespace-nowrap cursor-pointer text-xs">
+            Đăng ký
           </button>
         </div>
 
-        <p class="text-[10px] text-brand-muted opacity-70">Chúng tôi cam kết không spam thư rác và bảo mật thông tin
-          liên hệ 100%.</p>
+        <p class="text-[10px] text-brand-muted opacity-70">Cam kết bảo mật 100%, không gửi spam.</p>
       </div>
+
     </div>
 
-    <!-- Copy right row details -->
-    <div
-      class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-4 pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4">
-      <p>© 2026 TPVTravel. Đã đăng ký bản quyền thương hiệu. Thiết kế lấy cảm hứng từ thiên nhiên Việt Nam.</p>
+    <!-- Copyright Bar -->
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4 text-left">
+      <p>© 2026 TrustStay. Tất cả các quyền được bảo lưu. Nền tảng cho thuê phòng trọ uy tín hàng đầu.</p>
       <div class="flex items-center gap-6">
-        <span class="hover:text-white cursor-pointer">Điều khoản dịch vụ</span>
-        <span class="hover:text-white cursor-pointer">Bảo mật thông tin</span>
-        <span class="hover:text-white cursor-pointer">Hỗ trợ 24/7 Hotline</span>
+        <a href="/contacts" class="hover:text-white transition-colors">Quy định xem phòng</a>
+        <a href="/contacts" class="hover:text-white transition-colors">Bảo mật thông tin</a>
+        <a href="/contacts" class="hover:text-white transition-colors">Hotline hỗ trợ 24/7</a>
       </div>
     </div>
   </footer>
 
   <!-- Dropdowns & Icon Initialization Script -->
   <script>
-    // Initialize Lucide Icons
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
 
-    // Dropdown toggling logic
-    const favBtn = document.getElementById('favorites-toggle-btn');
-    const favDropdown = document.getElementById('favorites-dropdown');
     const profileBtn = document.getElementById('user-profile-btn');
     const bookingsDropdown = document.getElementById('bookings-dropdown');
-
-    if (favBtn && favDropdown) {
-      favBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        favDropdown.classList.toggle('hidden');
-        if (bookingsDropdown) bookingsDropdown.classList.add('hidden');
-      });
-    }
 
     if (profileBtn && bookingsDropdown) {
       profileBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         bookingsDropdown.classList.toggle('hidden');
-        if (favDropdown) favDropdown.classList.add('hidden');
       });
     }
 
-    // Close dropdowns on clicking outside
     document.addEventListener('click', () => {
-      if (favDropdown) favDropdown.classList.add('hidden');
       if (bookingsDropdown) bookingsDropdown.classList.add('hidden');
     });
 
-    // Prevent closing when clicking inside the dropdowns
-    if (favDropdown) {
-      favDropdown.addEventListener('click', (e) => e.stopPropagation());
-    }
     if (bookingsDropdown) {
       bookingsDropdown.addEventListener('click', (e) => e.stopPropagation());
+    }
+
+    // Mobile Menu Drawer Toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-menu-drawer');
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', () => {
+        mobileDrawer.classList.toggle('hidden');
+      });
     }
   </script>
 </body>

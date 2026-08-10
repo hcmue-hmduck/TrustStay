@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    <%= title || 'TPVTravel Admin - Bảng Điều Hành Quản Trị' %>
+    <%= title || 'TrustStay Admin - Quản Lý Phòng Trọ' %>
   </title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,11 +25,11 @@
             mono: ['Space Grotesk', 'monospace'],
           },
           colors: {
-            'brand-dark': '#030712', // Rich obsidian dark
-            'brand-card': 'rgba(17, 24, 39, 0.6)', // Sleek card gray-dark
-            'brand-accent': '#38bdf8', // Neon Sky Blue
-            'brand-primary': '#0284c7', // Sky Blue Primary
-            'brand-emerald': '#10b981', // Emerald success
+            'brand-dark': '#030712',
+            'brand-card': 'rgba(17, 24, 39, 0.6)',
+            'brand-accent': '#38bdf8',
+            'brand-primary': '#0284c7',
+            'brand-emerald': '#10b981',
             'brand-muted': '#9ca3af',
           }
         }
@@ -43,104 +43,118 @@
   <!-- Custom Styles -->
   <style>
     .glass-card {
-      background: rgba(17, 24, 39, 0.45);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(17, 24, 39, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .neon-text-glow {
-      text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-    }
-
-    .neon-border-glow:focus {
-      box-shadow: 0 0 15px rgba(2, 132, 199, 0.2);
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
     }
 
     /* Custom Scrollbar */
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
     }
 
     ::-webkit-scrollbar-track {
-      background: rgba(3, 7, 18, 0.8);
+      background: rgba(3, 7, 18, 0.9);
     }
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.3);
     }
   </style>
 </head>
 
-<body class="bg-brand-dark text-slate-100 h-screen flex flex-col md:flex-row antialiased overflow-hidden">
+<body class="bg-brand-dark text-slate-100 h-screen flex flex-col md:flex-row antialiased overflow-hidden text-base">
 
   <!-- Sidebar Component -->
   <aside
-    class="w-full md:w-64 md:h-screen bg-slate-950 border-r border-slate-900 flex flex-col justify-between shrink-0 z-40 overflow-y-auto transition-all duration-300">
+    class="w-full md:w-72 md:h-screen bg-slate-950 border-r border-slate-900 flex flex-col justify-between shrink-0 z-40 overflow-y-auto transition-all duration-300">
     <div>
       <!-- Sidebar Header -->
-      <div class="h-16 flex items-center justify-between px-6 border-b border-slate-900">
-        <a href="/" class="flex items-center gap-2 group">
-          <i data-lucide="compass"
-            class="w-6 h-6 text-brand-accent group-hover:rotate-45 transition-transform duration-300"></i>
-          <span class="font-mono text-lg font-black tracking-tight text-white uppercase">TPV<span
-              class="text-brand-accent">Travel</span></span>
+      <div class="h-20 flex items-center justify-between px-6 border-b border-slate-900">
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-brand-accent/15 border border-brand-accent/40 flex items-center justify-center text-brand-accent">
+            <i data-lucide="home" class="w-6 h-6"></i>
+          </div>
+          <span class="font-mono text-xl font-black tracking-tight text-white uppercase">Trust<span
+              class="text-brand-accent">Stay</span></span>
         </a>
         <div
-          class="text-[9px] bg-brand-primary/20 text-brand-accent px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+          class="text-[10px] bg-brand-primary/20 text-brand-accent px-2.5 py-1 rounded-full font-extrabold uppercase tracking-wider border border-brand-accent/30">
           Admin
         </div>
       </div>
 
       <!-- Navigation links -->
-      <nav class="mt-6 px-4 space-y-1.5">
+      <nav class="mt-6 px-4 space-y-2">
         <a href="/admin/dashboard"
-          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_dashboard' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_dashboard' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
           <i data-lucide="layout-dashboard"
             class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
           <span>Bảng Điều Khiển</span>
         </a>
 
-        <a href="/admin/tours"
-          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_tours' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
-          <i data-lucide="map" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
-          <span>Quản Lý Tours</span>
+        <a href="/admin/rooms"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_rooms' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="home" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Quản Lý Phòng Trọ</span>
         </a>
 
-        <a href="/admin/bookings"
-          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_bookings' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
-          <i data-lucide="ticket-percent"
-            class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
-          <span>Quản Lý Đơn Vé</span>
+        <a href="/admin/categories"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_categories' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="layers" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Danh Mục Phòng</span>
         </a>
 
-        <a href="/admin/category-location"
-          class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all group <%= page === 'admin_category_location' ? 'bg-brand-primary/10 border border-brand-primary/30 text-white font-bold' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
-          <i data-lucide="tags" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
-          <span>Quản Lý Danh mục & Địa điểm</span>
+        <a href="/admin/locations"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_locations' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="map-pin" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Khu Vực / Địa Điểm</span>
+        </a>
+
+        <a href="/admin/requests"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_requests' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="calendar" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Yêu Cầu Hẹn Xem</span>
+        </a>
+
+        <a href="/admin/reviews"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_reviews' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="star" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Đánh Giá Khách Hàng</span>
+        </a>
+
+        <a href="/admin/blogs"
+          class="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all group <%= page === 'admin_blogs' ? 'bg-brand-primary/20 border border-brand-primary/40 text-white shadow-lg' : 'text-slate-400 hover:bg-white/5 hover:text-white border border-transparent' %>">
+          <i data-lucide="book-open" class="w-5 h-5 text-brand-accent transition-transform group-hover:scale-110"></i>
+          <span>Bài Viết Kinh Nghiệm</span>
         </a>
       </nav>
     </div>
 
     <!-- Sidebar Footer user profile card -->
     <div class="p-4 border-t border-slate-900">
-      <div class="flex items-center gap-3 p-2 bg-slate-900/60 rounded-2xl border border-white/5">
+      <div class="flex items-center gap-3 p-3 bg-slate-900/80 rounded-2xl border border-white/5">
         <div
-          class="w-10 h-10 rounded-xl bg-brand-primary/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent font-black">
+          class="w-10 h-10 rounded-xl bg-brand-primary/20 border border-brand-accent/30 flex items-center justify-center text-brand-accent font-black text-sm">
           AD
         </div>
         <div class="flex-1 min-w-0">
-          <p class="text-xs font-bold text-white truncate">Administrator</p>
-          <p class="text-[10px] text-brand-muted truncate">admin@tpvtravel.vn</p>
+          <p class="text-xs font-black text-white truncate">Administrator</p>
+          <p class="text-[11px] text-brand-muted truncate">admin@truststay.vn</p>
         </div>
         <a href="/" title="Về trang chủ"
-          class="p-1.5 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+          class="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-xl transition-colors">
           <i data-lucide="log-out" class="w-4 h-4"></i>
         </a>
       </div>
@@ -152,25 +166,24 @@
 
     <!-- Toast notifications -->
     <div id="admin-toast"
-      class="fixed top-5 right-5 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl glass-card border-brand-accent/30 shadow-2xl transition-all duration-300 transform -translate-y-4 opacity-0 hidden">
-      <div class="w-8 h-8 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+      class="fixed top-5 right-5 z-50 flex items-center gap-3 px-6 py-3.5 rounded-2xl glass-card border-brand-accent/40 shadow-2xl transition-all duration-300 transform -translate-y-4 opacity-0 hidden">
+      <div class="w-9 h-9 rounded-full bg-brand-accent/15 flex items-center justify-center text-brand-accent">
         <i data-lucide="bell" class="w-4 h-4"></i>
       </div>
       <p id="admin-toast-text" class="text-xs font-bold text-slate-100"></p>
     </div>
 
-
     <!-- Content Area -->
-    <div class="flex-1 p-6 md:p-10 overflow-y-auto max-w-full w-full">
+    <div class="flex-1 p-6 md:p-10 lg:p-12 overflow-y-auto max-w-full w-full">
       <%- body %>
     </div>
   </main>
 
   <script>
-    // Create icons on page render
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
 
-    // Global toast system
     window.showAdminToast = (message, isSuccess = true) => {
       const toast = document.getElementById('admin-toast');
       const text = document.getElementById('admin-toast-text');
@@ -193,7 +206,6 @@
 
     window.getFormData = (formElement) => {
       const formData = new FormData(formElement);
-      // console.log(Array.from(formData.entries()));
       const data = {};
       for (let [key, value] of formData.entries()) {
         if (key.endsWith('[]')) {

@@ -1,0 +1,198 @@
+<div class="max-w-6xl mx-auto space-y-8 text-left">
+  
+  <!-- Header -->
+  <div class="flex items-center justify-between pb-6 border-b border-slate-900">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-mono font-black text-white uppercase tracking-tight flex items-center gap-3">
+        <i data-lucide="<%= data ? 'edit-3' : 'plus-circle' %>" class="w-7 h-7 text-brand-accent"></i>
+        <span><%= data ? 'Chỉnh Sửa Thông Tin Phòng Trọ' : 'Thêm Tin Đăng Phòng Trọ Mới' %></span>
+      </h1>
+      <p class="text-xs md:text-sm text-brand-muted mt-1.5">Nhập các thông tin chi tiết về phòng trọ, giá thuê, diện tích và tiện nghi đi kèm</p>
+    </div>
+
+    <a href="/admin/rooms" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs md:text-sm rounded-xl transition-all border border-white/10 flex items-center gap-2">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Quay lại danh sách</span>
+    </a>
+  </div>
+
+  <!-- Form Component -->
+  <form id="roomForm" onsubmit="saveRoom(event)" class="space-y-8">
+    
+    <!-- Section 1: Basic Info -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
+      <h3 class="text-base font-bold text-brand-accent uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+        <i data-lucide="file-text" class="w-5 h-5 text-brand-accent"></i>
+        <span>1. Thông Tin Cơ Bản & Phân Loại</span>
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Room Title -->
+        <div class="md:col-span-2">
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Tên phòng trọ / Tiêu đề tin đăng <span class="text-red-400">*</span></label>
+          <input type="text" name="ten_phong" required value="<%= data ? data.ten_phong : '' %>" placeholder="Ví dụ: Phòng Trọ Khép Kín Gần Đại Học HUTECH..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all" />
+        </div>
+
+        <!-- Category -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Danh mục loại phòng <span class="text-red-400">*</span></label>
+          <select name="ma_danh_muc" required class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 appearance-none cursor-pointer">
+            <option value="">-- Chọn loại phòng --</option>
+            <% category.forEach(cat => { %>
+              <option value="<%= cat.ma_danh_muc %>" <%= data && data.ma_danh_muc === cat.ma_danh_muc ? 'selected' : '' %>><%= cat.ten_danh_muc %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <!-- Location -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Khu vực / Địa điểm <span class="text-red-400">*</span></label>
+          <select name="ma_dia_diem" required class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 appearance-none cursor-pointer">
+            <option value="">-- Chọn khu vực --</option>
+            <% location.forEach(loc => { %>
+              <option value="<%= loc.ma_dia_diem %>" <%= data && data.ma_dia_diem === loc.ma_dia_diem ? 'selected' : '' %>><%= loc.ten_dia_diem %> (<%= loc.tinh_thanh %>)</option>
+            <% }) %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Pricing & Specs -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
+      <h3 class="text-base font-bold text-brand-accent uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+        <i data-lucide="dollar-sign" class="w-5 h-5 text-brand-accent"></i>
+        <span>2. Giá Thuê & Thông Số Căn Phòng</span>
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rent Price -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Giá thuê hàng tháng (VNĐ) <span class="text-red-400">*</span></label>
+          <input type="number" name="gia_thue" required value="<%= data ? data.gia_thue : '' %>" placeholder="3500000" class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all font-mono font-bold" />
+        </div>
+
+        <!-- Deposit Price -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Tiền cọc tham khảo (VNĐ)</label>
+          <input type="number" name="tien_coc" value="<%= data ? data.tien_coc : 0 %>" placeholder="3500000" class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all font-mono" />
+        </div>
+
+        <!-- Area (m2) -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Diện tích (m²)</label>
+          <input type="number" name="dien_tich" value="<%= data ? data.dien_tich : 20 %>" placeholder="25" class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all font-mono" />
+        </div>
+
+        <!-- Max Occupants -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Số người ở tối đa</label>
+          <input type="number" name="so_nguoi_toi_da" value="<%= data ? data.so_nguoi_toi_da : 2 %>" placeholder="2" class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all font-mono" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Location & Media -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
+      <h3 class="text-base font-bold text-brand-accent uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+        <i data-lucide="map-pin" class="w-5 h-5 text-brand-accent"></i>
+        <span>3. Vị Trí Chi Tiết & Hình Ảnh</span>
+      </h3>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Full Address -->
+        <div class="md:col-span-2">
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Địa chỉ chi tiết (Số nhà, tên đường, phường/xã)</label>
+          <input type="text" name="dia_chi_chi_tiet" value="<%= data ? data.dia_chi_chi_tiet : '' %>" placeholder="Số 142/8 Nguyễn Gia Trí, Phường 25, Quận Bình Thạnh..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all" />
+        </div>
+
+        <!-- Main Image URL -->
+        <div class="md:col-span-2">
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Đường dẫn hình ảnh đại diện (URL)</label>
+          <input type="url" name="hinh_anh_dai_dien" value="<%= data ? data.hinh_anh_dai_dien : '' %>" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: Amenities & Descriptions -->
+    <div class="glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-2xl">
+      <h3 class="text-base font-bold text-brand-accent uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+        <i data-lucide="list-checks" class="w-5 h-5 text-brand-accent"></i>
+        <span>4. Nội Dung Mô Tả & Tiện Nghi</span>
+      </h3>
+
+      <div class="space-y-6">
+        <!-- Amenities -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Danh sách tiện nghi (phân cách bằng dấu phẩy)</label>
+          <input type="text" name="tien_nghi" value="<%= data && data.tien_nghi ? (Array.isArray(data.tien_nghi) ? data.tien_nghi.join(', ') : data.tien_nghi) : 'Máy lạnh, Gác xép, WC riêng, Wifi, Giờ giấc tự do' %>" placeholder="Máy lạnh, Gác xép, Ban công, WC riêng, Khóa vân tay..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all" />
+        </div>
+
+        <!-- Short Description -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Mô tả ngắn gọn</label>
+          <input type="text" name="mo_ta_ngan" value="<%= data ? data.mo_ta_ngan : '' %>" placeholder="Tóm tắt điểm nổi bật của phòng trọ..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all" />
+        </div>
+
+        <!-- Detailed Description -->
+        <div>
+          <label class="block text-xs md:text-sm font-bold text-slate-200 uppercase tracking-wider mb-2">Mô tả chi tiết phòng trọ</label>
+          <textarea name="mo_ta_chi_tiet" rows="5" placeholder="Chi tiết về nội thất, quy định chung, giờ giấc, chi phí dịch vụ (điện, nước)..." class="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl px-4 py-3.5 text-sm md:text-base text-white placeholder:text-slate-500 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20 transition-all"><%= data ? data.mo_ta_chi_tiet : '' %></textarea>
+        </div>
+
+        <!-- Options: Featured Checkbox -->
+        <div class="pt-2">
+          <label class="inline-flex items-center gap-3 cursor-pointer p-3 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-accent/30 transition-all">
+            <input type="checkbox" name="la_noi_bat" value="true" <%= data && data.la_noi_bat ? 'checked' : '' %> class="w-5 h-5 rounded text-brand-primary focus:ring-0 cursor-pointer" />
+            <span class="text-sm font-bold text-white">Đánh dấu Phòng Nổi Bật (Hiển thị ưu tiên HOT)</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Bar -->
+    <div class="glass-card p-6 rounded-3xl border border-white/10 flex justify-end gap-4 shadow-2xl">
+      <a href="/admin/rooms" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold text-xs md:text-sm rounded-xl transition-all">
+        Hủy bỏ
+      </a>
+
+      <button type="submit" class="px-8 py-3.5 bg-brand-primary hover:bg-brand-accent text-slate-950 font-black text-xs md:text-sm rounded-xl transition-all shadow-lg cursor-pointer hover:scale-[1.02]">
+        <%= data ? 'LƯU CẬP NHẬT PHÒNG TRỌ' : 'TẠO PHÒNG TRỌ MỚI' %>
+      </button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  async function saveRoom(e) {
+    e.preventDefault();
+    const isEdit = "<%= data ? 'true' : 'false' %>" === 'true';
+    const ma_phong = '<%= data ? data.ma_phong : "" %>';
+
+    const form = e.target;
+    const dataObj = window.getFormData(form);
+    dataObj.la_noi_bat = form.la_noi_bat ? form.la_noi_bat.checked : false;
+
+    const url = isEdit ? '/api/rooms/update/' + ma_phong : '/api/rooms/create';
+    const method = isEdit ? 'PUT' : 'POST';
+
+    try {
+      const res = await fetch(url, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dataObj)
+      });
+      const result = await res.json();
+      if (result.success) {
+        window.showAdminToast(isEdit ? 'Cập nhật phòng trọ thành công!' : 'Tạo phòng trọ mới thành công!');
+        setTimeout(() => {
+          window.location.href = '/admin/rooms';
+        }, 1000);
+      } else {
+        alert('Lỗi: ' + (result.message || 'Không thể lưu dữ liệu.'));
+      }
+    } catch (err) {
+      alert('Lỗi kết nối máy chủ!');
+    }
+  }
+</script>

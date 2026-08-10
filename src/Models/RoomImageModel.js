@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
-const TourImageModel = new mongoose.Schema({
+const RoomImageModel = new mongoose.Schema({
     ma_hinh_anh: {
         type: String,
         required: true,
         unique: true
     },
 
-    ma_tour: {
+    ma_phong: {
         type: String,
         required: true,
-        ref: 'Tour'
+        ref: 'Room'
     },
 
     duong_dan_anh: {
@@ -39,4 +39,4 @@ const TourImageModel = new mongoose.Schema({
     versionKey: false
 });
 
-module.exports = mongoose.model('Tour_Image', TourImageModel);
+module.exports = mongoose.model('Room_Image', RoomImageModel);

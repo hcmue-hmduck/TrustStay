@@ -1,41 +1,41 @@
 const mongoose = require('mongoose');
 
-const UserModel = new mongoose.Schema({
-    ma_nguoi_dung: {
+const ReviewSchema = new mongoose.Schema({
+    ma_danh_gia: {
         type: String,
         required: true,
         unique: true
     },
-    ma_vai_tro: {
+    ma_phong: {
         type: String,
         required: true,
-        ref: 'Role'
+        ref: 'Room'
     },
     ho_ten: {
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
     so_dien_thoai: {
-        type: String,
-        unique: true,
+        type: String
     },
-    mat_khau: {
+    so_sao: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5,
+        default: 5
+    },
+    noi_dung: {
         type: String,
         required: true
     },
-    anh_dai_dien: String,
     trang_thai: {
         type: String,
-        default: 'active'
+        default: 'approved'
     }
 }, {
     timestamps: true,
     versionKey: false
 });
 
-module.exports = mongoose.model('User', UserModel);
+module.exports = mongoose.model('Review', ReviewSchema);

@@ -10,7 +10,7 @@ const BlogModel = new mongoose.Schema({
     ma_nguoi_dung: {
         type: String,
         required: true,
-        ref: 'NguoiDung'
+        ref: 'User'
     },
 
     tieu_de: {

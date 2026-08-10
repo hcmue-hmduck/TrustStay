@@ -5,38 +5,50 @@ const upload = require('../Configs/configMulter');
 
 const UserController = require('../Controllers/apiControllers/UserController');
 const CategoryController = require('../Controllers/apiControllers/CategoryController');
-const TourController = require('../Controllers/apiControllers/TourController');
+const RoomController = require('../Controllers/apiControllers/RoomController');
+const RoomRequestController = require('../Controllers/apiControllers/RoomRequestController');
+const ReviewController = require('../Controllers/apiControllers/ReviewController');
+const BlogController = require('../Controllers/apiControllers/BlogController');
 const LocationController = require('../Controllers/apiControllers/LocationController');
-// const TourScheduleController = require('../Controllers/apiControllers/TourScheduleController');
-
 const UploadController = require('../Controllers/apiControllers/UploadController');
 
 router.get('/user', UserController.getAllUser);
 
-router.get('/tours/:ma_tour', TourController.getTourDetails)
-router.post('/tours/create', TourController.postTours)
-router.put('/tours/update/:ma_tour', TourController.putTours)
-router.delete('/tours/delete/:ma_tour', TourController.deleteTour)
+// Room routes
+router.get('/rooms', RoomController.getRooms);
+router.get('/rooms/:ma_phong', RoomController.getRoomDetails);
+router.post('/rooms/create', RoomController.postRooms);
+router.put('/rooms/update/:ma_phong', RoomController.putRooms);
+router.delete('/rooms/delete/:ma_phong', RoomController.deleteRoom);
 
-// router.get('/tour-schedules/:ma_tour', TourScheduleController.getTourSchedule);
-// router.post('/tour-schedules/create', TourScheduleController.postTourSchedule);
-// router.put('/tour-schedules/update/:ma_lich_trinh', TourScheduleController.putTourSchedule);
-// router.delete('/tour-schedules/:ma_lich_trinh', TourScheduleController.deleteTourSchedule);
+// Room Request routes (Liên hệ xem phòng)
+router.post('/room-requests/create', RoomRequestController.postRoomRequest);
+router.get('/room-requests', RoomRequestController.getRoomRequests);
+router.put('/room-requests/update/:ma_yeu_cau', RoomRequestController.putRoomRequestStatus);
 
-router.get('/category', CategoryController.getCategory)
-router.post('/category', CategoryController.postCategory)
-router.put('/category/:ma_danh_muc', CategoryController.putCategory)
-router.delete('/category/:ma_danh_muc', CategoryController.deleteCategory)
+// Review routes (Đánh giá phòng)
+router.post('/reviews/create', ReviewController.postReview);
+router.get('/reviews/room/:ma_phong', ReviewController.getRoomReviews);
 
-router.get('/location', LocationController.getAllLocation)
-router.post('/location', LocationController.postLocation)
-router.put('/location/:ma_dia_diem', LocationController.putLocation)
-router.delete('/location/:ma_dia_diem', LocationController.deleteLocation)
+// Blog routes (Chia sẻ kinh nghiệm thuê trọ)
+router.get('/blogs', BlogController.getBlogs);
+router.post('/blogs/create', BlogController.postBlog);
 
-router.post('/upload-file', upload.single('file'), UploadController.postFile)
-router.post('/upload-files', upload.array('files'), UploadController.postFiles)
+// Category routes
+router.get('/category', CategoryController.getCategory);
+router.post('/category', CategoryController.postCategory);
+router.put('/category/:ma_danh_muc', CategoryController.putCategory);
+router.delete('/category/:ma_danh_muc', CategoryController.deleteCategory);
 
+// Location routes
+router.get('/location', LocationController.getAllLocation);
+router.post('/location', LocationController.postLocation);
+router.put('/location/:ma_dia_diem', LocationController.putLocation);
+router.delete('/location/:ma_dia_diem', LocationController.deleteLocation);
 
-router.get('/images/:fileId', UploadController.getImage)
+// Upload routes
+router.post('/upload-file', upload.single('file'), UploadController.postFile);
+router.post('/upload-files', upload.array('files'), UploadController.postFiles);
+router.get('/images/:fileId', UploadController.getImage);
 
 module.exports = router;

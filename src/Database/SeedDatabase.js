@@ -4,16 +4,14 @@ const path = require('path');
 // Load environment variables from the root .env file
 require('dotenv').config({ path: path.join(__dirname, '../../.env') });
 
-// Import all sub-seeders
+// Import sub-seeders
 const { seedRoles } = require('./roleSeedData');
 const { seedUsers } = require('./userSeedData');
 const { seedCategories } = require('./categorySeedData');
 const { seedLocations } = require('./locationSeedData');
-const { seedTours } = require('./toursSeedData');
-const { seedSchedules } = require('./tourScheduleSeedData');
-const { seedImages } = require('./tourImageSeedData');
-const { seedStartTours } = require('./startTourSeedData');
-const { seedTourRequests } = require('./tourRequestSeedData');
+const { seedRooms } = require('./roomsSeedData');
+const { seedRoomImages } = require('./roomImageSeedData');
+const { seedRoomRequests } = require('./roomRequestSeedData');
 const { seedBlogs } = require('./blogSeedData');
 const { seedContacts } = require('./contactSeedData');
 
@@ -37,52 +35,42 @@ async function runSeed() {
         const userIdMap = await seedUsers(roleIdMap);
         console.log('--------------------------------------------------');
 
-        // 3. Danh mục (Categories)
+        // 3. Danh mục Phòng Trọ (Categories)
         const categoryIdMap = await seedCategories();
         console.log('--------------------------------------------------');
 
-        // 4. Địa điểm (Locations)
+        // 4. Khu vực / Quận Huyện (Locations)
         const locationIdMap = await seedLocations(categoryIdMap);
         console.log('--------------------------------------------------');
 
-        // 5. Tours
-        const tourIdMap = await seedTours(categoryIdMap, locationIdMap);
+        // 5. Phòng Trọ (Rooms)
+        const rooms = await seedRooms(categoryIdMap, locationIdMap);
         console.log('--------------------------------------------------');
 
-        // 6. Lịch trình Tour (Schedules)
-        await seedSchedules(tourIdMap);
+        // 6. Hình ảnh Phòng Trọ (Room Images)
+        await seedRoomImages(rooms);
         console.log('--------------------------------------------------');
 
-        // 7. Hình ảnh Tour (Images)
-        await seedImages(tourIdMap);
+        // 7. Yêu cầu Hẹn Xem Phòng (Room Requests)
+        await seedRoomRequests(rooms);
         console.log('--------------------------------------------------');
 
-        // 8. Lịch khởi hành Tour (StartTours)
-        const startTourIdMap = await seedStartTours(tourIdMap);
-        console.log('--------------------------------------------------');
-
-        // 9. Yêu cầu đặt Tour (TourRequests)
-        await seedTourRequests(tourIdMap, startTourIdMap);
-        console.log('--------------------------------------------------');
-
-        // 10. Bài viết Blog (Blogs)
+        // 8. Bài viết Blog (Blogs)
         await seedBlogs(userIdMap);
         console.log('--------------------------------------------------');
 
-        // 11. Liên hệ (Contacts)
+        // 9. Liên hệ (Contacts)
         await seedContacts();
         console.log('--------------------------------------------------');
 
-        console.log('🎉🎉🎉 HOÀN TẤT QUÁ TRÌNH SEED DỮ LIỆU TOÀN BỘ HỆ THỐNG! 🎉🎉🎉');
+        console.log('🎉🎉🎉 HOÀN TẤT QUÁ TRÌNH SEED DỮ LIỆU PHÒNG TRỌ (TRUSTSTAY)! 🎉🎉🎉');
 
     } catch (error) {
         console.error('Đã xảy ra lỗi nghiêm trọng khi chạy seeder:', error);
     } finally {
-        // Đóng kết nối
         await mongoose.connection.close();
         console.log('Đã đóng kết nối cơ sở dữ liệu.');
     }
 }
 
-// Chạy seeder chính
 runSeed();

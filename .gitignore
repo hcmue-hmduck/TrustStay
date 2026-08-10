@@ -5,3 +5,4 @@ googleUploadService
 token.json
 oauth.json
 temp_uploads
+src/Services/UploadServices.js

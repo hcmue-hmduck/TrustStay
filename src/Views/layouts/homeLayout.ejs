@@ -23,15 +23,17 @@
             sans: ['Inter', 'sans-serif'],
           },
           colors: {
-            'brand-dark': '#020e1f',
-            'brand-text': '#f3f4f6',
-            'brand-accent': '#a4e6ff',
-            'brand-primary': '#00d2ff',
-            'brand-muted': '#9ca3af',
+            'brand-dark': '#0f172a',
+            'brand-text': '#0f172a',
+            'brand-accent': '#0284c7',
+            'brand-primary': '#2563eb',
+            'brand-muted': '#64748b',
             'brand-secondary': '#10b981',
+            'brand-bg': '#f8fafc',
           },
           animation: {
             'spin-slow': 'spin 12s linear infinite',
+            'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
           }
         }
       }
@@ -41,25 +43,51 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Glassmorphism & Dropdown styles -->
+  <!-- Custom Light Glassmorphism & Luxury Theme Styles -->
   <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+    }
+
     .glass-panel {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.1);
     }
 
     .glass-dropdown {
-      background: rgba(10, 25, 47, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(164, 230, 255, 0.2);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(164, 230, 255, 0.1);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(226, 232, 240, 1);
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+    }
+
+    .gradient-brand-text {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .btn-primary-gradient {
+      background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+      box-shadow: 0 8px 20px -6px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary-gradient:hover {
+      background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+      box-shadow: 0 12px 25px -6px rgba(37, 99, 235, 0.45);
     }
 
     .hero-gradient-text {
-      background: linear-gradient(135deg, #fff 30%, #a4e6ff 100%);
+      background: linear-gradient(135deg, #0f172a 20%, #0284c7 60%, #2563eb 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -67,36 +95,36 @@
   </style>
 </head>
 
-<body class="relative min-h-screen bg-[#020e1f] text-brand-text overflow-x-hidden font-sans">
+<body class="relative min-h-screen bg-[#f8fafc] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(14,165,233,0.12),rgba(255,255,255,0))] text-slate-800 overflow-x-hidden font-sans">
 
   <!-- Top Banner Navigation Bar -->
-  <header class="sticky top-0 z-50 bg-[#020e1f]/85 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/80 transition-all duration-300 shadow-sm">
     <nav class="flex justify-between items-center w-full px-4 md:px-8 py-4 max-w-screen-2xl mx-auto" id="main-nav">
       
       <!-- Brand Logo -->
-      <a href="/" class="text-2xl font-black text-brand-accent tracking-tighter cursor-pointer flex items-center gap-2 hover:scale-105 transition-transform">
-        <div class="w-9 h-9 rounded-xl bg-brand-accent/15 border border-brand-accent/40 flex items-center justify-center text-brand-accent shadow-[0_0_15px_rgba(164,230,255,0.2)]">
+      <a href="/" class="text-2xl font-black tracking-tighter cursor-pointer flex items-center gap-2.5 hover:scale-105 transition-transform">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
           <i data-lucide="home" class="w-5 h-5"></i>
         </div>
-        <span>Trust<span class="text-white">Stay</span></span>
+        <span class="gradient-brand-text font-black">Trust<span class="text-slate-900">Stay</span></span>
       </a>
 
       <!-- Center Navigation Actions (Desktop) -->
       <div class="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider">
         <a href="/"
-          class="pb-1 transition-all <%= page === 'home' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          class="pb-1 transition-all <%= page === 'home' ? 'text-sky-600 font-extrabold border-b-2 border-sky-600' : 'text-slate-600 hover:text-sky-600' %>">
           Trang chủ
         </a>
         <a href="/rooms"
-          class="pb-1 transition-all <%= page === 'list_rooms' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          class="pb-1 transition-all <%= page === 'list_rooms' ? 'text-sky-600 font-extrabold border-b-2 border-sky-600' : 'text-slate-600 hover:text-sky-600' %>">
           Danh sách Phòng trọ
         </a>
         <a href="/blogs" 
-          class="pb-1 transition-all <%= page === 'blogs' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          class="pb-1 transition-all <%= page === 'blogs' ? 'text-sky-600 font-extrabold border-b-2 border-sky-600' : 'text-slate-600 hover:text-sky-600' %>">
           Kinh nghiệm thuê phòng
         </a>
         <a href="/contacts" 
-          class="pb-1 transition-all <%= page === 'contacts' ? 'text-brand-accent border-b-2 border-brand-accent' : 'text-brand-text/80 hover:text-brand-accent' %>">
+          class="pb-1 transition-all <%= page === 'contacts' ? 'text-sky-600 font-extrabold border-b-2 border-sky-600' : 'text-slate-600 hover:text-sky-600' %>">
           Liên hệ tư vấn
         </a>
       </div>
@@ -105,7 +133,7 @@
       <div class="flex items-center gap-3 relative">
 
         <!-- Saved Rooms Counter / Favorites -->
-        <a href="/rooms" class="p-2.5 rounded-full glass-panel hover:bg-white/10 hover:border-brand-accent/40 transition-all text-brand-text/80 relative cursor-pointer"
+        <a href="/rooms" class="p-2.5 rounded-full bg-slate-100 border border-slate-200 hover:bg-sky-50 hover:border-sky-300 transition-all text-slate-700 relative cursor-pointer"
           title="Xem phòng trọ">
           <i data-lucide="search" class="w-4 h-4 text-brand-accent"></i>
         </a>
@@ -113,57 +141,57 @@
         <!-- Profile Menu Dropdown Container -->
         <div class="relative">
           <button
-            class="flex items-center gap-2.5 pl-2 pr-3.5 py-1.5 glass-panel rounded-full hover:bg-white/10 hover:border-brand-accent/40 active:scale-95 transition-all group cursor-pointer"
+            class="flex items-center gap-2.5 pl-2 pr-3.5 py-1.5 bg-slate-100 border border-slate-200 rounded-full hover:bg-sky-50 hover:border-sky-300 active:scale-95 transition-all group cursor-pointer"
             id="user-profile-btn">
             <div class="relative">
-              <div class="w-7 h-7 rounded-full bg-brand-accent/20 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-xs group-hover:scale-105 transition-transform">
+              <div class="w-7 h-7 rounded-full bg-sky-100 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-xs group-hover:scale-105 transition-transform">
                 TS
               </div>
-              <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-brand-dark animate-pulse"></span>
+              <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full border border-white animate-pulse"></span>
             </div>
-            <span class="text-xs font-bold text-white hidden sm:inline group-hover:text-brand-accent transition-colors">Tài khoản</span>
-            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-brand-muted group-hover:text-brand-accent transition-colors"></i>
+            <span class="text-xs font-bold text-slate-800 hidden sm:inline group-hover:text-brand-accent transition-colors">Tài khoản</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-accent transition-colors"></i>
           </button>
 
-          <!-- Premium Profile Dropdown Box -->
+          <!-- Profile Dropdown Box -->
           <div
             class="absolute right-0 mt-3 w-64 glass-dropdown rounded-2xl p-4 z-50 text-left hidden transition-all duration-200"
             id="bookings-dropdown">
 
             <!-- User Info Header -->
-            <div class="flex items-center gap-3 pb-3 mb-3 border-b border-white/10">
-              <div class="w-10 h-10 rounded-full bg-brand-accent/20 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-sm shrink-0">
+            <div class="flex items-center gap-3 pb-3 mb-3 border-b border-slate-200">
+              <div class="w-10 h-10 rounded-full bg-sky-100 border-2 border-brand-accent flex items-center justify-center text-brand-accent font-black text-sm shrink-0">
                 TS
               </div>
               <div class="overflow-hidden">
-                <h4 class="font-extrabold text-white text-xs truncate">Tài Khoản Khách Hàng</h4>
-                <p class="text-[10px] text-brand-muted truncate opacity-80">khachhang@truststay.vn</p>
+                <h4 class="font-extrabold text-slate-900 text-xs truncate">Tài Khoản Khách Hàng</h4>
+                <p class="text-[10px] text-slate-500 truncate">khachhang@truststay.vn</p>
               </div>
             </div>
 
             <!-- Dropdown Options List -->
             <div class="space-y-1 text-xs">
               <a href="/rooms"
-                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                class="flex items-center gap-2.5 px-3 py-2 text-slate-700 hover:text-brand-accent hover:bg-sky-50 rounded-xl transition-all font-medium">
                 <i data-lucide="search" class="w-4 h-4 text-brand-accent"></i>
                 <span>Tìm kiếm phòng trọ</span>
               </a>
 
               <a href="/blogs"
-                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                class="flex items-center gap-2.5 px-3 py-2 text-slate-700 hover:text-brand-accent hover:bg-sky-50 rounded-xl transition-all font-medium">
                 <i data-lucide="book-open" class="w-4 h-4 text-brand-accent"></i>
                 <span>Kinh nghiệm & Review</span>
               </a>
 
               <a href="/contacts"
-                class="flex items-center gap-2.5 px-3 py-2 text-white/90 hover:text-brand-accent hover:bg-white/10 rounded-xl transition-all font-medium">
+                class="flex items-center gap-2.5 px-3 py-2 text-slate-700 hover:text-brand-accent hover:bg-sky-50 rounded-xl transition-all font-medium">
                 <i data-lucide="phone-call" class="w-4 h-4 text-brand-accent"></i>
                 <span>Liên hệ hỗ trợ xem phòng</span>
               </a>
 
-              <div class="pt-2 border-t border-white/10 mt-2">
+              <div class="pt-2 border-t border-slate-200 mt-2">
                 <a href="/admin/dashboard"
-                  class="flex items-center gap-2.5 px-3 py-2.5 text-brand-accent hover:bg-brand-accent/15 rounded-xl transition-all font-bold">
+                  class="flex items-center gap-2.5 px-3 py-2.5 text-brand-accent hover:bg-sky-50 rounded-xl transition-all font-bold">
                   <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
                   <span>Trang quản trị (Admin)</span>
                 </a>
@@ -173,7 +201,7 @@
         </div>
 
         <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-full glass-panel text-white hover:text-brand-accent">
+        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-full bg-slate-100 border border-slate-200 text-slate-800 hover:text-brand-accent">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
 
@@ -181,11 +209,11 @@
     </nav>
 
     <!-- Mobile Drawer Navigation -->
-    <div id="mobile-menu-drawer" class="hidden md:hidden bg-[#020e1f]/95 border-b border-white/10 px-6 py-4 space-y-3 text-xs font-bold uppercase tracking-wider text-left">
-      <a href="/" class="block py-2 <%= page === 'home' ? 'text-brand-accent font-black' : 'text-white/80' %>">Trang chủ</a>
-      <a href="/rooms" class="block py-2 <%= page === 'list_rooms' ? 'text-brand-accent font-black' : 'text-white/80' %>">Danh sách Phòng trọ</a>
-      <a href="/blogs" class="block py-2 <%= page === 'blogs' ? 'text-brand-accent font-black' : 'text-white/80' %>">Kinh nghiệm thuê phòng</a>
-      <a href="/contacts" class="block py-2 <%= page === 'contacts' ? 'text-brand-accent font-black' : 'text-white/80' %>">Liên hệ tư vấn</a>
+    <div id="mobile-menu-drawer" class="hidden md:hidden bg-white/95 border-b border-slate-200 px-6 py-4 space-y-3 text-xs font-bold uppercase tracking-wider text-left shadow-lg">
+      <a href="/" class="block py-2 <%= page === 'home' ? 'text-brand-accent font-black' : 'text-slate-700' %>">Trang chủ</a>
+      <a href="/rooms" class="block py-2 <%= page === 'list_rooms' ? 'text-brand-accent font-black' : 'text-slate-700' %>">Danh sách Phòng trọ</a>
+      <a href="/blogs" class="block py-2 <%= page === 'blogs' ? 'text-brand-accent font-black' : 'text-slate-700' %>">Kinh nghiệm thuê phòng</a>
+      <a href="/contacts" class="block py-2 <%= page === 'contacts' ? 'text-brand-accent font-black' : 'text-slate-700' %>">Liên hệ tư vấn</a>
     </div>
   </header>
 
@@ -195,28 +223,28 @@
   </main>
 
   <!-- Footer Section -->
-  <footer class="bg-[#020e1f] text-brand-muted text-xs py-12 border-t border-white/10" id="feedback-footer">
+  <footer class="bg-white text-slate-600 text-xs py-12 border-t border-slate-200 shadow-inner" id="feedback-footer">
     <div class="max-w-screen-2xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 text-left">
       
       <!-- Brand & Description -->
       <div class="space-y-4">
         <div class="text-xl font-black text-brand-accent flex items-center gap-2 leading-tight">
-          <div class="w-7 h-7 rounded-lg bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent">
+          <div class="w-7 h-7 rounded-lg bg-sky-100 border border-sky-300 flex items-center justify-center text-brand-accent">
             <i data-lucide="home" class="w-4 h-4"></i>
           </div>
           <span>TrustStay</span>
         </div>
-        <p class="text-[11px] leading-relaxed opacity-80">
+        <p class="text-[11px] leading-relaxed text-slate-500">
           TrustStay - Nền tảng Tìm & Cho Thuê Phòng Trọ Uy Tín. Kết nối trực tiếp giữa người thuê và chủ trọ chất lượng cao tại TP.HCM, Hà Nội & các khu vực lân cận.
         </p>
         <div class="pt-1 text-xs text-brand-accent font-bold">
-          Hotline xem phòng 24/7: <span class="text-white">0909 123 456</span>
+          Hotline xem phòng 24/7: <span class="text-slate-900 font-extrabold">0909 123 456</span>
         </div>
       </div>
 
       <!-- Quick Navigation Links -->
       <div class="space-y-3">
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Khám Phá TrustStay</h4>
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Khám Phá TrustStay</h4>
         <ul class="space-y-2 text-[11px]">
           <li><a href="/" class="hover:text-brand-accent transition-colors">Trang chủ</a></li>
           <li><a href="/rooms" class="hover:text-brand-accent transition-colors">Danh sách phòng trọ</a></li>
@@ -227,7 +255,7 @@
 
       <!-- Popular Areas -->
       <div class="space-y-3">
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Khu Vực Hot</h4>
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Khu Vực Hot</h4>
         <ul class="space-y-2 text-[11px]">
           <li><a href="/rooms?ma_dia_diem=Q7" class="hover:text-brand-accent transition-colors">Phòng trọ Quận 7 - TP.HCM</a></li>
           <li><a href="/rooms?ma_dia_diem=BK" class="hover:text-brand-accent transition-colors">Phòng trọ Bách Khoa - Hà Nội</a></li>
@@ -238,31 +266,31 @@
 
       <!-- Newsletter Signups -->
       <div class="space-y-3">
-        <h4 class="font-bold text-white text-xs uppercase tracking-wider">Đăng Ký Nhận Tin Phòng Mới</h4>
-        <p class="text-[11px] leading-relaxed">Nhập email để nhận ngay thông báo phòng trọ mới đăng giá tốt hàng tuần.</p>
+        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider">Đăng Ký Nhận Tin Phòng Mới</h4>
+        <p class="text-[11px] leading-relaxed text-slate-500">Nhập email để nhận ngay thông báo phòng trọ mới đăng giá tốt hàng tuần.</p>
 
         <div class="flex gap-2">
           <input type="email" placeholder="Nhập địa chỉ email..."
-            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent"
+            class="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-brand-accent focus:bg-white"
             id="newsletter-email-input" />
           <button onclick="alert('Đăng ký nhận thông báo phòng trọ thành công!')"
-            class="px-4 py-2.5 bg-brand-accent text-brand-dark rounded-xl font-bold hover:bg-brand-primary whitespace-nowrap cursor-pointer text-xs">
+            class="px-4 py-2.5 bg-brand-accent text-white rounded-xl font-bold hover:bg-brand-primary whitespace-nowrap cursor-pointer text-xs transition-colors shadow-sm">
             Đăng ký
           </button>
         </div>
 
-        <p class="text-[10px] text-brand-muted opacity-70">Cam kết bảo mật 100%, không gửi spam.</p>
+        <p class="text-[10px] text-slate-400">Cam kết bảo mật 100%, không gửi spam.</p>
       </div>
 
     </div>
 
     <!-- Copyright Bar -->
-    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] text-brand-muted/70 gap-4 text-left">
+    <div class="max-w-screen-2xl mx-auto px-4 md:px-8 mt-10 pt-6 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-500 gap-4 text-left">
       <p>© 2026 TrustStay. Tất cả các quyền được bảo lưu. Nền tảng cho thuê phòng trọ uy tín hàng đầu.</p>
       <div class="flex items-center gap-6">
-        <a href="/contacts" class="hover:text-white transition-colors">Quy định xem phòng</a>
-        <a href="/contacts" class="hover:text-white transition-colors">Bảo mật thông tin</a>
-        <a href="/contacts" class="hover:text-white transition-colors">Hotline hỗ trợ 24/7</a>
+        <a href="/contacts" class="hover:text-slate-900 transition-colors">Quy định xem phòng</a>
+        <a href="/contacts" class="hover:text-slate-900 transition-colors">Bảo mật thông tin</a>
+        <a href="/contacts" class="hover:text-slate-900 transition-colors">Hotline hỗ trợ 24/7</a>
       </div>
     </div>
   </footer>

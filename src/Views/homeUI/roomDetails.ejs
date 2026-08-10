@@ -6,79 +6,79 @@
 <div class="max-w-screen-2xl mx-auto px-4 md:px-8 py-8 text-left space-y-8">
 
   <!-- Breadcrumb -->
-  <div class="flex flex-wrap items-center gap-2 text-xs text-brand-muted">
-    <a href="/" class="hover:text-brand-accent transition-colors flex items-center gap-1">
+  <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
+    <a href="/" class="hover:text-sky-600 transition-colors flex items-center gap-1">
       <i data-lucide="home" class="w-3.5 h-3.5"></i>
       <span>Trang chủ</span>
     </a>
-    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-white/20"></i>
-    <a href="/rooms" class="hover:text-brand-accent transition-colors">Danh sách Phòng trọ</a>
-    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-white/20"></i>
-    <span class="text-brand-accent font-bold truncate max-w-xs"><%= data.ten_phong %></span>
+    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
+    <a href="/rooms" class="hover:text-sky-600 transition-colors">Danh sách Phòng trọ</a>
+    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-300"></i>
+    <span class="text-sky-600 font-bold truncate max-w-xs"><%= data.ten_phong %></span>
   </div>
 
   <!-- Sleek Page Header Banner -->
-  <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5 shadow-2xl">
+  <div class="glass-card p-6 md:p-8 rounded-3xl border border-slate-200/80 space-y-5 shadow-xl">
     
     <!-- Badges Row -->
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="px-3.5 py-1.5 bg-brand-accent/15 border border-brand-accent/30 text-brand-accent text-xs font-bold rounded-full">
+        <span class="px-3.5 py-1.5 bg-sky-50/90 border border-sky-200 text-sky-700 text-xs font-bold rounded-full shadow-sm">
           <%= roomCat.ten_danh_muc || 'Phòng trọ' %>
         </span>
-        <span class="px-3.5 py-1.5 bg-white/10 border border-white/10 text-brand-muted text-xs font-bold rounded-full">
+        <span class="px-3.5 py-1.5 bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold rounded-full">
           Mã phòng: <%= data.ma_phong %>
         </span>
-        <span class="px-3.5 py-1.5 bg-green-500/15 border border-green-500/30 text-green-400 text-xs font-bold rounded-full flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        <span class="px-3.5 py-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold rounded-full flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span>Đang trống</span>
         </span>
         <% if (data.la_noi_bat) { %>
-          <span class="px-3.5 py-1.5 bg-red-500 text-white text-xs font-black rounded-full uppercase shadow-lg flex items-center gap-1">
+          <span class="px-3.5 py-1.5 bg-gradient-to-r from-red-500 to-amber-500 text-white text-xs font-black rounded-full uppercase shadow-md flex items-center gap-1">
             <i data-lucide="star" class="w-3.5 h-3.5 fill-white"></i> HOT
           </span>
         <% } %>
       </div>
 
       <!-- Quick Trust Rating -->
-      <div class="flex items-center gap-2 text-xs text-brand-muted">
-        <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i>
+      <div class="flex items-center gap-2 text-xs text-slate-500 font-semibold">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
         <span>Đã được kiểm duyệt bởi TrustStay</span>
       </div>
     </div>
 
     <!-- Title & Address -->
     <div class="space-y-3">
-      <h1 class="text-2xl md:text-4xl font-black text-white leading-tight"><%= data.ten_phong %></h1>
+      <h1 class="text-2xl md:text-4xl font-black text-slate-900 leading-tight tracking-tight"><%= data.ten_phong %></h1>
 
-      <div class="flex items-center gap-2 text-xs text-brand-muted font-medium">
-        <i data-lucide="map-pin" class="w-4 h-4 text-brand-accent shrink-0"></i>
-        <span class="text-white/90"><%= data.dia_chi_chi_tiet || (roomLoc.ten_dia_diem + ', ' + roomLoc.tinh_thanh) %></span>
+      <div class="flex items-center gap-2 text-xs text-slate-500 font-semibold">
+        <i data-lucide="map-pin" class="w-4 h-4 text-sky-600 shrink-0"></i>
+        <span class="text-slate-700"><%= data.dia_chi_chi_tiet || (roomLoc.ten_dia_diem + ', ' + roomLoc.tinh_thanh) %></span>
       </div>
     </div>
 
     <!-- Bottom Row: Landlord Info & Action Buttons -->
-    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-4 border-t border-slate-100">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0">
+        <div class="w-10 h-10 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0 shadow-sm">
           <i data-lucide="user-check" class="w-5 h-5"></i>
         </div>
         <div class="text-xs">
-          <div class="font-bold text-white flex items-center gap-1">
+          <div class="font-bold text-slate-900 flex items-center gap-1">
             <span>TrustStay Verified Landlord</span>
-            <i data-lucide="badge-check" class="w-4 h-4 text-brand-accent fill-brand-accent/20"></i>
+            <i data-lucide="badge-check" class="w-4 h-4 text-sky-600 fill-sky-100"></i>
           </div>
-          <span class="text-[11px] text-brand-muted">Hỗ trợ dẫn xem phòng miễn phí 24/7</span>
+          <span class="text-[11px] text-slate-500">Hỗ trợ dẫn xem phòng miễn phí 24/7</span>
         </div>
       </div>
 
       <div class="flex items-center gap-3">
-        <a href="tel:0909123456" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-2xl transition-all flex items-center gap-2 text-xs border border-white/10">
-          <i data-lucide="phone" class="w-4 h-4 text-green-400"></i>
+        <a href="tel:0909123456" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-2xl transition-all flex items-center gap-2 text-xs border border-slate-200">
+          <i data-lucide="phone" class="w-4 h-4 text-emerald-600"></i>
           <span>Hotline: 0909 123 456</span>
         </a>
 
-        <button onclick="openContactModal()" class="px-6 py-3 bg-brand-accent hover:bg-brand-primary text-brand-dark font-black rounded-2xl transition-all shadow-xl flex items-center gap-2 text-xs cursor-pointer group hover:scale-[1.02]">
+        <button onclick="openContactModal()" class="px-6 py-3.5 btn-primary-gradient text-white font-black rounded-2xl transition-all shadow-lg shadow-sky-500/25 flex items-center gap-2 text-xs cursor-pointer group hover:scale-[1.02] active:scale-95">
           <i data-lucide="calendar" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
           <span>HẸN LỊCH XEM PHÒNG</span>
         </button>
@@ -90,46 +90,46 @@
     <!-- Quick Highlights Stat Bar (Prominent Price & Specs) -->
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
     <!-- Giá thuê niêm yết -->
-    <div class="glass-panel p-5 rounded-2xl border border-brand-accent/30 flex items-center gap-4 shadow-xl bg-brand-accent/5">
-      <div class="w-12 h-12 rounded-xl bg-brand-accent/20 border border-brand-accent/40 flex items-center justify-center text-brand-accent shrink-0">
+    <div class="glass-card p-5 rounded-2xl border border-sky-200/80 flex items-center gap-4 shadow-md bg-sky-50/40">
+      <div class="w-12 h-12 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0 shadow-sm">
         <i data-lucide="circle-dollar-sign" class="w-6 h-6"></i>
       </div>
       <div>
-        <span class="text-[10px] font-bold text-brand-muted uppercase tracking-wider block">Giá thuê niêm yết</span>
-        <span class="text-lg md:text-xl font-black text-brand-accent"><%= data.gia_thue.toLocaleString('vi-VN') %> <span class="text-xs text-white/70 font-normal">đ/tháng</span></span>
+        <span class="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block">Giá thuê niêm yết</span>
+        <span class="text-lg md:text-xl font-black bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent"><%= data.gia_thue.toLocaleString('vi-VN') %> <span class="text-xs text-slate-500 font-normal">đ/tháng</span></span>
       </div>
     </div>
 
     <!-- Tiền đặt cọc -->
-    <div class="glass-panel p-5 rounded-2xl border border-white/10 flex items-center gap-4 shadow-lg">
-      <div class="w-12 h-12 rounded-xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0">
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 flex items-center gap-4 shadow-sm">
+      <div class="w-12 h-12 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0">
         <i data-lucide="shield-alert" class="w-6 h-6"></i>
       </div>
       <div>
-        <span class="text-[10px] font-bold text-brand-muted uppercase tracking-wider block">Tiền đặt cọc</span>
-        <span class="text-base font-black text-white"><%= data.tien_coc ? data.tien_coc.toLocaleString('vi-VN') + ' đ' : 'Thỏa thuận' %></span>
+        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Tiền đặt cọc</span>
+        <span class="text-base font-black text-slate-900"><%= data.tien_coc ? data.tien_coc.toLocaleString('vi-VN') + ' đ' : 'Thỏa thuận' %></span>
       </div>
     </div>
 
     <!-- Diện tích -->
-    <div class="glass-panel p-5 rounded-2xl border border-white/10 flex items-center gap-4 shadow-lg">
-      <div class="w-12 h-12 rounded-xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0">
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 flex items-center gap-4 shadow-sm">
+      <div class="w-12 h-12 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0">
         <i data-lucide="maximize" class="w-6 h-6"></i>
       </div>
       <div>
-        <span class="text-[10px] font-bold text-brand-muted uppercase tracking-wider block">Diện tích phòng</span>
-        <span class="text-base font-black text-white"><%= data.dien_tich || 'N/A' %> <span class="text-xs text-white/60 font-normal">m²</span></span>
+        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Diện tích phòng</span>
+        <span class="text-base font-black text-slate-900"><%= data.dien_tich || 'N/A' %> <span class="text-xs text-slate-500 font-normal">m²</span></span>
       </div>
     </div>
 
     <!-- Sức chứa -->
-    <div class="glass-panel p-5 rounded-2xl border border-white/10 flex items-center gap-4 shadow-lg">
-      <div class="w-12 h-12 rounded-xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0">
+    <div class="bg-white p-5 rounded-2xl border border-slate-200 flex items-center gap-4 shadow-sm">
+      <div class="w-12 h-12 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0">
         <i data-lucide="users" class="w-6 h-6"></i>
       </div>
       <div>
-        <span class="text-[10px] font-bold text-brand-muted uppercase tracking-wider block">Sức chứa tối đa</span>
-        <span class="text-base font-black text-white">Tối đa <%= data.so_nguoi_toi_da || 1 %> <span class="text-xs text-white/60 font-normal">người</span></span>
+        <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Sức chứa tối đa</span>
+        <span class="text-base font-black text-slate-900">Tối đa <%= data.so_nguoi_toi_da || 1 %> <span class="text-xs text-slate-500 font-normal">người</span></span>
       </div>
     </div>
   </div>
@@ -148,22 +148,22 @@
 
   <div id="gallery-slider-data" data-images="<%= JSON.stringify(galleryList) %>" class="space-y-4">
     <!-- Main Display Container (Single Image) -->
-    <div class="relative aspect-[16/10] md:aspect-[21/9] rounded-3xl overflow-hidden glass-panel border border-white/10 shadow-2xl group">
+    <div class="relative aspect-[16/10] md:aspect-[21/9] rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-xl group">
       <img id="main-room-img" src="<%= data.hinh_anh_dai_dien %>" alt="<%= data.ten_phong %>" class="w-full h-full object-cover transition-opacity duration-300" />
       
       <!-- Pre / Next Buttons -->
       <% if (galleryList.length > 1) { %>
-        <button type="button" onclick="prevDetailImage()" aria-label="Ảnh trước" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass-panel border border-white/20 bg-slate-900/80 text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition-all duration-300 shadow-2xl opacity-80 md:opacity-0 group-hover:opacity-100 active:scale-95 cursor-pointer">
+        <button type="button" onclick="prevDetailImage()" aria-label="Ảnh trước" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 border border-slate-200 text-slate-800 flex items-center justify-center hover:bg-sky-600 hover:text-white transition-all duration-300 shadow-xl opacity-80 md:opacity-0 group-hover:opacity-100 active:scale-95 cursor-pointer">
           <i data-lucide="chevron-left" class="w-6 h-6"></i>
         </button>
 
-        <button type="button" onclick="nextDetailImage()" aria-label="Ảnh tiếp theo" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full glass-panel border border-white/20 bg-slate-900/80 text-white flex items-center justify-center hover:bg-brand-accent hover:text-brand-dark transition-all duration-300 shadow-2xl opacity-80 md:opacity-0 group-hover:opacity-100 active:scale-95 cursor-pointer">
+        <button type="button" onclick="nextDetailImage()" aria-label="Ảnh tiếp theo" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white/90 border border-slate-200 text-slate-800 flex items-center justify-center hover:bg-sky-600 hover:text-white transition-all duration-300 shadow-xl opacity-80 md:opacity-0 group-hover:opacity-100 active:scale-95 cursor-pointer">
           <i data-lucide="chevron-right" class="w-6 h-6"></i>
         </button>
 
         <!-- Counter Badge -->
-        <div class="absolute bottom-4 right-4 z-10 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-xs font-bold text-white flex items-center gap-1.5">
-          <i data-lucide="image" class="w-3.5 h-3.5 text-brand-accent"></i>
+        <div class="absolute bottom-4 right-4 z-10 px-3 py-1 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700 text-xs font-bold text-white flex items-center gap-1.5 shadow-md">
+          <i data-lucide="image" class="w-3.5 h-3.5 text-sky-400"></i>
           <span id="detail-img-index">1</span> / <span><%= galleryList.length %></span>
         </div>
       <% } %>
@@ -173,10 +173,10 @@
     <% if (galleryList.length > 1) { %>
       <div class="flex items-center justify-center gap-3 overflow-x-auto pb-2 scrollbar-none w-full">
         <% galleryList.forEach((imgUrl, idx) => { %>
-          <button type="button" onclick="selectDetailImage('<%= imgUrl %>', Number('<%= idx %>'))" class="detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border <%= idx === 0 ? 'border-2 border-brand-accent' : 'border-white/15' %> shrink-0 focus:outline-none transition-all hover:scale-105 cursor-pointer">
+          <button type="button" onclick="selectDetailImage('<%= imgUrl %>', Number('<%= idx %>'))" class="detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border <%= idx === 0 ? 'border-2 border-sky-600' : 'border-slate-200' %> shrink-0 focus:outline-none transition-all hover:scale-105 cursor-pointer">
             <img src="<%= imgUrl %>" class="w-full h-full object-cover" />
             <% if (idx === 0) { %>
-              <span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-black/80 rounded text-[9px] text-white font-bold">Chính</span>
+              <span class="absolute bottom-1 right-1 px-1.5 py-0.5 bg-slate-900/80 rounded text-[9px] text-white font-bold">Chính</span>
             <% } %>
           </button>
         <% }) %>
@@ -189,19 +189,19 @@
     
     <!-- Amenities Section -->
     <% if (data.tien_nghi && data.tien_nghi.length > 0) { %>
-      <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5 shadow-xl">
-        <div class="flex items-center justify-between border-b border-white/10 pb-4">
-          <h3 class="text-lg font-bold text-white flex items-center gap-2.5">
-            <i data-lucide="sparkles" class="w-5 h-5 text-brand-accent"></i>
+      <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 space-y-5 shadow-md">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2.5">
+            <i data-lucide="sparkles" class="w-5 h-5 text-sky-600"></i>
             <span>Tiện nghi & Dịch vụ đi kèm</span>
           </h3>
-          <span class="text-xs text-brand-muted font-bold"><%= data.tien_nghi.length %> tiện ích</span>
+          <span class="text-xs text-slate-500 font-bold"><%= data.tien_nghi.length %> tiện ích</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           <% data.tien_nghi.forEach(item => { %>
-            <div class="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-accent/30 transition-all text-xs font-semibold text-white">
-              <div class="w-8 h-8 rounded-xl bg-brand-accent/10 border border-brand-accent/20 flex items-center justify-center text-brand-accent shrink-0">
+            <div class="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-sky-300 transition-all text-xs font-semibold text-slate-800">
+              <div class="w-8 h-8 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0">
                 <i data-lucide="check-circle-2" class="w-4 h-4"></i>
               </div>
               <span><%= item %></span>
@@ -212,93 +212,93 @@
     <% } %>
 
     <!-- Description Section -->
-    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5 shadow-xl">
-      <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-white/10 pb-4">
-        <i data-lucide="file-text" class="w-5 h-5 text-brand-accent"></i>
+    <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 space-y-5 shadow-md">
+      <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2.5 border-b border-slate-100 pb-4">
+        <i data-lucide="file-text" class="w-5 h-5 text-sky-600"></i>
         <span>Mô tả chi tiết phòng trọ</span>
       </h3>
-      <div class="text-sm text-brand-muted leading-relaxed whitespace-pre-line font-normal"><%= (data.mo_ta_chi_tiet || data.mo_ta_ngan || '').trim() %></div>
+      <div class="text-sm text-slate-700 leading-relaxed whitespace-pre-line font-normal"><%= (data.mo_ta_chi_tiet || data.mo_ta_ngan || '').trim() %></div>
     </div>
 
     <!-- Location & Area Info -->
-    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5 shadow-xl">
-      <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-white/10 pb-4">
-        <i data-lucide="map-pin" class="w-5 h-5 text-brand-accent"></i>
+    <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 space-y-5 shadow-md">
+      <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2.5 border-b border-slate-100 pb-4">
+        <i data-lucide="map-pin" class="w-5 h-5 text-sky-600"></i>
         <span>Vị trí & Khu vực xung quanh</span>
       </h3>
       
-      <div class="flex items-start gap-4 p-5 rounded-2xl bg-white/5 border border-white/5 text-xs text-white">
-        <div class="w-10 h-10 rounded-xl bg-brand-accent/15 border border-brand-accent/30 flex items-center justify-center text-brand-accent shrink-0 mt-0.5">
+      <div class="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800">
+        <div class="w-10 h-10 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-sky-600 shrink-0 mt-0.5">
           <i data-lucide="navigation" class="w-5 h-5"></i>
         </div>
         <div>
-          <strong class="block text-sm font-bold text-white mb-1">Địa chỉ chi tiết phòng trọ:</strong>
-          <span class="text-brand-muted leading-relaxed text-xs"><%= data.dia_chi_chi_tiet || (roomLoc.ten_dia_diem + ', ' + roomLoc.tinh_thanh) %></span>
+          <strong class="block text-sm font-bold text-slate-900 mb-1">Địa chỉ chi tiết phòng trọ:</strong>
+          <span class="text-slate-600 leading-relaxed text-xs"><%= data.dia_chi_chi_tiet || (roomLoc.ten_dia_diem + ', ' + roomLoc.tinh_thanh) %></span>
         </div>
       </div>
     </div>
 
     <!-- TrustStay Viewing Process -->
-    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-5 shadow-xl">
-      <h3 class="text-lg font-bold text-white flex items-center gap-2.5 border-b border-white/10 pb-4">
-        <i data-lucide="shield-check" class="w-5 h-5 text-brand-accent"></i>
+    <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 space-y-5 shadow-md">
+      <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2.5 border-b border-slate-100 pb-4">
+        <i data-lucide="shield-check" class="w-5 h-5 text-sky-600"></i>
         <span>Quy trình hẹn xem phòng tại TrustStay</span>
       </h3>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="p-5 rounded-2xl bg-white/5 border border-white/5 space-y-3">
-          <span class="w-9 h-9 rounded-xl bg-brand-accent/20 border border-brand-accent text-brand-accent text-sm font-bold flex items-center justify-center">1</span>
-          <h4 class="text-sm font-bold text-white">Gửi yêu cầu đặt lịch</h4>
-          <p class="text-xs text-brand-muted leading-relaxed">Điền thông tin cá nhân và thời gian mong muốn tới xem phòng.</p>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <span class="w-9 h-9 rounded-xl bg-sky-100 border border-sky-300 text-sky-700 text-sm font-bold flex items-center justify-center">1</span>
+          <h4 class="text-sm font-bold text-slate-900">Gửi yêu cầu đặt lịch</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Điền thông tin cá nhân và thời gian mong muốn tới xem phòng.</p>
         </div>
-        <div class="p-5 rounded-2xl bg-white/5 border border-white/5 space-y-3">
-          <span class="w-9 h-9 rounded-xl bg-brand-accent/20 border border-brand-accent text-brand-accent text-sm font-bold flex items-center justify-center">2</span>
-          <h4 class="text-sm font-bold text-white">Xác nhận hẹn xem</h4>
-          <p class="text-xs text-brand-muted leading-relaxed">CSKH liên hệ xác nhận lịch hẹn và hướng dẫn vị trí xem phòng.</p>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <span class="w-9 h-9 rounded-xl bg-sky-100 border border-sky-300 text-sky-700 text-sm font-bold flex items-center justify-center">2</span>
+          <h4 class="text-sm font-bold text-slate-900">Xác nhận hẹn xem</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">CSKH liên hệ xác nhận lịch hẹn và hướng dẫn vị trí xem phòng.</p>
         </div>
-        <div class="p-5 rounded-2xl bg-white/5 border border-white/5 space-y-3">
-          <span class="w-9 h-9 rounded-xl bg-brand-accent/20 border border-brand-accent text-brand-accent text-sm font-bold flex items-center justify-center">3</span>
-          <h4 class="text-sm font-bold text-white">Xem phòng trực tiếp</h4>
-          <p class="text-xs text-brand-muted leading-relaxed">Đến xem phòng thực tế, trao đổi trực tiếp không qua trung gian.</p>
+        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <span class="w-9 h-9 rounded-xl bg-sky-100 border border-sky-300 text-sky-700 text-sm font-bold flex items-center justify-center">3</span>
+          <h4 class="text-sm font-bold text-slate-900">Xem phòng trực tiếp</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Đến xem phòng thực tế, trao đổi trực tiếp không qua trung gian.</p>
         </div>
       </div>
     </div>
 
     <!-- Customer Reviews Section (Standalone Div) -->
-    <div class="glass-panel p-6 md:p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
+    <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-md">
       
       <!-- Reviews Header -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
-          <h3 class="text-lg font-bold text-white flex items-center gap-2.5">
-            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+          <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2.5">
+            <i data-lucide="star" class="w-5 h-5 text-amber-500 fill-amber-500"></i>
             <span>Đánh Giá Từ Khách Hàng</span>
           </h3>
-          <p class="text-xs text-brand-muted mt-1">Cảm nhận thực tế từ người thuê & khách tham quan phòng trọ</p>
+          <p class="text-xs text-slate-500 mt-1">Cảm nhận thực tế từ người thuê & khách tham quan phòng trọ</p>
         </div>
 
         <!-- Rating Summary Box -->
-        <div class="flex items-center gap-4 bg-white/5 px-5 py-3 rounded-2xl border border-white/5">
+        <div class="flex items-center gap-4 bg-slate-50 px-5 py-3 rounded-2xl border border-slate-200">
           <div class="text-center">
-            <span class="text-3xl font-black text-yellow-400"><%= (ratingStats && ratingStats.avgRating) ? ratingStats.avgRating : '5.0' %></span>
-            <span class="text-[10px] text-brand-muted block font-bold">/ 5.0</span>
+            <span class="text-3xl font-black text-amber-500"><%= (ratingStats && ratingStats.avgRating) ? ratingStats.avgRating : '5.0' %></span>
+            <span class="text-[10px] text-slate-400 block font-bold">/ 5.0</span>
           </div>
           <div class="space-y-1">
-            <div class="flex items-center gap-1 text-yellow-400">
+            <div class="flex items-center gap-1 text-amber-500">
               <% const score = Math.round((ratingStats && ratingStats.avgRating) ? ratingStats.avgRating : 5); %>
               <% for(let i = 1; i <= 5; i++) { %>
-                <i data-lucide="star" class="w-4 h-4 <%= i <= score ? 'fill-yellow-400 text-yellow-400' : 'text-white/20' %>"></i>
+                <i data-lucide="star" class="w-4 h-4 <%= i <= score ? 'fill-amber-500 text-amber-500' : 'text-slate-300' %>"></i>
               <% } %>
             </div>
-            <span class="text-xs text-white/80 font-bold block">(<%= (ratingStats && ratingStats.totalReviews) ? ratingStats.totalReviews : 0 %> đánh giá)</span>
+            <span class="text-xs text-slate-600 font-bold block">(<%= (ratingStats && ratingStats.totalReviews) ? ratingStats.totalReviews : 0 %> đánh giá)</span>
           </div>
         </div>
       </div>
 
       <!-- Add Review Form (Glass Box) -->
-      <div class="bg-white/5 p-5 md:p-6 rounded-2xl border border-white/10 space-y-4">
-        <h4 class="text-sm font-bold text-white flex items-center gap-2">
-          <i data-lucide="message-square-plus" class="w-4 h-4 text-brand-accent"></i>
+      <div class="bg-slate-50 p-5 md:p-6 rounded-2xl border border-slate-200 space-y-4">
+        <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="message-square-plus" class="w-4 h-4 text-sky-600"></i>
           <span>Viết Đánh Giá Của Bạn</span>
         </h4>
 
@@ -307,12 +307,12 @@
 
           <!-- Rating Star Picker -->
           <div class="flex items-center gap-3">
-            <span class="text-xs font-bold text-slate-200 uppercase tracking-wider">Đánh giá của bạn:</span>
+            <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Đánh giá của bạn:</span>
             <div class="flex items-center gap-1 cursor-pointer" id="starRatingPicker">
               <input type="hidden" name="so_sao" id="inputRatingStars" value="5" />
               <% for(let s = 1; s <= 5; s++) { %>
                 <button type="button" onclick="setRatingStar(Number('<%= s %>'))" id="star-btn-<%= s %>" class="focus:outline-none transition-transform active:scale-125 p-1 cursor-pointer">
-                  <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                  <i data-lucide="star" class="w-5 h-5 fill-amber-400 text-amber-400"></i>
                 </button>
               <% } %>
             </div>
@@ -320,21 +320,21 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Họ tên của bạn <span class="text-red-400">*</span></label>
-              <input type="text" name="ho_ten" required placeholder="Nhập họ tên..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Họ tên của bạn <span class="text-red-500">*</span></label>
+              <input type="text" name="ho_ten" required placeholder="Nhập họ tên..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Số điện thoại (tùy chọn)</label>
-              <input type="tel" name="so_dien_thoai" placeholder="0901234567..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Số điện thoại (tùy chọn)</label>
+              <input type="tel" name="so_dien_thoai" placeholder="0901234567..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20" />
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Nội dung nhận xét <span class="text-red-400">*</span></label>
-            <textarea name="noi_dung" rows="3" required placeholder="Chia sẻ trải nghiệm xem phòng, môi trường sống, chủ trọ..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"></textarea>
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nội dung nhận xét <span class="text-red-500">*</span></label>
+            <textarea name="noi_dung" rows="3" required placeholder="Chia sẻ trải nghiệm xem phòng, môi trường sống, chủ trọ..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"></textarea>
           </div>
 
-          <button type="submit" class="px-8 py-3.5 bg-brand-accent hover:bg-brand-primary text-brand-dark font-black rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer hover:scale-[1.02]">
+          <button type="submit" class="px-8 py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-black rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer hover:scale-[1.02]">
             <i data-lucide="send" class="w-4 h-4"></i>
             <span>GỬI ĐÁNH GIÁ</span>
           </button>
@@ -343,38 +343,38 @@
 
       <!-- Reviews List Display -->
       <div class="space-y-4 pt-2">
-        <h4 class="text-xs font-bold text-brand-muted uppercase tracking-wider">Danh sách đánh giá mới nhất</h4>
+        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Danh sách đánh giá mới nhất</h4>
 
         <div id="reviewsListContainer" class="space-y-4">
           <% if (reviews && reviews.length > 0) { %>
             <% reviews.forEach(r => { %>
-              <div class="p-4 md:p-5 rounded-2xl bg-white/5 border border-white/5 space-y-3 transition-all hover:border-white/10">
+              <div class="p-4 md:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 transition-all hover:border-slate-300">
                 <div class="flex items-center justify-between gap-3">
                   <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-brand-accent/20 border border-brand-accent/40 text-brand-accent font-black text-sm flex items-center justify-center">
+                    <div class="w-9 h-9 rounded-full bg-sky-100 border border-sky-300 text-sky-700 font-black text-sm flex items-center justify-center">
                       <%= (r.ho_ten || 'K').charAt(0).toUpperCase() %>
                     </div>
                     <div>
-                      <strong class="text-xs font-bold text-white block"><%= r.ho_ten %></strong>
-                      <span class="text-[10px] text-brand-muted"><%= new Date(r.createdAt || Date.now()).toLocaleDateString('vi-VN') %></span>
+                      <strong class="text-xs font-bold text-slate-900 block"><%= r.ho_ten %></strong>
+                      <span class="text-[10px] text-slate-400"><%= new Date(r.createdAt || Date.now()).toLocaleDateString('vi-VN') %></span>
                     </div>
                   </div>
 
                   <!-- Stars -->
-                  <div class="flex items-center gap-1 text-yellow-400">
+                  <div class="flex items-center gap-1 text-amber-400">
                     <% for(let s = 1; s <= 5; s++) { %>
-                      <i data-lucide="star" class="w-3.5 h-3.5 <%= s <= (r.so_sao || 5) ? 'fill-yellow-400 text-yellow-400' : 'text-white/20' %>"></i>
+                      <i data-lucide="star" class="w-3.5 h-3.5 <%= s <= (r.so_sao || 5) ? 'fill-amber-400 text-amber-400' : 'text-slate-300' %>"></i>
                     <% } %>
                   </div>
                 </div>
 
-                <p class="text-xs text-white/90 leading-relaxed font-normal pl-12"><%= r.noi_dung %></p>
+                <p class="text-xs text-slate-700 leading-relaxed font-normal pl-12"><%= r.noi_dung %></p>
               </div>
             <% }) %>
           <% } else { %>
-            <div id="emptyReviewsNote" class="text-center py-8 p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-              <i data-lucide="message-square-dashed" class="w-8 h-8 text-brand-muted mx-auto opacity-50"></i>
-              <p class="text-xs text-brand-muted">Chưa có đánh giá nào cho phòng trọ này. Hãy là người đầu tiên để lại nhận xét!</p>
+            <div id="emptyReviewsNote" class="text-center py-8 p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+              <i data-lucide="message-square-dashed" class="w-8 h-8 text-slate-400 mx-auto opacity-50"></i>
+              <p class="text-xs text-slate-500">Chưa có đánh giá nào cho phòng trọ này. Hãy là người đầu tiên để lại nhận xét!</p>
             </div>
           <% } %>
         </div>
@@ -387,60 +387,60 @@
 </div>
 
 <!-- CONTACT / VIEWING APPOINTMENT MODAL -->
-<div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
-  <div class="glass-panel bg-slate-900/95 max-w-lg w-full rounded-3xl p-6 md:p-8 border border-brand-accent/40 shadow-2xl relative text-left">
+<div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 hidden">
+  <div class="bg-white max-w-lg w-full rounded-3xl p-6 md:p-8 border border-slate-200 shadow-2xl relative text-left">
     
-    <button onclick="closeContactModal()" class="absolute top-5 right-5 text-brand-muted hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+    <button onclick="closeContactModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-1 rounded-full hover:bg-slate-100 transition-colors">
       <i data-lucide="x" class="w-5 h-5"></i>
     </button>
 
     <div class="space-y-2 mb-6">
-      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/15 text-brand-accent text-[11px] font-bold">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200 text-[11px] font-bold">
         <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Hẹn lịch xem phòng trực tiếp
       </div>
-      <h3 class="text-xl font-black text-white">Liên Hệ Hẹn Xem Phòng</h3>
-      <p class="text-xs text-brand-muted"><%= data.ten_phong %></p>
+      <h3 class="text-xl font-black text-slate-900">Liên Hệ Hẹn Xem Phòng</h3>
+      <p class="text-xs text-slate-500"><%= data.ten_phong %></p>
     </div>
 
     <form id="contactRequestForm" onsubmit="submitRoomRequest(event)" class="space-y-4">
       <input type="hidden" name="ma_phong" value="<%= data.ma_phong %>" />
 
       <div>
-        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Họ và tên của bạn <span class="text-red-400">*</span></label>
-        <input type="text" name="ho_ten_khach" required placeholder="Nhập họ tên..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Họ và tên của bạn <span class="text-red-500">*</span></label>
+        <input type="text" name="ho_ten_khach" required placeholder="Nhập họ tên..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Số điện thoại liên hệ <span class="text-red-400">*</span></label>
-          <input type="tel" name="so_dien_thoai_khach" required placeholder="0901234567..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Số điện thoại liên hệ <span class="text-red-500">*</span></label>
+          <input type="tel" name="so_dien_thoai_khach" required placeholder="0901234567..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Email (không bắt buộc)</label>
-          <input type="email" name="email_khach" placeholder="example@email.com" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Email (không bắt buộc)</label>
+          <input type="email" name="email_khach" placeholder="example@email.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
         </div>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Ngày mong muốn hẹn xem</label>
-          <input type="date" name="ngay_hen_xem" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Ngày mong muốn hẹn xem</label>
+          <input type="date" name="ngay_hen_xem" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Số người dự kiến ở</label>
-          <input type="number" name="so_nguoi_o" min="1" max="10" value="1" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Số người dự kiến ở</label>
+          <input type="number" name="so_nguoi_o" min="1" max="10" value="1" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
         </div>
       </div>
 
       <div>
-        <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Lời nhắn / Yêu cầu thêm</label>
-        <textarea name="ghi_chu" rows="3" placeholder="Ví dụ: Em muốn hẹn xem tầm 5h chiều sau giờ làm..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"></textarea>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Lời nhắn / Yêu cầu thêm</label>
+        <textarea name="ghi_chu" rows="3" placeholder="Ví dụ: Em muốn hẹn xem tầm 5h chiều sau giờ làm..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20"></textarea>
       </div>
 
       <div class="pt-2">
-        <button type="submit" class="w-full bg-brand-accent hover:bg-brand-primary text-brand-dark font-black py-3.5 px-6 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer hover:scale-[1.01]">
+        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-black py-3.5 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 text-xs uppercase tracking-wider cursor-pointer hover:scale-[1.01]">
           <i data-lucide="send" class="w-4 h-4"></i>
           <span>GỬI YÊU CẦU HẸN XEM</span>
         </button>
@@ -471,9 +471,9 @@
     const thumbs = document.querySelectorAll('.detail-thumb-btn');
     thumbs.forEach((thumb, i) => {
       if (i === idx) {
-        thumb.className = 'detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border-2 border-brand-accent shrink-0 focus:outline-none transition-all hover:scale-105 cursor-pointer';
+        thumb.className = 'detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border-2 border-sky-600 shrink-0 focus:outline-none transition-all hover:scale-105 cursor-pointer';
       } else {
-        thumb.className = 'detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border border-white/15 shrink-0 focus:outline-none hover:border-brand-accent transition-all hover:scale-105 cursor-pointer';
+        thumb.className = 'detail-thumb-btn relative w-24 h-16 rounded-2xl overflow-hidden border border-slate-200 shrink-0 focus:outline-none hover:border-sky-400 transition-all hover:scale-105 cursor-pointer';
       }
     });
   }
@@ -548,13 +548,13 @@
         const icon = btn.querySelector('svg') || btn.querySelector('i');
         if (icon) {
           if (s <= star) {
-            icon.setAttribute('class', 'w-5 h-5 fill-yellow-400 text-yellow-400 lucide lucide-star');
+            icon.setAttribute('class', 'w-5 h-5 fill-amber-400 text-amber-400 lucide lucide-star');
             icon.style.fill = '#facc15';
             icon.style.color = '#facc15';
           } else {
-            icon.setAttribute('class', 'w-5 h-5 fill-transparent text-white/20 lucide lucide-star');
+            icon.setAttribute('class', 'w-5 h-5 fill-transparent text-slate-300 lucide lucide-star');
             icon.style.fill = 'transparent';
-            icon.style.color = 'rgba(255, 255, 255, 0.2)';
+            icon.style.color = '#cbd5e1';
           }
         }
       }
@@ -590,7 +590,8 @@
 
 <% } else { %>
   <div class="max-w-md mx-auto py-20 text-center space-y-4">
-    <h2 class="text-2xl font-bold text-white">Không tìm thấy thông tin phòng trọ</h2>
-    <a href="/rooms" class="inline-block px-6 py-2.5 bg-brand-accent text-brand-dark font-bold text-xs rounded-xl">Quay lại danh sách</a>
+    <h2 class="text-2xl font-bold text-slate-900">Không tìm thấy thông tin phòng trọ</h2>
+    <a href="/rooms" class="inline-block px-6 py-2.5 bg-sky-600 text-white font-bold text-xs rounded-xl shadow-sm hover:bg-sky-700">Quay lại danh sách</a>
   </div>
 <% } %>
+

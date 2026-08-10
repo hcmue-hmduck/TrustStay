@@ -1,11 +1,11 @@
 <!-- Hero Header Section for Customer Rental Experience Blog -->
 <section class="relative min-h-[48vh] flex flex-col justify-center py-12 overflow-hidden text-left">
-    <!-- Cinematic Backdrop Image -->
+    <!-- Backdrop Image -->
     <div class="absolute inset-0 z-0">
-        <img alt="Rental Blog background cover" class="w-full h-full object-cover brightness-[0.25]"
+        <img alt="Rental Blog background cover" class="w-full h-full object-cover opacity-20"
             src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&q=80&w=2000"
             referrerpolicy="no-referrer" />
-        <div class="absolute inset-0 bg-gradient-to-b from-[#020e1f]/50 via-[#020e1f]/80 to-[#020e1f]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-50/70 via-slate-50/90 to-[#f8fafc]"></div>
     </div>
 
     <!-- Outer Alignment Container -->
@@ -13,29 +13,29 @@
         <!-- Content Panel -->
         <div class="w-full max-w-4xl text-center">
             <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 glass-panel rounded-full shadow-[0_0_15px_rgba(164,230,255,0.1)]">
-                <i data-lucide="book-open" class="w-4 h-4 text-brand-accent"></i>
-                <span class="text-[10px] font-extrabold text-brand-accent uppercase tracking-widest">Góc Chia Sẻ & Review Khách Hàng</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-sky-50 border border-sky-200 rounded-full shadow-sm">
+                <i data-lucide="book-open" class="w-4 h-4 text-sky-600"></i>
+                <span class="text-[10px] font-extrabold text-sky-700 uppercase tracking-widest">Góc Chia Sẻ & Review Khách Hàng</span>
             </div>
 
             <!-- Title -->
-            <h1 class="text-3xl md:text-6xl font-black text-white leading-tight tracking-tight mb-6">
+            <h1 class="text-3xl md:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-6">
                 Kinh Nghiệm <span class="hero-gradient-text">Thuê Phòng Trọ</span>
             </h1>
 
-            <p class="text-sm md:text-base text-brand-muted font-medium mb-8 max-w-2xl mx-auto opacity-90 leading-relaxed">
+            <p class="text-sm md:text-base text-slate-600 font-medium mb-8 max-w-2xl mx-auto leading-relaxed">
                 Tổng hợp những nhận xét thực tế, kinh nghiệm soi hợp đồng, mẹo decor và câu chuyện tìm trọ thực chiến từ cộng đồng người thuê TrustStay.
             </p>
 
             <!-- Search & Create Bar -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-3xl mx-auto mb-4">
-                <div class="w-full sm:flex-1 glass-panel p-2 rounded-full flex items-center border border-white/10 shadow-2xl">
-                    <i data-lucide="search" class="w-5 h-5 text-brand-muted ml-4"></i>
+                <div class="w-full sm:flex-1 bg-white p-2 rounded-full flex items-center border border-slate-200 shadow-lg">
+                    <i data-lucide="search" class="w-5 h-5 text-slate-400 ml-4"></i>
                     <input type="text" id="blogSearchInput" onkeyup="filterBlogArticles()" placeholder="Tìm bài viết kinh nghiệm, review phòng..." 
-                        class="flex-1 bg-transparent border-none text-xs font-medium text-white px-4 py-2 focus:outline-none placeholder:text-brand-muted/50" />
+                        class="flex-1 bg-transparent border-none text-xs font-medium text-slate-800 px-4 py-2 focus:outline-none placeholder:text-slate-400" />
                 </div>
 
-                <button onclick="openCreateBlogModal()" class="w-full sm:w-auto px-6 py-3 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary active:scale-95 transition-all shadow-[0_0_15px_rgba(164,230,255,0.3)] flex items-center justify-center gap-2 shrink-0 cursor-pointer">
+                <button onclick="openCreateBlogModal()" class="w-full sm:w-auto px-6 py-3 bg-sky-600 text-white rounded-full text-xs font-black hover:bg-sky-700 active:scale-95 transition-all shadow-md flex items-center justify-center gap-2 shrink-0 cursor-pointer">
                     <i data-lucide="pen-tool" class="w-4 h-4"></i>
                     <span>VIẾT BÀI CHIA SẺ</span>
                 </button>
@@ -45,13 +45,13 @@
 </section>
 
 <!-- Blog Listing Section -->
-<section class="py-12 bg-[#020e1f] relative z-10 text-left">
+<section class="py-12 bg-[#f8fafc] relative z-10 text-left">
     <div class="max-w-screen-2xl mx-auto px-4 md:px-8">
         <% if (data && data.length > 0) { %>
             
             <!-- Featured Blog (First Item) -->
             <% const featured = data[0]; %>
-            <div id="blog-card-<%= featured.ma_bai_viet %>" class="blog-article-card glass-panel rounded-3xl overflow-hidden border border-white/10 group mb-16 hover:border-brand-accent/40 transition-colors duration-500 shadow-2xl">
+            <div id="blog-card-<%= featured.ma_bai_viet %>" class="blog-article-card bg-white rounded-3xl overflow-hidden border border-slate-200 group mb-16 hover:border-sky-300 transition-colors duration-500 shadow-md hover:shadow-xl">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <!-- Image -->
                     <a href="/blogs/<%= featured.ma_bai_viet %>" class="relative h-64 lg:h-[420px] overflow-hidden block">
@@ -59,7 +59,7 @@
                              alt="<%= featured.tieu_de %>" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                         <div class="absolute top-5 left-5">
-                            <span class="px-3 py-1.5 bg-brand-accent text-brand-dark text-[10px] font-black rounded-lg uppercase tracking-widest shadow-lg">
+                            <span class="px-3 py-1.5 bg-sky-600 text-white text-[10px] font-black rounded-lg uppercase tracking-widest shadow-md">
                                 BÀI VIẾT NỔI BẬT
                             </span>
                         </div>
@@ -67,32 +67,32 @@
                     
                     <!-- Content -->
                     <div class="p-8 lg:p-12 flex flex-col justify-center relative">
-                        <div class="flex items-center gap-4 text-[10px] font-bold text-brand-muted uppercase tracking-widest mb-4">
+                        <div class="flex items-center gap-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-4">
                             <span class="flex items-center gap-1.5">
-                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-accent"></i>
+                                <i data-lucide="calendar" class="w-3.5 h-3.5 text-sky-600"></i>
                                 <%= new Date(featured.createdAt || Date.now()).toLocaleDateString('vi-VN') %>
                             </span>
-                            <span class="px-2.5 py-0.5 rounded-full bg-white/10 border border-white/10 text-white/80">
+                            <span class="px-2.5 py-0.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700">
                                 Chia sẻ từ Người Thuê
                             </span>
                         </div>
                         
-                        <h2 class="text-2xl lg:text-3xl font-black text-white leading-tight mb-4 group-hover:text-brand-accent transition-colors article-title">
-                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="hover:text-brand-accent transition-colors"><%= featured.tieu_de %></a>
+                        <h2 class="text-2xl lg:text-3xl font-black text-slate-900 leading-tight mb-4 group-hover:text-sky-600 transition-colors article-title">
+                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="hover:text-sky-600 transition-colors"><%= featured.tieu_de %></a>
                         </h2>
                         
-                        <p class="text-brand-muted text-xs md:text-sm leading-relaxed mb-6 line-clamp-4 article-summary">
+                        <p class="text-slate-600 text-xs md:text-sm leading-relaxed mb-6 line-clamp-4 article-summary">
                             <%= featured.tom_tat || featured.noi_dung %>
                         </p>
 
                         <% if (featured.noi_dung) { %>
-                            <div class="p-4 rounded-2xl bg-white/5 border border-white/5 text-xs text-white/90 leading-relaxed mb-6 line-clamp-2 italic">
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed mb-6 line-clamp-2 italic">
                                 "<%= featured.noi_dung %>"
                             </div>
                         <% } %>
 
                         <div class="pt-2">
-                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-brand-accent/40 text-brand-accent text-xs font-black hover:bg-brand-accent hover:text-brand-dark transition-all group/link">
+                            <a href="/blogs/<%= featured.ma_bai_viet %>" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-sky-600 text-sky-700 text-xs font-black hover:bg-sky-600 hover:text-white transition-all group/link">
                                 <span>Đọc Tiếp Bài Viết</span>
                                 <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform"></i>
                             </a>
@@ -105,34 +105,33 @@
             <% if (data.length > 1) { %>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blogGridContainer">
                     <% data.slice(1).forEach(blog => { %>
-                        <div id="blog-card-<%= blog.ma_bai_viet %>" class="blog-article-card glass-panel rounded-2xl overflow-hidden border border-white/10 flex flex-col group hover:-translate-y-2 hover:border-brand-accent/30 hover:shadow-[0_15px_30px_-15px_rgba(164,230,255,0.15)] transition-all duration-300">
+                        <div id="blog-card-<%= blog.ma_bai_viet %>" class="blog-article-card bg-white rounded-2xl overflow-hidden border border-slate-200 flex flex-col group hover:-translate-y-2 hover:border-sky-300 shadow-sm hover:shadow-xl transition-all duration-300">
                             <!-- Image -->
                             <a href="/blogs/<%= blog.ma_bai_viet %>" class="relative h-56 overflow-hidden block">
                                 <img src="<%= blog.hinh_anh_dai_dien || 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80' %>" 
                                      alt="<%= blog.tieu_de %>" 
                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#020e1f] via-transparent to-transparent opacity-90"></div>
                             </a>
                             
                             <!-- Content -->
-                            <div class="p-6 flex-1 flex flex-col justify-between z-10 relative -mt-10">
+                            <div class="p-6 flex-1 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center gap-3 text-[10px] font-bold text-brand-muted uppercase tracking-widest mb-3">
-                                        <span class="px-2.5 py-1 bg-[#020e1f]/80 rounded text-brand-accent border border-white/10 backdrop-blur-md">
+                                    <div class="flex items-center gap-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">
+                                        <span class="px-2.5 py-1 bg-sky-50 rounded text-sky-700 border border-sky-200">
                                             <%= new Date(blog.createdAt || Date.now()).toLocaleDateString('vi-VN') %>
                                         </span>
                                         <span>Góc Người Thuê</span>
                                     </div>
-                                    <h3 class="text-base font-black text-white leading-snug mb-3 group-hover:text-brand-accent transition-colors line-clamp-2 article-title">
-                                        <a href="/blogs/<%= blog.ma_bai_viet %>" class="hover:text-brand-accent transition-colors"><%= blog.tieu_de %></a>
+                                    <h3 class="text-base font-black text-slate-900 leading-snug mb-3 group-hover:text-sky-600 transition-colors line-clamp-2 article-title">
+                                        <a href="/blogs/<%= blog.ma_bai_viet %>" class="hover:text-sky-600 transition-colors"><%= blog.tieu_de %></a>
                                     </h3>
-                                    <p class="text-brand-muted text-xs leading-relaxed line-clamp-3 article-summary">
+                                    <p class="text-slate-500 text-xs leading-relaxed line-clamp-3 article-summary">
                                         <%= blog.tom_tat || blog.noi_dung %>
                                     </p>
                                 </div>
 
-                                <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                                    <a href="/blogs/<%= blog.ma_bai_viet %>" class="text-brand-accent text-xs font-bold hover:text-brand-primary transition-colors flex items-center gap-1.5">
+                                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                    <a href="/blogs/<%= blog.ma_bai_viet %>" class="text-sky-600 text-xs font-bold hover:text-sky-700 transition-colors flex items-center gap-1.5">
                                         <span>Đọc bài viết</span>
                                         <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                                     </a>
@@ -145,13 +144,13 @@
 
         <% } else { %>
             <!-- Empty State -->
-            <div class="py-20 text-center glass-panel rounded-3xl border border-white/10 max-w-2xl mx-auto shadow-2xl relative overflow-hidden">
-                <div class="w-16 h-16 bg-brand-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-brand-accent/20">
-                    <i data-lucide="file-text" class="w-8 h-8 text-brand-accent"></i>
+            <div class="py-20 text-center bg-white rounded-3xl border border-slate-200 max-w-2xl mx-auto shadow-md relative overflow-hidden">
+                <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-sky-200">
+                    <i data-lucide="file-text" class="w-8 h-8 text-sky-600"></i>
                 </div>
-                <h3 class="text-xl font-black text-white mb-2">Chưa có bài chia sẻ nào</h3>
-                <p class="text-brand-muted text-xs max-w-md mx-auto mb-6">Hãy là người đầu tiên chia sẻ kinh nghiệm thuê trọ, review không gian sống của bạn cho cộng đồng TrustStay!</p>
-                <button onclick="openCreateBlogModal()" class="px-6 py-2.5 bg-brand-accent text-brand-dark rounded-full text-xs font-black hover:bg-brand-primary">
+                <h3 class="text-xl font-black text-slate-900 mb-2">Chưa có bài chia sẻ nào</h3>
+                <p class="text-slate-500 text-xs max-w-md mx-auto mb-6">Hãy là người đầu tiên chia sẻ kinh nghiệm thuê trọ, review không gian sống của bạn cho cộng đồng TrustStay!</p>
+                <button onclick="openCreateBlogModal()" class="px-6 py-2.5 bg-sky-600 text-white rounded-full text-xs font-black hover:bg-sky-700 shadow-sm">
                     + Viết bài chia sẻ ngay
                 </button>
             </div>
@@ -160,47 +159,47 @@
 </section>
 
 <!-- CREATE CUSTOMER BLOG MODAL -->
-<div id="createBlogModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 hidden">
-    <div class="glass-panel bg-slate-900/95 max-w-2xl w-full rounded-3xl p-6 md:p-8 border border-brand-accent/40 shadow-2xl relative text-left">
+<div id="createBlogModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 hidden">
+    <div class="bg-white max-w-2xl w-full rounded-3xl p-6 md:p-8 border border-slate-200 shadow-2xl relative text-left">
         
-        <button onclick="closeCreateBlogModal()" class="absolute top-5 right-5 text-brand-muted hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors">
+        <button onclick="closeCreateBlogModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 p-1 rounded-full hover:bg-slate-100 transition-colors">
             <i data-lucide="x" class="w-5 h-5"></i>
         </button>
 
-        <div class="space-y-2 mb-6 border-b border-white/10 pb-4">
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/15 text-brand-accent text-[11px] font-bold">
+        <div class="space-y-2 mb-6 border-b border-slate-100 pb-4">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-200 text-[11px] font-bold">
                 <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i> Góc Chia Sẻ Khách Hàng
             </div>
-            <h3 class="text-xl font-black text-white">Đăng Bài Chia Sẻ Kinh Nghiệm Thuê Trọ</h3>
-            <p class="text-xs text-brand-muted">Chia sẻ trải nghiệm xem phòng, mẹo chọn trọ hoặc kinh nghiệm cá nhân đến cộng đồng.</p>
+            <h3 class="text-xl font-black text-slate-900">Đăng Bài Chia Sẻ Kinh Nghiệm Thuê Trọ</h3>
+            <p class="text-xs text-slate-500">Chia sẻ trải nghiệm xem phòng, mẹo chọn trọ hoặc kinh nghiệm cá nhân đến cộng đồng.</p>
         </div>
 
         <form id="createBlogForm" onsubmit="submitCustomerBlog(event)" class="space-y-4">
             <div>
-                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Tiêu đề bài viết <span class="text-red-400">*</span></label>
-                <input type="text" name="tieu_de" required placeholder="Ví dụ: Kinh nghiệm đàm phán hợp đồng thuê trọ sinh viên..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tiêu đề bài viết <span class="text-red-500">*</span></label>
+                <input type="text" name="tieu_de" required placeholder="Ví dụ: Kinh nghiệm đàm phán hợp đồng thuê trọ sinh viên..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Tóm tắt ngắn</label>
-                <input type="text" name="tom_tat" placeholder="Tóm tắt nội dung chính trong 1-2 câu..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Tóm tắt ngắn</label>
+                <input type="text" name="tom_tat" placeholder="Tóm tắt nội dung chính trong 1-2 câu..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Link hình ảnh bìa (tùy chọn)</label>
-                <input type="url" name="hinh_anh_dai_dien" placeholder="https://images.unsplash.com/..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20" />
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Link hình ảnh bìa (tùy chọn)</label>
+                <input type="url" name="hinh_anh_dai_dien" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
             </div>
 
             <div>
-                <label class="block text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">Nội dung bài viết chi tiết <span class="text-red-400">*</span></label>
-                <textarea name="noi_dung" rows="5" required placeholder="Chia sẻ kinh nghiệm thực tế, chi phí sinh hoạt, lưu ý chủ trọ, thiết bị phòng..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-brand-muted/40 focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/20"></textarea>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nội dung bài viết chi tiết <span class="text-red-500">*</span></label>
+                <textarea name="noi_dung" rows="5" required placeholder="Chia sẻ kinh nghiệm thực tế, chi phí sinh hoạt, lưu ý chủ trọ, thiết bị phòng..." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20"></textarea>
             </div>
 
             <div class="pt-2 flex justify-end gap-3">
-                <button type="button" onclick="closeCreateBlogModal()" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs border border-white/10">
+                <button type="button" onclick="closeCreateBlogModal()" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs border border-slate-200">
                     Hủy bỏ
                 </button>
-                <button type="submit" class="px-7 py-3 bg-brand-accent hover:bg-brand-primary text-brand-dark font-black rounded-xl transition-all shadow-lg flex items-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
+                <button type="submit" class="px-7 py-3 bg-sky-600 hover:bg-sky-700 text-white font-black rounded-xl transition-all shadow-md flex items-center gap-2 text-xs uppercase tracking-wider cursor-pointer">
                     <i data-lucide="send" class="w-4 h-4"></i>
                     <span>ĐĂNG BÀI VIẾT</span>
                 </button>
